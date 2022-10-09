@@ -79,8 +79,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.28583124, g: 0.6981132, b: 0.34289297, a: 1}
+  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  m_Color: {r: 0.4342072, g: 0.69803923, b: 0.28627452, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -110,7 +110,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &5568317251215709958
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4572d50ba349b14a85f0871a7d36d18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageText: {fileID: 5967945735771566980, guid: 8d3e873a3ad721746bd34e36d6c81160, type: 3}
   healthBar: {fileID: 3167265781937673222}
   maxHealth: 5
   damage: 1

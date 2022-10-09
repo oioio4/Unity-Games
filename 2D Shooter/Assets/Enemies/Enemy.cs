@@ -23,6 +23,8 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public GameObject damageText; 
+
     public HealthBar healthBar;
     public float maxHealth = 3f;
     private float health;
@@ -45,6 +47,8 @@ public class Enemy : MonoBehaviour
     void Update() {
         if (damaged) {
             animator.SetBool("hit", true);
+            GameObject dmg = Instantiate(damageText, transform.position, Quaternion.identity);
+            Destroy(dmg, 0.2f);
             damaged = false;
         }
         else {
