@@ -71,6 +71,14 @@ public class Enemy : MonoBehaviour
         damaged = true;
     }
 
+    public void increaseHealth(float hp) {
+        maxHealth += hp;
+    }
+
+    public void setHealth(float hp) {
+        maxHealth = hp;
+    }
+
     void OnTriggerEnter2D(Collider2D collision) {
         if(collision.tag == "Player") {
             // Deal damage to the enemy

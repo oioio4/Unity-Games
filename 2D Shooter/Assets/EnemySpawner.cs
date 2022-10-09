@@ -13,7 +13,15 @@ public class EnemySpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Enemy enemy = enemyPrefab.GetComponent<Enemy>();
+        enemy.setHealth(3f);
         StartCoroutine(spawnEnemy(swarmInterval, enemyPrefab));
+    }
+
+    void Update() {
+        float increase = Time.fixedDeltaTime * 0.05f;
+        Enemy enemy = enemyPrefab.GetComponent<Enemy>();
+        enemy.increaseHealth(increase);
     }
 
     // Update is called once per frame
