@@ -17,6 +17,15 @@ public class ScoreText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
+        float t = Time.time;
+        int seconds = (int)(t % 60);
+        int prev = 0;
+        if (seconds == prev + 1) {
+            scoreNum++;
+            prev = seconds;
+        }
+        */
         score.text = "Score: " + scoreNum;
     }
 }
