@@ -211,7 +211,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: db750325989564987a34393247d883b4, type: 3}
   m_Color: {r: 0.16981131, g: 0.1464222, b: 0.1464222, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -302,7 +302,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 4360353847585036020, guid: cba06e46c2c7e044f9ab70899d45d273, type: 3}
   bulletForce: 20
   maxAmmo: 7
-  reloadTime: 3
+  reloadTime: 2
 --- !u!1 &8116813415760586441
 GameObject:
   m_ObjectHideFlags: 0

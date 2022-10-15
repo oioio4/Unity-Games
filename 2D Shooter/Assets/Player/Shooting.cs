@@ -11,6 +11,7 @@ public class Shooting : MonoBehaviour
     public float bulletForce = 20f;
     public int maxAmmo = 7;
     public float reloadTime = 3f;
+    private bool isReloading = false;
     private int ammo;
 
     void Start()
@@ -21,12 +22,16 @@ public class Shooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isReloading) {
+            return;
+        }
         if (Input.GetMouseButtonDown(0) && ammo != 0) {
             Shoot();
             ammo--;
         }
         if (ammo == 0) {
             StartCoroutine(Reload());
+            return;
         }
     }
 
@@ -37,8 +42,10 @@ public class Shooting : MonoBehaviour
     }
 
     private IEnumerator Reload() {
+        isReloading = true;
         yield return new WaitForSeconds(reloadTime);
         ammo = maxAmmo;
+        isReloading = false;
     }
 
     public int getAmmo() {

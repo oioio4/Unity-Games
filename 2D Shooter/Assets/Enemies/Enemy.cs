@@ -30,6 +30,8 @@ public class Enemy : MonoBehaviour
     private float health;
 
     public float damage = 1f;
+    public float attackSpeed = 1f;
+    private float curTime;
 
     public float moveSpeed = 5f;
     private bool damaged = false;
@@ -42,6 +44,7 @@ public class Enemy : MonoBehaviour
         healthBar.SetMaxHealth(maxHealth);
         health = maxHealth;
         player = GameObject.FindGameObjectWithTag("Player");
+        curTime = 0f;
     }
 
     void Update() {
@@ -79,19 +82,20 @@ public class Enemy : MonoBehaviour
         maxHealth = hp;
     }
 
-    void OnTriggerEnter2D(Collider2D collision) {
+    void OnTriggerStay2D(Collider2D collision) {
         if(collision.tag == "Player") {
             // Deal damage to the enemy
             PlayerControl player = collision.GetComponent<PlayerControl>();
 
             if(player != null) {
-                //if (attackSpeed <= canAttack) {
+                if (curTime <= 0) {
                     player.Health -= damage;
                     player.isDamaged();
-                //}
-                //else {
-                   // canAttack += Time.deltaTime;
-               // }
+                    curTime = attackSpeed;
+                }
+                else {
+                    curTime -= Time.deltaTime;
+                }
             }
         }
     }
