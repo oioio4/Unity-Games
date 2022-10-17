@@ -25,7 +25,6 @@ public class PlayerControl : MonoBehaviour
     public HealthBar healthBar;
     public float maxHealth = 3f;
     private float health;
-    private bool damaged = false;
     
     public float moveSpeed = 5f;
 
@@ -49,6 +48,9 @@ public class PlayerControl : MonoBehaviour
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
 
         healthBar.SetHealth(health);
+        if (health <= 0) {
+            FindObjectOfType<GameManager>().EndGame();
+        }
     }
 
     void FixedUpdate() {
@@ -57,9 +59,5 @@ public class PlayerControl : MonoBehaviour
         Vector2 lookDir = mousePos - rb.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
         rb.rotation = angle;
-    }
-
-    public void isDamaged() {
-        damaged = true;
     }
 }

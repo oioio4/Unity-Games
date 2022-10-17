@@ -25,7 +25,7 @@ public class Shooting : MonoBehaviour
         if (isReloading) {
             return;
         }
-        if (Input.GetMouseButtonDown(0) && ammo != 0) {
+        if (Input.GetMouseButtonDown(0) && ammo != 0 && !PauseMenu.GamePaused) {
             Shoot();
             ammo--;
         }

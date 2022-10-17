@@ -90,7 +90,6 @@ public class Enemy : MonoBehaviour
             if(player != null) {
                 if (curTime <= 0) {
                     player.Health -= damage;
-                    player.isDamaged();
                     curTime = attackSpeed;
                 }
                 else {
