@@ -24,6 +24,8 @@ public class Enemy : MonoBehaviour
     }
 
     public GameObject damageText; 
+    public CameraShake cameraShake;
+    public ParticleSystem deathParticles;
 
     public HealthBar healthBar;
     public float maxHealth = 3f;
@@ -67,6 +69,7 @@ public class Enemy : MonoBehaviour
 
     public void Defeated(){
         ScoreText.scoreNum += 10;
+        Instantiate(deathParticles, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 

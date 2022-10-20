@@ -156,6 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageText: {fileID: 5967945735771566980, guid: 8d3e873a3ad721746bd34e36d6c81160, type: 3}
+  deathParticles: {fileID: 7248636665449164756, guid: 377caf8ce0d3b444f91f998e52db42a3, type: 3}
   healthBar: {fileID: 3167265781937673222}
   maxHealth: 5
   damage: 1

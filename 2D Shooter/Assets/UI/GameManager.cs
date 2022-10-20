@@ -7,13 +7,26 @@ public class GameManager : MonoBehaviour
 {
     bool gameEnd = false;
 
-    public float restartDelay = 0.05f;
+    public PlayerControl player;
 
     public void EndGame() {
         if (gameEnd == false) {
             gameEnd = true;
             SceneManager.LoadScene(2);
+            SavePlayer();
         }
 
     }
+
+    public void SavePlayer() {
+        SaveSystem.SavePlayer(player);
+    }
+
+    public void LoadPlayer() {
+        PlayerData data = SaveSystem.LoadPlayer();
+        player.maxHealth = data.health;
+        player.moveSpeed = data.moveSpeed;
+    }
+
+
 }
