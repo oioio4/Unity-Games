@@ -1065,11 +1065,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2543903224156316991, guid: e845412d61c96a84ebf8da9c400e7074, type: 3}
   m_PrefabInstance: {fileID: 139684961}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &142499260 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8368205207314509125, guid: 956f6716933edc94abfb52fb57b72b6d, type: 3}
-  m_PrefabInstance: {fileID: 175208984}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &160405671
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1248,6 +1243,14 @@ PrefabInstance:
     - target: {fileID: 8368205207314509125, guid: 956f6716933edc94abfb52fb57b72b6d, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8456432096593441128, guid: 956f6716933edc94abfb52fb57b72b6d, type: 3}
+      propertyPath: m_AutoBraking
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8456432096593441128, guid: 956f6716933edc94abfb52fb57b72b6d, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 956f6716933edc94abfb52fb57b72b6d, type: 3}
@@ -11692,7 +11695,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2e211105d9f74a4da3667f57ad0bc6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 142499260}
+  enemyPrefab: {fileID: 7609221189019774101, guid: 956f6716933edc94abfb52fb57b72b6d, type: 3}
   spawnPoint: {fileID: 653496787}
   waveTimer: 5
 --- !u!114 &1715678226

@@ -5,16 +5,31 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    private Transform movePositionTransform;
+    public float speed = 10f;
 
-    private NavMeshAgent navMeshAgent;
+    private Transform target;
+    private int wavepointIndex = 0;
 
-    private void Start() {
-        navMeshAgent = GetComponent<NavMeshAgent>();
-        movePositionTransform =  GameObject.Find("End").transform;
+    void Start() {
+        target = Waypoints.points[0];
     }
 
-    private void Update() {
-        navMeshAgent.destination = movePositionTransform.position;
+    void Update() {
+        Vector3 dir = target.position - transform.position;
+        transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
+
+        if (Vector3.Distance(transform.position, target.position) <= 0.2f) {
+            GetNextWaypoint();
+        }
+    }
+
+    void GetNextWaypoint() {
+        if (wavepointIndex >= Waypoints.points.Length - 1) {
+            Destroy(gameObject);
+            return;
+        }
+
+        wavepointIndex++;
+        target = Waypoints.points[wavepointIndex];
     }
 }

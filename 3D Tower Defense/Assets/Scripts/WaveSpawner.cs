@@ -1,15 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WaveSpawner : MonoBehaviour
 {
-    public GameObject enemyPrefab;
-
+    public Transform enemyPrefab;
     public Transform spawnPoint;
 
     public float waveTimer = 5f;
     private float countdown = 2f;
+
+    public Text waveText;
 
     private int waveIndex = 0;
 
@@ -20,6 +22,8 @@ public class WaveSpawner : MonoBehaviour
         }
 
         countdown -= Time.deltaTime;
+
+        waveText.text = Mathf.Floor(countdown).ToString();
     }
 
     IEnumerator SpawnWave() {
@@ -31,6 +35,6 @@ public class WaveSpawner : MonoBehaviour
     }
 
     void SpawnEnemy() {
-        Instantiate(enemyPrefab, spawnPoint.transform);
+        Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
     }
 }
