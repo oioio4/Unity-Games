@@ -29,7 +29,7 @@ public class CameraController : MonoBehaviour
         if (!canMove) {
             return;
         }
-        if ( Input.GetMouseButton(0)) {
+        if ( Input.GetMouseButton(2)) {
             transform.Translate(Vector3.right * Time.deltaTime * panSpeed * (Input.mousePosition.x - Screen.width * 0.5f) / (Screen.width * 0.5f), Space.World);
             transform.Translate(Vector3.forward * Time.deltaTime * panSpeed * (Input.mousePosition.y - Screen.height * 0.5f) / (Screen.height * 0.5f), Space.World);
         }
