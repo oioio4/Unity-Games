@@ -10,8 +10,12 @@ public class Node : MonoBehaviour
     public Color insufficientMoneyColor;
     public Vector3 positionOffset;
 
-    [Header("Optional")]
+    [HideInInspector]
     public GameObject turret;
+    [HideInInspector]
+    public TurretBlueprint turretBlueprint;
+    [HideInInspector]
+    public bool isUpgraded = false;
 
     private Color startColor;
     private Renderer rend;
@@ -34,15 +38,51 @@ public class Node : MonoBehaviour
         if (EventSystem.current.IsPointerOverGameObject()) {
             return;
         }
-        if (!buildManager.CanBuild) {
-            return;
-        }
+
         if (turret != null) {
-            Debug.Log("Can't build");
+            buildManager.SelectNode(this);
             return;
         }
 
-        buildManager.BuildTurretOn(this);
+        if (!buildManager.CanBuild) {
+            return;
+        }
+
+        BuildTurret(buildManager.GetTurretToBuild());
+    }
+
+    void BuildTurret(TurretBlueprint blueprint) {
+        if (PlayerStats.Money < blueprint.cost) {
+            Debug.Log("Not enough money");
+            return;
+        }
+        PlayerStats.Money -= blueprint.cost; 
+        
+        Vector3 currentLoc = GetBuildPosition();
+        GameObject _turret = Instantiate(blueprint.prefab, currentLoc, Quaternion.identity);
+        turret = _turret;
+        turretBlueprint = blueprint;
+        GameObject effect = Instantiate(buildManager.buildEffect, currentLoc, Quaternion.identity);
+        Destroy(effect, 3f);
+
+    }
+
+    public void UpgradeTurret() {
+        if (PlayerStats.Money < turretBlueprint.upgradeCost) {
+            Debug.Log("Not enough money to upgrade");
+            return;
+        }
+        PlayerStats.Money -= turretBlueprint.upgradeCost; 
+
+        Destroy(turret);
+
+        Vector3 currentLoc = GetBuildPosition();
+        GameObject _turret = Instantiate(turretBlueprint.upgradedPrefab, currentLoc, Quaternion.identity);
+        turret = _turret;
+        GameObject effect = Instantiate(buildManager.buildEffect, currentLoc, Quaternion.identity);
+        Destroy(effect, 3f);
+
+        isUpgraded = true;
     }
 
     void OnMouseEnter() {

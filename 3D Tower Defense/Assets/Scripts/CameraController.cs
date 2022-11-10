@@ -7,9 +7,9 @@ public class CameraController : MonoBehaviour
     private bool canMove = true;
     private float panSpeed = 30f;
     private float panBorderThickness = 10f;
-    private Vector2 zoomRange = new Vector2(-10, 100);
+    private Vector2 zoomRange = new Vector2(-10, 70);
     private float CurrentZoom = 0;
-    private float ZoomZpeed = 2f;
+    private float ZoomZpeed = 4f;
     private float ZoomRotation = 1.5f;
     private Vector2 zoomAngleRange = new Vector2(10, 70);
     private Vector3 InitPos;
@@ -23,6 +23,10 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.gameEnded) {
+            this.enabled = false;
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.Escape)) {
             canMove = !canMove;
         }
