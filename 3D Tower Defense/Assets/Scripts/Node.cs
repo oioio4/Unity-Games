@@ -85,6 +85,17 @@ public class Node : MonoBehaviour
         isUpgraded = true;
     }
 
+    public void SellTurret() {
+        PlayerStats.Money += turretBlueprint.GetSellAmount();
+
+        Vector3 currentLoc = GetBuildPosition();
+        GameObject effect = Instantiate(buildManager.sellEffect, currentLoc, Quaternion.identity);
+        Destroy(effect, 3f);
+
+        Destroy(turret);
+        turretBlueprint = null;
+    }
+
     void OnMouseEnter() {
         if (EventSystem.current.IsPointerOverGameObject()) {
             return;

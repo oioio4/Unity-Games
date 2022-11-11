@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4061699053121757421}
   - component: {fileID: 612508265345608451}
   - component: {fileID: -1609066350988674057}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Node
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,3 +114,9 @@ MonoBehaviour:
   insufficientMoneyColor: {r: 1, g: 0, b: 0, a: 1}
   positionOffset: {x: 0, y: 0, z: 0}
   turret: {fileID: 0}
+  turretBlueprint:
+    prefab: {fileID: 0}
+    cost: 0
+    upgradedPrefab: {fileID: 0}
+    upgradeCost: 0
+  isUpgraded: 0
