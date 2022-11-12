@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -9,18 +9,25 @@ public class Enemy : MonoBehaviour
     [HideInInspector]
     public float speed = 10f;
 
-    public float health = 100f;
+    public float startHealth = 100f;
+    private float health;
 
     public int value = 50;
 
     public GameObject deathEffect;
 
+    [Header("Unity Things")]
+    public Image healthBar;
+
     void Start() {
         speed = startSpeed;
+        health = startHealth;
     }
 
     public void TakeDamage(float dmg) {
         health -= dmg;
+
+        healthBar.fillAmount = health / startHealth;
         
         if (health <= 0) {
             Die();
@@ -36,6 +43,8 @@ public class Enemy : MonoBehaviour
 
         GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(effect, 5f);
+
+        WaveSpawner.EnemiesAlive--;
         Destroy(gameObject);
     }
 }

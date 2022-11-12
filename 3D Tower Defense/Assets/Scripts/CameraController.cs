@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    private bool canMove = true;
     private float panSpeed = 30f;
     private float panBorderThickness = 10f;
-    private Vector2 zoomRange = new Vector2(-10, 70);
+    private Vector2 zoomRange = new Vector2(-50, 50);
     private float CurrentZoom = 0;
     private float ZoomZpeed = 4f;
-    private float ZoomRotation = 1.5f;
+    private float ZoomRotation = 0.35f;
     private Vector2 zoomAngleRange = new Vector2(10, 70);
     private Vector3 InitPos;
     private Vector3 InitRotation;
+
 
     void Start() {
         InitPos = transform.position;
@@ -25,12 +25,6 @@ public class CameraController : MonoBehaviour
     {
         if (GameManager.gameEnded) {
             this.enabled = false;
-            return;
-        }
-        if (Input.GetKeyDown(KeyCode.Escape)) {
-            canMove = !canMove;
-        }
-        if (!canMove) {
             return;
         }
         if ( Input.GetMouseButton(2)) {
@@ -54,10 +48,15 @@ public class CameraController : MonoBehaviour
 
         CurrentZoom -= Input.GetAxis("Mouse ScrollWheel") * Time.deltaTime * 1000 * ZoomZpeed;
  
-        CurrentZoom = Mathf.Clamp( CurrentZoom, zoomRange.x, zoomRange.y );
- 
-        transform.position = new Vector3( transform.position.x, transform.position.y - (transform.position.y - (InitPos.y + CurrentZoom)) * 0.1f, transform.position.z );
- 
+        CurrentZoom = Mathf.Clamp( CurrentZoom, zoomRange.x, zoomRange.y);
+
+        Vector3 pos = new Vector3( transform.position.x, transform.position.y - (transform.position.y - (InitPos.y + CurrentZoom)) * 0.1f, transform.position.z );
+
+        pos.z = Mathf.Clamp(pos.z, -20, 40);
+        pos.y = Mathf.Clamp(pos.y, 30, 100);
+        pos.x = Mathf.Clamp(pos.x, -100, 30);
+        transform.position = pos;
+
         float x = transform.eulerAngles.x - (transform.eulerAngles.x - (InitRotation.x + CurrentZoom * ZoomRotation)) * 0.1f;
         x = Mathf.Clamp( x, zoomAngleRange.x, zoomAngleRange.y );
  
