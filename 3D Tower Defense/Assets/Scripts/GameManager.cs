@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject gameOverUI;
 
+    public GameObject completeLevelUI;
+
     void Start() {
         gameEnded = false;
         gameOverUI.SetActive(false);
@@ -27,5 +29,10 @@ public class GameManager : MonoBehaviour
     void EndGame() {
         gameEnded = true;
         gameOverUI.SetActive(true);
+    }
+
+    public void WinLevel() {
+        gameEnded = true;
+        completeLevelUI.SetActive(true);
     }
 }

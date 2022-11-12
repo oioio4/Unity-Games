@@ -629,7 +629,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.1137255, g: 0.10196079, b: 0.16470589, a: 0}
+  m_BackGroundColor: {r: 0.34901962, g: 0.3803922, b: 0.454902, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -880,7 +880,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7b28f164d056d2488be851c62e66a1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelToLoad: MainLevel
+  levelToLoad: LevelSelect
   sceneFader: {fileID: 1597797432}
 --- !u!4 &1259686293
 Transform:
@@ -1127,6 +1127,10 @@ PrefabInstance:
     - target: {fileID: 5295063320918715315, guid: 8773d2f62f25c9342a959c0cd6bf7320, type: 3}
       propertyPath: m_Name
       value: SceneFader
+      objectReference: {fileID: 0}
+    - target: {fileID: 5295063320918715315, guid: 8773d2f62f25c9342a959c0cd6bf7320, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8773d2f62f25c9342a959c0cd6bf7320, type: 3}
