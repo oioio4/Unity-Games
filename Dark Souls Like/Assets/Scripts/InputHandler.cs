@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Input {
+namespace NC {
     public class InputHandler : MonoBehaviour
     {
         public float horizontal;
@@ -14,26 +14,13 @@ namespace Input {
         public bool b_Input;
 
         public bool rollflag;
-        public bool isInteracting;
+        public bool sprintflag;
+        public float rollInputTimer;
 
         PlayerControls inputActions;
-        CameraHandler cameraHandler;
 
         Vector2 movementInput;
         Vector2 cameraInput;
-
-        private void Awake() {
-            cameraHandler = CameraHandler.singleton;
-        }
-
-        private void FixedUpdate() {
-            float delta= Time.fixedDeltaTime;
-
-            if (cameraHandler != null) {
-                cameraHandler.FollowTarget(delta);
-                cameraHandler.HandleCameraRotation(delta, mouseX, mouseY);
-            }
-        }
 
         public void OnEnable() {
             if (inputActions == null) {
@@ -65,7 +52,15 @@ namespace Input {
         private void HandleRollInput(float delta) {
             b_Input = inputActions.PlayerActions.Roll.phase == UnityEngine.InputSystem.InputActionPhase.Performed;
             if (b_Input) {
-                rollflag = true;
+                rollInputTimer += delta;
+                sprintflag = true;
+            }
+            else {
+                if (rollInputTimer > 0 && rollInputTimer < 0.2f) {
+                    sprintflag = false;
+                    rollflag = true;
+                }
+                rollInputTimer = 0;
             }
         }
     }
