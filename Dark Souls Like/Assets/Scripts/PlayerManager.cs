@@ -50,6 +50,8 @@ namespace NC {
         private void LateUpdate() {
             inputHandler.rollflag = false;
             inputHandler.sprintflag = false;
+            inputHandler.rb_Input = false;
+            inputHandler.rt_Input = false;
             isSprinting = inputHandler.b_Input;
 
             if (isInAir) {

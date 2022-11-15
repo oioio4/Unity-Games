@@ -30,7 +30,9 @@ namespace NC {
 
         [Header("Movement Stats")]
         [SerializeField]
-        float movementSpeed = 5f;
+        float movementSpeed = 2f;
+        [SerializeField]
+        float walkingSpeed = 5f;
         [SerializeField]
         float sprintSpeed = 7f;
         [SerializeField]
@@ -98,13 +100,20 @@ namespace NC {
 
             float speed = movementSpeed;
 
-            if (inputHandler.sprintflag) {
+            if (inputHandler.sprintflag && inputHandler.moveAmount > 0.5) {
                 speed = sprintSpeed;
                 playerManager.isSprinting = true;
                 moveDirection *= speed;
             }
             else {
-                moveDirection *= speed;
+                if (inputHandler.moveAmount < 0.5) {
+                    moveDirection *= walkingSpeed;
+                    playerManager.isSprinting = false;
+                }
+                else {
+                    moveDirection *= speed;
+                    playerManager.isSprinting = false;
+                }
             }
 
             Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
@@ -171,7 +180,7 @@ namespace NC {
                         inAirTimer = 0;
                     }
                     else {
-                        animatorHandler.PlayTargetAnimation("Locomotion", false);
+                        animatorHandler.PlayTargetAnimation("Empty", false);
                         inAirTimer = 0;
                     }
 

@@ -63,7 +63,7 @@ namespace NC {
             }
             #endregion
 
-            if (isSprinting && playerMovement.rigidbody.velocity.x != 0) {
+            if (isSprinting) {
                 v = 2;
                 h = horizontalMovement;
             }
