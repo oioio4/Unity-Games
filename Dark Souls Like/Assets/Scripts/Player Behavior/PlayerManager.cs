@@ -38,8 +38,8 @@ namespace NC {
             playerMovement.HandleFalling(delta, playerMovement.moveDirection);
         }
 
-        private void FixedUpdate() {
-            float delta= Time.fixedDeltaTime;
+        void FixedUpdate() {
+            float delta = Time.fixedDeltaTime;
 
             if (cameraHandler != null) {
                 cameraHandler.FollowTarget(delta);
