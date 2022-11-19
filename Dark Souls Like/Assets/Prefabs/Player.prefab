@@ -92,6 +92,7 @@ MonoBehaviour:
   rt_Input: 0
   rollflag: 0
   sprintflag: 0
+  comboFlag: 0
   rollInputTimer: 0
 --- !u!114 &8129933533534619853
 MonoBehaviour:
@@ -135,6 +136,7 @@ MonoBehaviour:
   isSprinting: 0
   isInAir: 0
   isGrounded: 0
+  canDoCombo: 0
 --- !u!114 &8129933533534619840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,6 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be31fe86534522e4fb4fe5a3d9dc9c7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastAttack: 
 --- !u!114 &8129933533534619842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,8 +177,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthLevel: 10
-  maxHealth: 0
-  currentHealth: 0
+  maxHealth: 100
+  currentHealth: 100
   healthBar: {fileID: 0}
 --- !u!1001 &8129933533020398924
 PrefabInstance:

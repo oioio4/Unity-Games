@@ -16,6 +16,7 @@ namespace NC {
         public bool isSprinting;
         public bool isInAir;
         public bool isGrounded;
+        public bool canDoCombo;
 
         // Start is called before the first frame update
         void Start()
@@ -31,7 +32,8 @@ namespace NC {
         {
             float delta = Time.deltaTime;
             isInteracting = anim.GetBool("isInteracting");
-
+            canDoCombo = anim.GetBool("canDoCombo");
+            
             inputHandler.TickInput(delta);
             playerMovement.HandleMovement(delta);
             playerMovement.HandleRollingAndSprinting(delta);

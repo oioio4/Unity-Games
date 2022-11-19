@@ -17,6 +17,7 @@ namespace NC {
 
         public bool rollflag;
         public bool sprintflag;
+        public bool comboFlag;
         public float rollInputTimer;
 
         PlayerControls inputActions;
@@ -80,11 +81,21 @@ namespace NC {
             inputActions.PlayerActions.RB.performed += i => rb_Input = true;
             inputActions.PlayerActions.RT.performed += i => rt_Input = true;
 
-            if (playerManager.isInteracting) {
-                return;
-            }
             if (rb_Input) {
-                playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
+                if (playerManager.canDoCombo) {
+                    comboFlag = true;
+                    playerAttacker.HandleWeaponCombo(playerInventory.rightWeapon);
+                    comboFlag = false;
+                }
+                else {
+                    if (playerManager.isInteracting) {
+                        return;
+                    }
+                    if (playerManager.canDoCombo) {
+                        return;
+                    }
+                    playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
+                }
             }     
 
             if (rt_Input) {
