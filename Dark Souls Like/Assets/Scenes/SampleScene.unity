@@ -1187,6 +1187,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -32.369
       objectReference: {fileID: 0}
+    - target: {fileID: 8129933533534619840, guid: f8002d503cef3114b87cb69180131d3f, type: 3}
+      propertyPath: unarmedWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: a533951c5f299804b9e59378cd3d304b, type: 2}
+    - target: {fileID: 8129933533534619840, guid: f8002d503cef3114b87cb69180131d3f, type: 3}
+      propertyPath: weaponsInLeftHandSlots.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 3a7aec2ed6291014cbf86df3cf1b88bf, type: 2}
+    - target: {fileID: 8129933533534619840, guid: f8002d503cef3114b87cb69180131d3f, type: 3}
+      propertyPath: weaponsInRightHandSlots.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 3a7aec2ed6291014cbf86df3cf1b88bf, type: 2}
     - target: {fileID: 8129933533534619841, guid: f8002d503cef3114b87cb69180131d3f, type: 3}
       propertyPath: isGrounded
       value: 1

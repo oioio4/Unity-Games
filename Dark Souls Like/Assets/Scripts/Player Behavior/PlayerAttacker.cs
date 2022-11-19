@@ -15,11 +15,20 @@ namespace NC
             inputHandler = GetComponent<InputHandler>();
         }
 
-        public void HandleWeaponCombo(WeaponItem weapon) {
+        public void HandleLightWeaponCombo(WeaponItem weapon) {
             if (inputHandler.comboFlag) {
                 animatorHandler.anim.SetBool("canDoCombo", false);
                 if (lastAttack == weapon.OH_Light_Attack_1) {
                     animatorHandler.PlayTargetAnimation(weapon.OH_Light_Attack_2, true);
+                }
+            }
+        }
+
+        public void HandleHeavyWeaponCombo(WeaponItem weapon) {
+            if (inputHandler.comboFlag) {
+                animatorHandler.anim.SetBool("canDoCombo", false);
+                if (lastAttack == weapon.OH_Heavy_Attack_1) {
+                    animatorHandler.PlayTargetAnimation(weapon.OH_Heavy_Attack_2, true);
                 }
             }
         }
