@@ -12,10 +12,18 @@ namespace NC
         DamageCollider leftHandDamageCollider;
         DamageCollider rightHandDamageCollider;
 
+        public WeaponItem attackingWeapon;
+
         Animator animator;
+
+        QuickSlotsUI quickSlotsUI;
+
+        PlayerStats playerStats;
 
         private void Awake() {
             animator = GetComponent<Animator>();
+            quickSlotsUI = FindObjectOfType<QuickSlotsUI>();
+            playerStats = GetComponentInParent<PlayerStats>();
 
             WeaponHolderSlot[] weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
             foreach (WeaponHolderSlot weaponSlot in weaponHolderSlots) {
@@ -32,6 +40,7 @@ namespace NC
             if (isLeft) {
                 leftHandSlot.LoadWeaponModel(weaponItem);
                 LoadLeftWeaponDamageCollider();
+                quickSlotsUI.UpdateWeaponQuickSlotsUI(true, weaponItem);
 
                 if (weaponItem != null) {
                     animator.CrossFade(weaponItem.left_hand_idle, 0.2f);
@@ -43,6 +52,7 @@ namespace NC
             else {
                 rightHandSlot.LoadWeaponModel(weaponItem);
                 LoadRightWeaponDamageCollider();
+                quickSlotsUI.UpdateWeaponQuickSlotsUI(false, weaponItem);
 
                 if (weaponItem != null) {
                     animator.CrossFade(weaponItem.right_hand_idle, 0.2f);
@@ -76,6 +86,16 @@ namespace NC
 
         public void CloseLeftDamageCollider() {
             leftHandDamageCollider.DisableDamageCollider();
+        }
+        #endregion
+        
+        #region Handle Stamina Drain
+        public void DrainStaminaLightAttack() {
+            playerStats.DrainStamina(Mathf.RoundToInt(attackingWeapon.baseStamina * attackingWeapon.lightAttackMultiplier));
+        }
+
+        public void DrainStaminaHeavyAttack() {
+            playerStats.DrainStamina(Mathf.RoundToInt(attackingWeapon.baseStamina * attackingWeapon.heavyAttackMultiplier));
         }
         #endregion
     }
