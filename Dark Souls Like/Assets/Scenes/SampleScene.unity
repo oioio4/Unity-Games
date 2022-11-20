@@ -795,8 +795,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1250399390}
-  - component: {fileID: 1250399392}
-  - component: {fileID: 1250399393}
+  - component: {fileID: 1250399394}
+  - component: {fileID: 1250399395}
   m_Layer: 5
   m_Name: HealthBar
   m_TagString: Untagged
@@ -826,7 +826,7 @@ RectTransform:
   m_AnchoredPosition: {x: -280, y: 160}
   m_SizeDelta: {x: 180, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1250399392
+--- !u!114 &1250399394
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -873,11 +873,11 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1250399393
+--- !u!114 &1250399395
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -902,7 +902,7 @@ GameObject:
   - component: {fileID: 1544278639}
   - component: {fileID: 1544278638}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1206,7 +1206,7 @@ PrefabInstance:
     - target: {fileID: 8129933533534619842, guid: f8002d503cef3114b87cb69180131d3f, type: 3}
       propertyPath: healthBar
       value: 
-      objectReference: {fileID: 1250399393}
+      objectReference: {fileID: 1250399395}
     - target: {fileID: 8129933533534619842, guid: f8002d503cef3114b87cb69180131d3f, type: 3}
       propertyPath: maxHealth
       value: 100
