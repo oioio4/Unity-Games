@@ -10,6 +10,7 @@ namespace NC
         public int maxHealth;
         public int currentHealth;
 
+        private bool isDead = false;
 
         Animator animator;
 
@@ -30,13 +31,16 @@ namespace NC
         }
 
         public void TakeDamage(int damage) {
-            currentHealth = currentHealth - damage;
+            if (!isDead) {
+                currentHealth = currentHealth - damage;
 
-            animator.Play("Hurt");
+                animator.Play("Hurt");
 
-            if (currentHealth <= 0) {
-                currentHealth = 0;
-                animator.Play("Death");
+                if (currentHealth <= 0) {
+                    currentHealth = 0;
+                    animator.Play("Death");
+                    isDead = true;
+                }
             }
         }
     }

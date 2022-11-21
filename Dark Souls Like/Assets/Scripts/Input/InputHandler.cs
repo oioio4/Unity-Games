@@ -11,6 +11,7 @@ namespace NC {
         public float mouseX;
         public float mouseY;
 
+        public bool a_Input;
         public bool b_Input;
         public bool rb_Input;
         public bool rt_Input;
@@ -43,6 +44,7 @@ namespace NC {
                 inputActions = new PlayerControls();
                 inputActions.PlayerMovement.Movement.performed += inputActions => movementInput = inputActions.ReadValue<Vector2>();
                 inputActions.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
+                inputActions.PlayerActions.A.performed += i => a_Input = true;
             }
             
             inputActions.Enable();
