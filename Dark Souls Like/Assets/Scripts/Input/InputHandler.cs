@@ -16,6 +16,7 @@ namespace NC {
         public bool rb_Input;
         public bool rt_Input;
         public bool jump_Input;
+        public bool inventory_Input;
 
         public bool d_Pad_Up;
         public bool d_Pad_Down;
@@ -25,12 +26,14 @@ namespace NC {
         public bool rollflag;
         public bool sprintflag;
         public bool comboFlag;
+        public bool inventoryFlag;
         public float rollInputTimer;
 
         PlayerControls inputActions;
         PlayerAttacker playerAttacker;
         PlayerInventory playerInventory;
         PlayerManager playerManager;
+        UIManager uiManager;
 
         Vector2 movementInput;
         Vector2 cameraInput;
@@ -39,6 +42,7 @@ namespace NC {
             playerAttacker = GetComponent<PlayerAttacker>();
             playerInventory = GetComponent<PlayerInventory>();
             playerManager = GetComponent<PlayerManager>();
+            uiManager = FindObjectOfType<UIManager>();
         }
 
         public void OnEnable() {
@@ -62,6 +66,7 @@ namespace NC {
             HandleAttackInput(delta);
             HandleQuickSlotInput();
             HandleJumpInput();
+            HandleInventoryInput();
         }
 
         private void MoveInput(float delta) {
@@ -140,6 +145,21 @@ namespace NC {
 
         private void HandleJumpInput() {
             inputActions.PlayerActions.Jump.performed += i => jump_Input = true;
+        }
+
+        private void HandleInventoryInput() {
+            inputActions.PlayerActions.Inventory.performed += i => inventory_Input = true;
+
+            if (inventory_Input) {
+                inventoryFlag = !inventoryFlag;
+
+                if (inventoryFlag) {
+                    uiManager.OpenSelectWindow();
+                }
+                else {
+                    uiManager.CloseSelectWindow();
+                }
+            }
         }
     }
 }
