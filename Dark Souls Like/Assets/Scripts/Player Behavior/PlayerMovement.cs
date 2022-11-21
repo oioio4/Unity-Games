@@ -55,7 +55,6 @@ namespace NC {
             ignoreForGroundCheck = ~(1 << 8 | 1 << 11);
         }
 
-
         #region Movement
         Vector3 normalVector;
         Vector3 targetPosition;
@@ -209,6 +208,23 @@ namespace NC {
             }
             else {
                 myTransform.position = targetPosition;
+            }
+        }
+
+        public void HandleJumping() {
+            if (playerManager.isInteracting) {
+                return;
+            }
+
+            if (inputHandler.jump_Input) {
+                if (inputHandler.moveAmount > 0) {
+                    moveDirection = cameraObject.forward * inputHandler.vertical;
+                    moveDirection += cameraObject.right * inputHandler.horizontal;
+                    animatorHandler.PlayTargetAnimation("Jump", true);
+                    moveDirection.y = 0;
+                    Quaternion jumpRotation = Quaternion.LookRotation(moveDirection);
+                    myTransform.rotation = jumpRotation;
+                }
             }
         }
 

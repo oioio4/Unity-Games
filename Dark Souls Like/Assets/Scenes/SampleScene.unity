@@ -2537,6 +2537,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -32.369
       objectReference: {fileID: 0}
+    - target: {fileID: 7953843860349596410, guid: f8002d503cef3114b87cb69180131d3f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7953843860349596410, guid: f8002d503cef3114b87cb69180131d3f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.99518645
+      objectReference: {fileID: 0}
+    - target: {fileID: 7953843860349596410, guid: f8002d503cef3114b87cb69180131d3f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.09799981
+      objectReference: {fileID: 0}
+    - target: {fileID: 7953843860349596410, guid: f8002d503cef3114b87cb69180131d3f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7953843860349596410, guid: f8002d503cef3114b87cb69180131d3f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 7953843860349596410, guid: f8002d503cef3114b87cb69180131d3f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 11.248001
+      objectReference: {fileID: 0}
     - target: {fileID: 8129933533534619840, guid: f8002d503cef3114b87cb69180131d3f, type: 3}
       propertyPath: leftWeapon
       value: 

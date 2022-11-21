@@ -15,6 +15,8 @@ namespace NC {
         public bool b_Input;
         public bool rb_Input;
         public bool rt_Input;
+        public bool jump_Input;
+
         public bool d_Pad_Up;
         public bool d_Pad_Down;
         public bool d_Pad_Left;
@@ -59,6 +61,7 @@ namespace NC {
             HandleRollInput(delta);
             HandleAttackInput(delta);
             HandleQuickSlotInput();
+            HandleJumpInput();
         }
 
         private void MoveInput(float delta) {
@@ -133,6 +136,10 @@ namespace NC {
             else if (d_Pad_Left) {
                 playerInventory.ChangeLeftWeapon();
             }
+        }
+
+        private void HandleJumpInput() {
+            inputActions.PlayerActions.Jump.performed += i => jump_Input = true;
         }
     }
 }

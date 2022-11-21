@@ -38,11 +38,13 @@ namespace NC {
             float delta = Time.deltaTime;
             isInteracting = anim.GetBool("isInteracting");
             canDoCombo = anim.GetBool("canDoCombo");
+            anim.SetBool("isInAir", isInAir);
             
             inputHandler.TickInput(delta);
             playerMovement.HandleMovement(delta);
             playerMovement.HandleRollingAndSprinting(delta);
             playerMovement.HandleFalling(delta, playerMovement.moveDirection);
+            playerMovement.HandleJumping();
 
             CheckForInteractableObject();
         }
@@ -66,6 +68,7 @@ namespace NC {
             inputHandler.d_Pad_Left = false;
             inputHandler.d_Pad_Right = false;
             inputHandler.a_Input = false;
+            inputHandler.jump_Input = false;
             isSprinting = inputHandler.b_Input;
 
             if (isInAir) {
