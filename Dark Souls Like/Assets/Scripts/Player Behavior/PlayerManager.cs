@@ -10,6 +10,10 @@ namespace NC {
         CameraHandler cameraHandler;
         PlayerMovement playerMovement;
 
+        InteractableUI interactableUI;
+        public GameObject interactableUIGameObject;
+        public GameObject itemInteractableGameObject;
+
         public bool isInteracting;
 
         [Header("Player Flags")]
@@ -25,6 +29,7 @@ namespace NC {
             inputHandler = GetComponent<InputHandler>();
             anim = GetComponentInChildren<Animator>();
             playerMovement = GetComponent<PlayerMovement>();
+            interactableUI = FindObjectOfType<InteractableUI>();
         }
 
         // Update is called once per frame
@@ -77,11 +82,22 @@ namespace NC {
 
                     if (interactableObject != null) {
                         string interactableText = interactableObject.interactableText;
+                        interactableUI.interactableText.text = interactableText;
+                        interactableUIGameObject.SetActive(true);
 
                         if (inputHandler.a_Input) {
                             hit.collider.GetComponent<Interactable>().Interact(this);
                         }
                     }
+                }
+            }
+            else {
+                if (interactableUIGameObject != null) {
+                    interactableUIGameObject.SetActive(false);
+                }
+
+                if (itemInteractableGameObject != null && inputHandler.a_Input) {
+                    itemInteractableGameObject.SetActive(false);
                 }
             }
         }
