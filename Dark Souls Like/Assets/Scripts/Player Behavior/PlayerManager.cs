@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace NC {
-    public class PlayerManager : MonoBehaviour
+    public class PlayerManager : CharacterManager
     {
         InputHandler inputHandler;
         Animator anim;
@@ -41,9 +41,7 @@ namespace NC {
             anim.SetBool("isInAir", isInAir);
             
             inputHandler.TickInput(delta);
-            playerMovement.HandleMovement(delta);
             playerMovement.HandleRollingAndSprinting(delta);
-            playerMovement.HandleFalling(delta, playerMovement.moveDirection);
             playerMovement.HandleJumping();
 
             CheckForInteractableObject();
@@ -52,15 +50,20 @@ namespace NC {
         void FixedUpdate() {
             float delta = Time.fixedDeltaTime;
 
+            playerMovement.HandleMovement(delta);
+            playerMovement.HandleFalling(delta, playerMovement.moveDirection);
+    
+    /*
             if (cameraHandler != null) {
                 cameraHandler.FollowTarget(delta);
                 cameraHandler.HandleCameraRotation(delta, inputHandler.mouseX, inputHandler.mouseY);
             }
+            */
         }
 
         private void LateUpdate() {
             inputHandler.rollflag = false;
-            inputHandler.sprintflag = false;
+            //inputHandler.sprintflag = false;
             inputHandler.rb_Input = false;
             inputHandler.rt_Input = false;
             inputHandler.d_Pad_Up = false;
@@ -71,6 +74,12 @@ namespace NC {
             inputHandler.jump_Input = false;
             inputHandler.inventory_Input = false;
             isSprinting = inputHandler.b_Input;
+
+            float delta = Time.deltaTime;
+            if (cameraHandler != null) {
+                cameraHandler.FollowTarget(delta);
+                cameraHandler.HandleCameraRotation(delta, inputHandler.mouseX, inputHandler.mouseY);
+            }
 
             if (isInAir) {
                 playerMovement.inAirTimer = playerMovement.inAirTimer + Time.deltaTime;
