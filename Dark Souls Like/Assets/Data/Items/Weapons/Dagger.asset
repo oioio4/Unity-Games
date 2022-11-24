@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09106b46f98e81b41a5242ae07b67357, type: 3}
-  m_Name: Unarmed
+  m_Name: Dagger
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 21300000, guid: e31e2da70c7da50429bce274b14a6e11, type: 3}
-  itemName: Unarmed
-  modelPrefab: {fileID: 2452952778639612668, guid: ddd01712306a81544915b0b6e1bb3bb1, type: 3}
-  isUnarmed: 1
-  right_hand_idle: Right Arm Empty
-  left_hand_idle: Left Arm Empty
+  itemIcon: {fileID: 21300000, guid: 131de1b41f4b5c04390a821cf150da5d, type: 3}
+  itemName: Dagger
+  modelPrefab: {fileID: 3368857790545890660, guid: 0ef512e65a219fe43a04435e05aa5e78, type: 3}
+  isUnarmed: 0
+  right_hand_idle: Right_Arm_Idle
+  left_hand_idle: Left_Arm_Idle
   OH_Light_Attack_1: Sword_Light_Attack_1
   OH_Light_Attack_2: Sword_Light_Attack_2
   OH_Heavy_Attack_1: Sword_Heavy_Attack_1
   OH_Heavy_Attack_2: Sword_Heavy_Attack_2
-  baseStamina: 10
+  baseStamina: 15
   lightAttackMultiplier: 1
-  heavyAttackMultiplier: 1.5
+  heavyAttackMultiplier: 2

@@ -11,10 +11,9 @@ namespace NC
         public bool leftHandSlot01Selected;
         public bool leftHandSlot02Selected;
 
-        EquipmentSlotUI[] equipmentSlotUI;
+        public EquipmentSlotUI[] equipmentSlotUI;
 
         private void Start() {
-            equipmentSlotUI = GetComponentsInChildren<EquipmentSlotUI>();
         }
 
         public void LoadWeaponsOnEquipmentScreen(PlayerInventory playerInventory) {
