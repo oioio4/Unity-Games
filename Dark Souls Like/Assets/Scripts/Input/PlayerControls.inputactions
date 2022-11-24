@@ -207,6 +207,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Y",
+                    "type": "Button",
+                    "id": "98bdf43d-d587-4c79-9d61-4b02d11dab1d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "aae41b36-161d-4041-bcc6-de439df6ebfe",
@@ -331,6 +340,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "LockOn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5b23f5a2-ad83-43d8-ab2a-fa00c146c033",
+                    "path": "<Keyboard>/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Y",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
