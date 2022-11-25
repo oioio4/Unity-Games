@@ -36,7 +36,7 @@ namespace NC {
         public float cameraSphereRadius = 0.2f;
         public float cameraCollisionOffSet = 0.2f;
         public float minimumCollisionOffset = 0.2f;
-        public float lockedPivotPosition = 1.8f;
+        public float lockedPivotPosition = 1.7f;
         public float unlockedPivotPosition = 1.65f;
 
         List<CharacterManager> availableTargets = new List<CharacterManager>();
