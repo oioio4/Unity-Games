@@ -6,20 +6,20 @@ namespace NC
 {
     public class EnemyAnimatorHandler : AnimatorManager
     {
-        EnemyMovementManager enemyMovementManager;
+        EnemyManager enemyManager;
 
         private void Awake() {
             anim = GetComponent<Animator>();
-            enemyMovementManager= GetComponentInParent<EnemyMovementManager>();
+            enemyManager= GetComponentInParent<EnemyManager>();
         }
 
         private void OnAnimatorMove() {
             float delta = Time.deltaTime;
-            enemyMovementManager.enemyRigidbody.drag = 0;
+            enemyManager.enemyRigidbody.drag = 0;
             Vector3 deltaPosition = anim.deltaPosition;
             deltaPosition.y = 0;
             Vector3 velocity = deltaPosition / delta;
-            enemyMovementManager.enemyRigidbody.velocity = velocity;
+            enemyManager.enemyRigidbody.velocity = velocity;
         }
     }
 }

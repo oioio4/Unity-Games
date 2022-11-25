@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace NC
 {
@@ -8,21 +9,38 @@ namespace NC
     {
         EnemyMovementManager enemyMovementManager;
         EnemyAnimatorHandler enemyAnimatorHandler;
+        EnemyStats enemyStats;
+
+        public State currentState;
+        public CharacterStats currentTarget;
+        public NavMeshAgent navmeshAgent;
+        public Rigidbody enemyRigidbody;
+
         public bool isPerformingAction;
 
-        public EnemyAttackAction[] enemyAttacks;
-        public EnemyAttackAction currentAttack;
+        public float distanceFromTarget;
+        public float rotationSpeed = 25f;
+        public float maximumAttackRange = 1.5f;
 
         [Header("A.I. Settings")]
         public float detectionRadius = 20f;
         public float maximumDetectionAngle = 50f;
         public float minimumDetectionAngle = -50f;
+        public float viewableAngle;
 
         public float currentRecoveryTime = 0f;
 
         private void Awake() {
             enemyMovementManager = GetComponent<EnemyMovementManager>();
             enemyAnimatorHandler = GetComponentInChildren<EnemyAnimatorHandler>();
+            enemyStats = GetComponent<EnemyStats>();
+            navmeshAgent = GetComponentInChildren<NavMeshAgent>();
+            enemyRigidbody = GetComponent<Rigidbody>();
+        }
+
+        private void Start() {
+            navmeshAgent.enabled = false;
+            enemyRigidbody.isKinematic = false;
         }
 
         private void Update() {
@@ -30,24 +48,21 @@ namespace NC
         }
 
         private void FixedUpdate() {
-            HandleCurrentAction();
+            HandleStateMachine();
         }
 
-        private void HandleCurrentAction() {
-            if (enemyMovementManager.currentTarget != null) {
-                enemyMovementManager.distanceFromTarget = 
-                Vector3.Distance(enemyMovementManager.currentTarget.transform.position, transform.position);
-            }
+        private void HandleStateMachine() {
+            if (currentState != null) {
+                State nextState = currentState.Tick(this, enemyStats, enemyAnimatorHandler);
 
-            if (enemyMovementManager.currentTarget == null) {
-                enemyMovementManager.HandleDetection();
+                if (nextState != null) {
+                    SwitchToNextState(nextState);
+                }
             }
-            else if (enemyMovementManager.distanceFromTarget > enemyMovementManager.stoppingDistance){
-                enemyMovementManager.HandleMoveToTarget();
-            }
-            else if (enemyMovementManager.distanceFromTarget <= enemyMovementManager.stoppingDistance){
-                AttackTarget();
-            }
+        }
+
+        private void SwitchToNextState(State state) {
+            currentState = state;
         }
 
         private void HandleRecoveryTimer() {
@@ -58,64 +73,6 @@ namespace NC
             if (isPerformingAction) {
                 if (currentRecoveryTime <= 0) {
                     isPerformingAction = false;
-                }
-            }
-        }
-
-        private void AttackTarget() {
-            if (isPerformingAction) {
-                return;
-            }
-            if (currentAttack == null) {
-                GetNewAttack();
-            }
-            else {
-                isPerformingAction = true;
-                currentRecoveryTime = currentAttack.recoveryTime;
-                enemyAnimatorHandler.PlayTargetAnimation(currentAttack.actionAnimation, true);
-                currentAttack = null;
-            }
-        }
-
-        private void GetNewAttack() {
-            Vector3 targetDirection = enemyMovementManager.currentTarget.transform.position - transform.position;
-            float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
-            enemyMovementManager.distanceFromTarget = Vector3.Distance(enemyMovementManager.currentTarget.transform.position, transform.position);
-
-            int maxScore = 0;
-
-            for (int i = 0; i < enemyAttacks.Length; i++) {
-                EnemyAttackAction enemyAttackAction = enemyAttacks[i];
-
-                if (enemyMovementManager.distanceFromTarget  <= enemyAttackAction.maximumDistanceNeededToAttack
-                    && enemyMovementManager.distanceFromTarget  >= enemyAttackAction.minimumDistanceNeededToAttack) {
-                        if (viewableAngle <= enemyAttackAction.maximumAttackAngle
-                            && viewableAngle >= enemyAttackAction.minimumAttackAngle) {
-                                maxScore += enemyAttackAction.attackScore;
-                            }
-                }
-            }
-
-            int randomValue = Random.Range(0, maxScore);
-            int temporaryScore = 0;
-
-            for (int i = 0; i < enemyAttacks.Length; i++) {
-                EnemyAttackAction enemyAttackAction = enemyAttacks[i];
-
-                if (enemyMovementManager.distanceFromTarget  <= enemyAttackAction.maximumDistanceNeededToAttack
-                    && enemyMovementManager.distanceFromTarget  >= enemyAttackAction.minimumDistanceNeededToAttack) {
-                        if (viewableAngle <= enemyAttackAction.maximumAttackAngle
-                            && viewableAngle >= enemyAttackAction.minimumAttackAngle) {
-                                if (currentAttack != null) {
-                                    return;
-                                }
-
-                                temporaryScore += enemyAttackAction.attackScore;
-
-                                if (temporaryScore > randomValue) {
-                                    currentAttack = enemyAttackAction;
-                                }
-                            }
                 }
             }
         }
