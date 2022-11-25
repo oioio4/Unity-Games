@@ -51,7 +51,7 @@ namespace NC {
             singleton = this;
             myTransform = transform;
             defaultPosition = cameraTransform.localPosition.z;
-            ignoreLayers = ~(1 << 8 | 1 << 9 | 1 << 10);
+            ignoreLayers = ~(1 << 9 | 1 << 10);
             inputHandler = FindObjectOfType<InputHandler>();
             playerManager = FindObjectOfType<PlayerManager>();
 
@@ -116,6 +116,9 @@ namespace NC {
                 wall = true;
                 float dis = Vector3.Distance(cameraPivotTransform.position, hit.point);
                 targetPosition = -(dis - cameraCollisionOffSet);
+            }
+            else {
+                wall = false;
             }
 
             if (Mathf.Abs(targetPosition) < minimumCollisionOffset) {
