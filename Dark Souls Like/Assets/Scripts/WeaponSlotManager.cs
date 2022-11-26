@@ -6,14 +6,15 @@ namespace NC
 {
     public class WeaponSlotManager : MonoBehaviour
     {
+        PlayerManager playerManager;
+        public WeaponItem attackingWeapon;
+
         WeaponHolderSlot leftHandSlot;
         WeaponHolderSlot rightHandSlot;
         WeaponHolderSlot backSlot;
 
         DamageCollider leftHandDamageCollider;
         DamageCollider rightHandDamageCollider;
-
-        public WeaponItem attackingWeapon;
 
         Animator animator;
 
@@ -23,6 +24,7 @@ namespace NC
         InputHandler inputHandler;
 
         private void Awake() {
+            playerManager = GetComponentInParent<PlayerManager>();
             animator = GetComponent<Animator>();
             quickSlotsUI = FindObjectOfType<QuickSlotsUI>();
             playerStats = GetComponentInParent<PlayerStats>();
@@ -91,21 +93,24 @@ namespace NC
             rightHandDamageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
         }
 
-        public void OpenRightDamageCollider() {
-            rightHandDamageCollider.EnableDamageCollider();
+        public void OpenDamageCollider() {
+            if (playerManager.isUsingRightHand) {
+                rightHandDamageCollider.EnableDamageCollider();
+            }
+            else if (playerManager.isUsingLeftHand) {
+                leftHandDamageCollider.EnableDamageCollider();
+            }
         }
 
-        public void CloseRightDamageCollider() {
-            rightHandDamageCollider.DisableDamageCollider();
+        public void CloseDamageCollider() {
+            if (playerManager.isUsingRightHand) {
+                rightHandDamageCollider.DisableDamageCollider();
+            }
+            else if (playerManager.isUsingLeftHand) {
+                leftHandDamageCollider.DisableDamageCollider();
+            }
         }
 
-        public void OpenLeftDamageCollider() {
-            leftHandDamageCollider.EnableDamageCollider();
-        }
-
-        public void CloseLeftDamageCollider() {
-            leftHandDamageCollider.DisableDamageCollider();
-        }
         #endregion
         
         #region Handle Stamina Drain

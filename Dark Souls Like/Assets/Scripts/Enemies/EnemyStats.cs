@@ -6,8 +6,6 @@ namespace NC
 {
     public class EnemyStats : CharacterStats
     {
-        private bool isDead = false;
-
         Animator animator;
 
         private void Awake() {

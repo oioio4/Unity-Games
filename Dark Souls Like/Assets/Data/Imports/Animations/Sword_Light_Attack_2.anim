@@ -63221,14 +63221,14 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.6
-    functionName: OpenRightDamageCollider
+    functionName: OpenDamageCollider
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 1
-    functionName: CloseRightDamageCollider
+    functionName: CloseDamageCollider
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

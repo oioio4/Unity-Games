@@ -17,16 +17,15 @@ namespace NC
         public Rigidbody enemyRigidbody;
 
         public bool isPerformingAction;
+        public bool isInteracting;
 
-        public float distanceFromTarget;
-        public float rotationSpeed = 25f;
+        public float rotationSpeed = 300f;
         public float maximumAttackRange = 1.5f;
 
         [Header("A.I. Settings")]
         public float detectionRadius = 20f;
         public float maximumDetectionAngle = 50f;
         public float minimumDetectionAngle = -50f;
-        public float viewableAngle;
 
         public float currentRecoveryTime = 0f;
 
@@ -45,6 +44,7 @@ namespace NC
 
         private void Update() {
             HandleRecoveryTimer();
+            isInteracting = enemyAnimatorHandler.anim.GetBool("isInteracting");
         }
 
         private void FixedUpdate() {
@@ -52,6 +52,10 @@ namespace NC
         }
 
         private void HandleStateMachine() {
+            if (enemyStats.isDead) {
+                return;
+            }
+
             if (currentState != null) {
                 State nextState = currentState.Tick(this, enemyStats, enemyAnimatorHandler);
 

@@ -41,6 +41,9 @@ namespace NC {
         [SerializeField]
         float fallingSpeed = 45f;
 
+        public CapsuleCollider characterCollider;
+        public CapsuleCollider characterCollisionBlockerCollider;
+
         private void Awake() {
             cameraHandler = FindObjectOfType<CameraHandler>();
         }
@@ -58,6 +61,7 @@ namespace NC {
 
             playerManager.isGrounded = true;
             ignoreForGroundCheck = ~(1 << 11);
+            Physics.IgnoreCollision(characterCollider, characterCollisionBlockerCollider, true);
         }
 
         #region Movement

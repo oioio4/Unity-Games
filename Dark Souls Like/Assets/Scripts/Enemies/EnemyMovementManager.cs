@@ -9,12 +9,16 @@ namespace NC
         EnemyManager enemyManager;
         EnemyAnimatorHandler enemyAnimatorHandler;
 
+        public CapsuleCollider characterCollider;
+        public CapsuleCollider characterCollisionBlockerCollider;
+
         private void Awake() {
             enemyManager = GetComponent<EnemyManager>();
             enemyAnimatorHandler = GetComponentInChildren<EnemyAnimatorHandler>();
         }
 
         private void Start() {
+            Physics.IgnoreCollision(characterCollider, characterCollisionBlockerCollider, true);
         }
     }
 }
