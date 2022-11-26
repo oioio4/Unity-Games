@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09106b46f98e81b41a5242ae07b67357, type: 3}
+  m_Name: TH_Sword
+  m_EditorClassIdentifier: 
+  itemIcon: {fileID: 21300000, guid: 84749a058f1a84040a1cbee5cea4c41c, type: 3}
+  itemName: TH_Sword
+  modelPrefab: {fileID: 1710646068302536601, guid: f1c29d2b8d606e24c98619f1e13f65a4, type: 3}
+  isUnarmed: 0
+  right_hand_idle: Right_Arm_Idle
+  left_hand_idle: Left_Arm_Idle
+  th_idle: TH_Idle
+  OH_Light_Attack_1: Sword_Light_Attack_1
+  OH_Light_Attack_2: Sword_Light_Attack_2
+  OH_Heavy_Attack_1: Sword_Heavy_Attack_1
+  OH_Heavy_Attack_2: Sword_Heavy_Attack_2
+  TH_Light_Attack_1: TH_Light_Sword_Attack_1
+  TH_Light_Attack_2: TH_Light_Sword_Attack_2
+  TH_Heavy_Attack_1: TH_Heavy_Sword_Attack_1
+  TH_Heavy_Attack_2: TH_Heavy_Sword_Attack_2
+  baseStamina: 30
+  lightAttackMultiplier: 1
+  heavyAttackMultiplier: 1.5
+  isSpellCaster: 0
+  isFaithCaster: 0
+  isPyroCaster: 0
+  isMeleeWeapon: 1

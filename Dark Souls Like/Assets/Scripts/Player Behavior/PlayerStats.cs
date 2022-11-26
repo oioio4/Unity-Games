@@ -6,12 +6,17 @@ namespace NC
 {
     public class PlayerStats : CharacterStats
     {
+        PlayerManager playerManager;
         public HealthBar healthBar;
         public StaminaBar staminaBar;
 
         AnimatorHandler animatorHandler;
 
+        public float staminaRegenerationAmount = 20f;
+        public float staminaRegenTimer = 0f;
+
         private void Awake() {
+            playerManager = GetComponent<PlayerManager>();
             animatorHandler = GetComponentInChildren<AnimatorHandler>();
         }
 
@@ -31,12 +36,15 @@ namespace NC
             return maxHealth;
         }
 
-        private int SetMaxStaminaFromStaminaLevel() {
+        private float SetMaxStaminaFromStaminaLevel() {
             maxStamina = staminaLevel * 10;
             return maxStamina;
         }
 
         public void TakeDamage(int damage) {
+            if (playerManager.isInvulnerable) {
+                return;
+            }
             if (isDead) {
                 return;
             }
@@ -57,6 +65,29 @@ namespace NC
             currentStamina -= drain;
 
             staminaBar.SetCurrentStamina(currentStamina);
+        }
+
+        public void RegenerateStamina() {
+            if (playerManager.isInteracting) {
+                staminaRegenTimer = 0f;
+            }
+            else {
+                staminaRegenTimer += Time.deltaTime;
+                if (currentStamina < maxStamina && staminaRegenTimer > 1f) {
+                    currentStamina += staminaRegenerationAmount * Time.deltaTime;
+                    staminaBar.SetCurrentStamina(Mathf.RoundToInt(currentStamina));
+                }
+            }
+        }
+
+        public void HealPlayer(int healAmount) {
+            currentHealth = currentHealth + healAmount;
+
+            if (currentHealth > maxHealth) {
+                currentHealth = maxHealth;
+            }
+
+            healthBar.SetCurrentHealth(currentHealth);
         }
     }
 }

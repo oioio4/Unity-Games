@@ -8,6 +8,7 @@ namespace NC {
         InputHandler inputHandler;
         Animator anim;
         CameraHandler cameraHandler;
+        PlayerStats playerStats;
         PlayerMovement playerMovement;
 
         InteractableUI interactableUI;
@@ -23,6 +24,7 @@ namespace NC {
         public bool canDoCombo;
         public bool isUsingRightHand;
         public bool isUsingLeftHand;
+        public bool isInvulnerable;
 
         // Start is called before the first frame update
         void Start()
@@ -31,6 +33,7 @@ namespace NC {
             inputHandler = GetComponent<InputHandler>();
             anim = GetComponentInChildren<Animator>();
             playerMovement = GetComponent<PlayerMovement>();
+            playerStats = GetComponent<PlayerStats>();
             interactableUI = FindObjectOfType<InteractableUI>();
         }
 
@@ -44,10 +47,12 @@ namespace NC {
             anim.SetBool("isInAir", isInAir);
             isUsingRightHand = anim.GetBool("isUsingRightHand");
             isUsingLeftHand = anim.GetBool("isUsingLeftHand");
+            isInvulnerable = anim.GetBool("isInvulnerable");
             
             inputHandler.TickInput(delta);
             playerMovement.HandleRollingAndSprinting(delta);
             playerMovement.HandleJumping();
+            playerStats.RegenerateStamina();
 
             CheckForInteractableObject();
         }
