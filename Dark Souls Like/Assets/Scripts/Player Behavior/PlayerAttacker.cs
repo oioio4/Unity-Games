@@ -14,6 +14,8 @@ namespace NC
         WeaponSlotManager weaponSlotManager;
         public string lastAttack;
 
+        LayerMask backStabLayer = 1 << 13;
+
         private void Awake() {
             animatorHandler = GetComponent<AnimatorHandler>();
             playerManager = GetComponentInParent<PlayerManager>();
@@ -112,9 +114,15 @@ namespace NC
         }
 
         private void PerformRBMagicAction(WeaponItem weapon) {
+            if (playerManager.isInteracting) {
+                return;
+            }
+
             if (weapon.isFaithCaster) {
                 if (playerInventory.currentSpell != null && playerInventory.currentSpell.isFaithSpell) {
-                    playerInventory.currentSpell.AttemptToCastSpell(animatorHandler, playerStats);
+                    if (playerStats.currentFocusPoints >= playerInventory.currentSpell.focusPointCost) {
+                        playerInventory.currentSpell.AttemptToCastSpell(animatorHandler, playerStats);
+                    }
                 }
             }
         }
@@ -124,5 +132,38 @@ namespace NC
         }
 
         #endregion
+
+        public void AttemptBackStabOrRiposte(){
+            RaycastHit hit;
+
+            if (Physics.Raycast(inputHandler.criticalAttackRayCastStartPoint.position, 
+            transform.TransformDirection(Vector3.forward), out hit, 0.5f, backStabLayer)) {
+                CharacterManager enemyCharacterManager = hit.transform.gameObject.GetComponentInParent<CharacterManager>();
+
+                if (enemyCharacterManager != null) {
+                    playerManager.transform.position = enemyCharacterManager.backStabCollider.backStabberStandPoint.position;
+                    Vector3 rotationDirection = playerManager.transform.root.eulerAngles;
+                    rotationDirection = hit.transform.position - playerManager.transform.position;
+                    rotationDirection.y = 0;
+                    rotationDirection.Normalize();
+                    Quaternion tr = Quaternion.LookRotation(rotationDirection);
+                    Quaternion targetRotation = Quaternion.Slerp(playerManager.transform.rotation, tr, 500 * Time.deltaTime);
+                    playerManager.transform.rotation = targetRotation;
+
+                    animatorHandler.PlayTargetAnimation("BackStab", true);
+
+                    AnimatorManager enemyAnimatorManager = enemyCharacterManager.GetComponentInChildren<AnimatorManager>();
+                    StartCoroutine(HandleBackStab(enemyAnimatorManager));
+                }
+            }
+        }
+
+        private IEnumerator HandleBackStab(AnimatorManager enemyAnimatorManager) {
+            enemyAnimatorManager.PlayTargetAnimation("BackStabbed", true);
+            yield return new WaitForSeconds(3);
+            if (!enemyAnimatorManager.anim.GetBool("isDead")) {
+                enemyAnimatorManager.PlayTargetAnimation("BackStabbedAlive", true);
+            }
+        }
     }
 }

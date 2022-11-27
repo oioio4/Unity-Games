@@ -16,6 +16,7 @@ namespace NC {
         public bool y_Input;
         public bool rb_Input;
         public bool rt_Input;
+        public bool critical_attack_Input;
         public bool jump_Input;
         public bool inventory_Input;
         public bool lockOnInput;
@@ -34,6 +35,8 @@ namespace NC {
         public bool lockOnFlag;
         public bool inventoryFlag;
         public float rollInputTimer;
+
+        public Transform criticalAttackRayCastStartPoint;
 
         PlayerControls inputActions;
         PlayerAttacker playerAttacker;
@@ -73,6 +76,7 @@ namespace NC {
                 inputActions.PlayerMovement.LockOnTargetRight.performed += i => right_Stick_Right_Input = true;
                 inputActions.PlayerMovement.LockOnTargetLeft.performed += i => right_Stick_Left_Input = true;
                 inputActions.PlayerActions.Y.performed += i => y_Input = true;
+                inputActions.PlayerActions.CriticalAttack.performed += i => critical_attack_Input = true;
             }
             
             inputActions.Enable();
@@ -90,6 +94,7 @@ namespace NC {
             HandleInventoryInput();
             HandleLockOnInput();
             HandleTwoHandInput();
+            HandleCriticalAttackInput();
         }
 
         private void MoveInput(float delta) {
@@ -213,6 +218,13 @@ namespace NC {
                     weaponSlotManager.LoadWeaponOnSlot(playerInventory.rightWeapon, false);
                     weaponSlotManager.LoadWeaponOnSlot(playerInventory.leftWeapon, true);
                 }
+            }
+        }
+
+        private void HandleCriticalAttackInput() {
+            if (critical_attack_Input) {
+                critical_attack_Input = false;
+                playerAttacker.AttemptBackStabOrRiposte();
             }
         }
     }

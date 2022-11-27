@@ -198,6 +198,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "CriticalAttack",
+                    "type": "PassThrough",
+                    "id": "ff2cb13e-48bc-4248-9028-7e4f843828c0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "A",
                     "type": "Button",
                     "id": "45105791-188a-40ab-baec-a001382cbfe4",
@@ -270,7 +279,7 @@
                     "name": "",
                     "id": "06bdfb5e-276f-4f8f-bb1b-efd768964acf",
                     "path": "<Keyboard>/e",
-                    "interactions": "",
+                    "interactions": "Tap",
                     "processors": "",
                     "groups": "",
                     "action": "RB",
@@ -351,6 +360,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Y",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3a0525a8-117a-4a0d-b12e-7c7d978d782e",
+                    "path": "<Keyboard>/e",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CriticalAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

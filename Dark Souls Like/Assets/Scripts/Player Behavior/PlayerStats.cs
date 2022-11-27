@@ -7,8 +7,9 @@ namespace NC
     public class PlayerStats : CharacterStats
     {
         PlayerManager playerManager;
-        public HealthBar healthBar;
-        public StaminaBar staminaBar;
+        HealthBar healthBar;
+        StaminaBar staminaBar;
+        FocusPointBar focusPointBar;
 
         AnimatorHandler animatorHandler;
 
@@ -18,6 +19,10 @@ namespace NC
         private void Awake() {
             playerManager = GetComponent<PlayerManager>();
             animatorHandler = GetComponentInChildren<AnimatorHandler>();
+
+            healthBar = FindObjectOfType<HealthBar>();
+            staminaBar = FindObjectOfType<StaminaBar>();
+            focusPointBar = FindObjectOfType<FocusPointBar>();
         }
 
         // Start is called before the first frame update
@@ -25,10 +30,16 @@ namespace NC
         {   
             maxHealth = SetMaxHealthFromHealthLevel();
             maxStamina = SetMaxStaminaFromStaminaLevel();
+            maxFocusPoints = SetMaxFocusPointsFromFocusLevel();
             currentHealth = maxHealth;
             currentStamina = maxStamina;
+            currentFocusPoints = maxFocusPoints;
             healthBar.SetMaxHealth(maxHealth);
+            healthBar.SetCurrentHealth(currentHealth);
             staminaBar.SetMaxStamina(maxStamina);
+            staminaBar.SetCurrentStamina(currentStamina);
+            focusPointBar.SetMaxFocusPoints(maxFocusPoints);
+            focusPointBar.SetCurrentFocusPoints(currentFocusPoints);
         }
 
         private int SetMaxHealthFromHealthLevel() {
@@ -39,6 +50,11 @@ namespace NC
         private float SetMaxStaminaFromStaminaLevel() {
             maxStamina = staminaLevel * 10;
             return maxStamina;
+        }
+
+        private float SetMaxFocusPointsFromFocusLevel() {
+            maxFocusPoints = focusLevel * 10;
+            return maxFocusPoints;
         }
 
         public void TakeDamage(int damage) {
@@ -65,6 +81,16 @@ namespace NC
             currentStamina -= drain;
 
             staminaBar.SetCurrentStamina(currentStamina);
+        }
+
+        public void DeductFocusPoints(int focusPoints) {
+            currentFocusPoints = currentFocusPoints - focusPoints;
+
+            if (currentFocusPoints < 0) {
+                currentFocusPoints = 0;
+            }
+            
+            focusPointBar.SetCurrentFocusPoints(currentFocusPoints);
         }
 
         public void RegenerateStamina() {

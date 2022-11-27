@@ -14,6 +14,10 @@ namespace NC
         public float maxStamina;
         public float currentStamina;
 
+        public int focusLevel = 10;
+        public float maxFocusPoints;
+        public float currentFocusPoints;
+
         public bool isDead;
     }
 }

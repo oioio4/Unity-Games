@@ -30,6 +30,7 @@ namespace NC {
         void Start()
         {
             cameraHandler = CameraHandler.singleton;
+            backStabCollider = GetComponentInChildren<BackStabCollider>();
             inputHandler = GetComponent<InputHandler>();
             anim = GetComponentInChildren<Animator>();
             playerMovement = GetComponent<PlayerMovement>();
