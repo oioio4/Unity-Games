@@ -10,6 +10,10 @@ namespace NC
         public GameObject modelPrefab;
         public bool isUnarmed;
 
+        [Header("Damage")]
+        public int baseDamage = 25;
+        public int criticalDamageMultiplier = 3;
+
         [Header("Idle Animations")]
         public string right_hand_idle;
         public string left_hand_idle;

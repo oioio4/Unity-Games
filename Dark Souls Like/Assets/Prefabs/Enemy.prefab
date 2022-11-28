@@ -686,11 +686,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lockOnTransform: {fileID: 375576075}
-  backStabBoxCollider: {fileID: 0}
-  backStabCollider: {fileID: 536910693}
+  backStabBoxCollider: {fileID: 536910693}
+  backStabCollider: {fileID: 0}
+  pendingCriticalDamage: 0
   currentState: {fileID: 1459309553}
   currentTarget: {fileID: 0}
-  navmeshAgent: {fileID: 0}
+  navmeshAgent: {fileID: 1339627660}
   enemyRigidbody: {fileID: 0}
   isPerformingAction: 0
   isInteracting: 0
@@ -2226,6 +2227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
+  canRotate: 0
 --- !u!4 &8256704565500958100 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -7893469076863975964, guid: faa72e0aad86b1344939dca89f94418b, type: 3}

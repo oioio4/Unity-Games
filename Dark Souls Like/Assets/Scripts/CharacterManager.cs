@@ -12,5 +12,7 @@ namespace NC
         [Header("Combat Colliders")]
         public BoxCollider backStabBoxCollider;
         public BackStabCollider backStabCollider;
+
+        public int pendingCriticalDamage;
     }
 }

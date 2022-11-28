@@ -57,6 +57,24 @@ namespace NC
             return maxFocusPoints;
         }
 
+        public void TakeDamageNoAnimation(int damage) {
+            if (!isDead) {
+                if (playerManager.isInvulnerable) {
+                    return;
+                }
+
+                currentHealth = currentHealth - damage;
+
+                healthBar.SetCurrentHealth(currentHealth);
+
+                if (currentHealth <= 0) {
+                    currentHealth = 0;
+                    //animatorHandler.PlayTargetAnimation("Death", true);
+                    isDead = true;
+                }
+            }
+        }
+
         public void TakeDamage(int damage) {
             if (playerManager.isInvulnerable) {
                 return;

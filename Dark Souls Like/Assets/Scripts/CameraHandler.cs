@@ -5,13 +5,12 @@ using UnityEngine;
 namespace NC {
     public class CameraHandler : MonoBehaviour
     {
-
         public bool wall = false;
 
         InputHandler inputHandler;
         PlayerManager playerManager;
 
-        public Transform targetTransform;
+        Transform targetTransform;
         public Transform cameraTransform;
         public Transform cameraPivotTransform;
         private Transform myTransform;
@@ -22,9 +21,9 @@ namespace NC {
 
         public static CameraHandler singleton;
 
-        public float lookSpeed = 0.1f;
+        public float lookSpeed = 0.015f;
         public float followSpeed = 0.1f;
-        public float pivotSpeed = 0.03f;
+        public float pivotSpeed = 0.006f;
 
         private float targetPosition;
         private float defaultPosition;
@@ -50,6 +49,7 @@ namespace NC {
         private void Awake() {
             singleton = this;
             myTransform = transform;
+            targetTransform = FindObjectOfType<PlayerManager>().transform;
             defaultPosition = cameraTransform.localPosition.z;
             ignoreLayers = ~(1 << 9 | 1 << 10 | 1 << 11 | 1 << 12 | 1 << 13);
             inputHandler = FindObjectOfType<InputHandler>();

@@ -30,8 +30,8 @@ namespace NC
                     Vector3 targetsDirection = characterStats.transform.position - enemyManager.transform.position;
                     float viewableAngle = Vector3.Angle(targetsDirection, enemyManager.transform.forward);
 
-                    if (viewableAngle > enemyManager.minimumDetectionAngle
-                        && viewableAngle < enemyManager.maximumDetectionAngle) {
+                    if (viewableAngle > enemyManager.minimumDetectionAngle && viewableAngle < enemyManager.maximumDetectionAngle 
+                        || enemyStats.currentHealth < enemyStats.maxHealth) {
                         enemyManager.currentTarget = characterStats;
                         isSleeping = false;
                         enemyAnimatorHandler.PlayTargetAnimation(wakeAnimation, true);

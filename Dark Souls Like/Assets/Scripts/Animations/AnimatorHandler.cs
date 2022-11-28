@@ -6,14 +6,15 @@ namespace NC {
     public class AnimatorHandler : AnimatorManager
     {
         PlayerManager playerManager;
+        PlayerStats playerStats;
         InputHandler inputHandler;
         PlayerMovement playerMovement;
         int vertical;
         int horizontal;
-        public bool canRotate;
 
         public void Initialize() {
             playerManager = GetComponentInParent<PlayerManager>();
+            playerStats = GetComponentInParent<PlayerStats>();
             anim = GetComponent<Animator>();
             inputHandler = GetComponentInParent<InputHandler>();
             playerMovement = GetComponentInParent<PlayerMovement>();
@@ -71,14 +72,6 @@ namespace NC {
             anim.SetFloat(horizontal, h, 0.1f, Time.deltaTime);
         }
 
-        public void CanRotate() {
-            canRotate = true;
-        }
-
-        public void StopRotation() {
-            canRotate = false;
-        }
-
         public void EnableCombo() {
             anim.SetBool("canDoCombo", true);
         }
@@ -93,6 +86,11 @@ namespace NC {
 
         public void DisableIsInvulnerable() {
             anim.SetBool("isInvulnerable", false);
+        }
+
+        public override void TakeCriticalDamage() {
+            playerStats.TakeDamageNoAnimation(playerManager.pendingCriticalDamage);
+            playerManager.pendingCriticalDamage = 0;
         }
 
         private void OnAnimatorMove() {

@@ -7,7 +7,8 @@ namespace NC {
     {
         InputHandler inputHandler;
         Animator anim;
-        CameraHandler cameraHandler;
+        public CameraHandler cameraHandler;
+        AnimatorHandler animatorHandler;
         PlayerStats playerStats;
         PlayerMovement playerMovement;
 
@@ -26,16 +27,21 @@ namespace NC {
         public bool isUsingLeftHand;
         public bool isInvulnerable;
 
-        // Start is called before the first frame update
-        void Start()
-        {
-            cameraHandler = CameraHandler.singleton;
+        private void Awake() {
+            //cameraHandler = CameraHandler.singleton;
             backStabCollider = GetComponentInChildren<BackStabCollider>();
             inputHandler = GetComponent<InputHandler>();
+            animatorHandler = GetComponentInChildren<AnimatorHandler>();
             anim = GetComponentInChildren<Animator>();
             playerMovement = GetComponent<PlayerMovement>();
             playerStats = GetComponent<PlayerStats>();
             interactableUI = FindObjectOfType<InteractableUI>();
+        }
+
+        // Start is called before the first frame update
+        void Start()
+        {
+        
         }
 
         // Update is called once per frame
@@ -45,12 +51,14 @@ namespace NC {
             
             isInteracting = anim.GetBool("isInteracting");
             canDoCombo = anim.GetBool("canDoCombo");
-            anim.SetBool("isInAir", isInAir);
             isUsingRightHand = anim.GetBool("isUsingRightHand");
             isUsingLeftHand = anim.GetBool("isUsingLeftHand");
             isInvulnerable = anim.GetBool("isInvulnerable");
+            anim.SetBool("isInAir", isInAir);
+            anim.SetBool("isDead", playerStats.isDead);
             
             inputHandler.TickInput(delta);
+            animatorHandler.canRotate = anim.GetBool("canRotate");
             playerMovement.HandleRollingAndSprinting(delta);
             playerMovement.HandleJumping();
             playerStats.RegenerateStamina();
@@ -62,6 +70,7 @@ namespace NC {
             float delta = Time.fixedDeltaTime;
 
             playerMovement.HandleMovement(delta);
+            playerMovement.HandleRotation(delta);
             playerMovement.HandleFalling(delta, playerMovement.moveDirection);
     
     /*
@@ -96,7 +105,8 @@ namespace NC {
                 playerMovement.inAirTimer = playerMovement.inAirTimer + Time.deltaTime;
             }
         }
-
+        
+        
         public void CheckForInteractableObject() {
             RaycastHit hit;
 
@@ -125,5 +135,8 @@ namespace NC {
                 }
             }
         }
+        
+             
+        
     }
 }

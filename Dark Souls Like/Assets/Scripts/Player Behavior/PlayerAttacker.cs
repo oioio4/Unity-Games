@@ -39,6 +39,10 @@ namespace NC
         }
 
         public void HandleHeavyWeaponCombo(WeaponItem weapon) {
+            if (playerStats.currentStamina <= 0) {
+                return;
+            }
+
             if (inputHandler.comboFlag) {
                 animatorHandler.anim.SetBool("canDoCombo", false);
 
@@ -52,6 +56,10 @@ namespace NC
         }
 
         public void HandleLightAttack(WeaponItem weapon) {
+            if (playerStats.currentStamina <= 0) {
+                return;
+            }
+
             weaponSlotManager.attackingWeapon = weapon;
 
             if (inputHandler.twoHandFlag) {
@@ -65,6 +73,10 @@ namespace NC
         }
         // implement two hand stuff
         public void HandleHeavyAttack(WeaponItem weapon) {
+            if (playerStats.currentStamina <= 0) {
+                return;
+            }
+
             weaponSlotManager.attackingWeapon = weapon;
 
             if (inputHandler.twoHandFlag) {
@@ -134,11 +146,16 @@ namespace NC
         #endregion
 
         public void AttemptBackStabOrRiposte(){
+            if (playerStats.currentStamina <= 0) {
+                return;
+            }
+            
             RaycastHit hit;
 
             if (Physics.Raycast(inputHandler.criticalAttackRayCastStartPoint.position, 
             transform.TransformDirection(Vector3.forward), out hit, 0.5f, backStabLayer)) {
                 CharacterManager enemyCharacterManager = hit.transform.gameObject.GetComponentInParent<CharacterManager>();
+                DamageCollider rightWeapon = weaponSlotManager.rightHandDamageCollider;
 
                 if (enemyCharacterManager != null) {
                     playerManager.transform.position = enemyCharacterManager.backStabCollider.backStabberStandPoint.position;
@@ -150,8 +167,10 @@ namespace NC
                     Quaternion targetRotation = Quaternion.Slerp(playerManager.transform.rotation, tr, 500 * Time.deltaTime);
                     playerManager.transform.rotation = targetRotation;
 
-                    animatorHandler.PlayTargetAnimation("BackStab", true);
+                    int criticalDamage = playerInventory.rightWeapon.criticalDamageMultiplier * rightWeapon.curDamage;
+                    enemyCharacterManager.pendingCriticalDamage = criticalDamage;
 
+                    animatorHandler.PlayTargetAnimation("BackStab", true);
                     AnimatorManager enemyAnimatorManager = enemyCharacterManager.GetComponentInChildren<AnimatorManager>();
                     StartCoroutine(HandleBackStab(enemyAnimatorManager));
                 }
