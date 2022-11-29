@@ -20,6 +20,19 @@ namespace NC
             enemyManager.pendingCriticalDamage = 0;
         }
 
+        public void AwardSoulsOnDeath() {
+            PlayerStats playerStats = FindObjectOfType<PlayerStats>();
+            SoulCountUI soulCountUI = FindObjectOfType<SoulCountUI>();
+
+            if (playerStats != null) {
+                playerStats.AddSouls(enemyStats.soulsAwardedOnDeath);
+
+                if (soulCountUI != null) {
+                    soulCountUI.SetSoulCountText(playerStats.soulCount);
+                }
+            }
+        }
+
         private void OnAnimatorMove() {
             float delta = Time.deltaTime;
             enemyManager.enemyRigidbody.drag = 0;

@@ -133,5 +133,9 @@ namespace NC
 
             healthBar.SetCurrentHealth(currentHealth);
         }
+
+        public void AddSouls(int souls) {
+            soulCount = soulCount + souls;
+        }
     }
 }

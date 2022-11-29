@@ -93,6 +93,13 @@ namespace NC {
             playerManager.pendingCriticalDamage = 0;
         }
 
+        // just so no error on player death
+        public void AwardSoulsOnDeath() {
+            if (playerStats != null) {
+                playerStats.AddSouls(0);
+            }
+        }
+
         private void OnAnimatorMove() {
             if (playerManager.isInteracting == false) {
                 return;

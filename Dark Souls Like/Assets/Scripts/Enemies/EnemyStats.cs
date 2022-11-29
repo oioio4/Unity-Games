@@ -6,13 +6,15 @@ namespace NC
 {
     public class EnemyStats : CharacterStats
     {
-        Animator animator;
+        EnemyAnimatorHandler enemyAnimatorHandler;
         private Renderer modelRenderer;
-        public float currentDissolve = 1f;
-        public float targetDissolve = 1f;
+        private float currentDissolve = 1f;
+        private float targetDissolve = 1f;
+
+        public int soulsAwardedOnDeath = 50;
 
         private void Awake() {
-            animator = GetComponentInChildren<Animator>();
+            enemyAnimatorHandler = GetComponentInChildren<EnemyAnimatorHandler>();
             modelRenderer = GetComponentInChildren<Renderer>();
         }
 
@@ -38,9 +40,7 @@ namespace NC
                 currentHealth = currentHealth - damage;
 
                 if (currentHealth <= 0) {
-                    currentHealth = 0;
-                    //animator.Play("Death");
-                    isDead = true;
+                    HandleDeath();
                 }
             }
         }
@@ -49,16 +49,20 @@ namespace NC
             if (!isDead) {
                 currentHealth = currentHealth - damage;
 
-                animator.Play("Hurt");
+                enemyAnimatorHandler.PlayTargetAnimation("Hurt", true);
 
                 if (currentHealth <= 0) {
-                    currentHealth = 0;
-                    animator.Play("Death");
-                    isDead = true;
-                    // triggers dissolve shader
-                    targetDissolve = 0f;
+                    HandleDeath();
                 }
             }
+        }
+
+        private void HandleDeath() {
+            currentHealth = 0;
+            enemyAnimatorHandler.PlayTargetAnimation("Death", true);
+            isDead = true;
+            // triggers dissolve shader
+            targetDissolve = 0f;
         }
     }
 }

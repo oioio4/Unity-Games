@@ -106,6 +106,8 @@ namespace NC {
             }
         }
         
+        #region Player Interactions
+
         
         public void CheckForInteractableObject() {
             RaycastHit hit;
@@ -135,8 +137,14 @@ namespace NC {
                 }
             }
         }
+
+        public void OpenChestInteraction(Transform playerStandingPosition) {
+            playerMovement.rigidbody.velocity = Vector3.zero;
+            transform.position = playerStandingPosition.transform.position;
+            animatorHandler.PlayTargetAnimation("Open Chest", true);
+        }
         
-             
+        #endregion
         
     }
 }
