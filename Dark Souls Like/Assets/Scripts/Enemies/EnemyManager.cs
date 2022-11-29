@@ -33,7 +33,6 @@ namespace NC
             enemyMovementManager = GetComponent<EnemyMovementManager>();
             enemyAnimatorHandler = GetComponentInChildren<EnemyAnimatorHandler>();
             enemyStats = GetComponent<EnemyStats>();
-            backStabCollider = GetComponentInChildren<BackStabCollider>();
             navmeshAgent = GetComponentInChildren<NavMeshAgent>();
             enemyRigidbody = GetComponent<Rigidbody>();
         }

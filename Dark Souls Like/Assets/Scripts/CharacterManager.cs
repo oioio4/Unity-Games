@@ -10,8 +10,12 @@ namespace NC
         public Transform lockOnTransform;
 
         [Header("Combat Colliders")]
-        public BoxCollider backStabBoxCollider;
-        public BackStabCollider backStabCollider;
+        public CriticalDamageCollider backStabCollider;
+        public CriticalDamageCollider riposteCollider;
+
+        [Header("Combat Flags")]
+        public bool canBeRiposted;
+
 
         public int pendingCriticalDamage;
     }

@@ -51,7 +51,7 @@ namespace NC {
             myTransform = transform;
             targetTransform = FindObjectOfType<PlayerManager>().transform;
             defaultPosition = cameraTransform.localPosition.z;
-            ignoreLayers = ~(1 << 9 | 1 << 10 | 1 << 11 | 1 << 12 | 1 << 13);
+            ignoreLayers = ~(1 << 9 | 1 << 10 | 1 << 11 | 1 << 12 | 1 << 13 | 1 << 14);
             inputHandler = FindObjectOfType<InputHandler>();
             playerManager = FindObjectOfType<PlayerManager>();
 

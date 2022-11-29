@@ -12,6 +12,7 @@ namespace NC
         public string wakeAnimation;
 
         public LayerMask detectionLayer;
+        public LayerMask environmentLayer;
 
         public PursueTargetState pursueTargetState;
 
@@ -32,9 +33,18 @@ namespace NC
 
                     if (viewableAngle > enemyManager.minimumDetectionAngle && viewableAngle < enemyManager.maximumDetectionAngle 
                         || enemyStats.currentHealth < enemyStats.maxHealth) {
-                        enemyManager.currentTarget = characterStats;
-                        isSleeping = false;
-                        enemyAnimatorHandler.PlayTargetAnimation(wakeAnimation, true);
+                            // check if wall between player and enemy
+                        RaycastHit hit;
+                        if (Physics.Linecast(enemyManager.transform.position, characterStats.transform.position, out hit)) {
+                            if (hit.transform.gameObject.layer == environmentLayer) {
+
+                            }
+                            else {
+                                enemyManager.currentTarget = characterStats;
+                                isSleeping = false;
+                                enemyAnimatorHandler.PlayTargetAnimation(wakeAnimation, true);
+                            }         
+                        }
                     }
                 }
             }

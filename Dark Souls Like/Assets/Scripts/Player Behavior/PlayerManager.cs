@@ -29,7 +29,6 @@ namespace NC {
 
         private void Awake() {
             //cameraHandler = CameraHandler.singleton;
-            backStabCollider = GetComponentInChildren<BackStabCollider>();
             inputHandler = GetComponent<InputHandler>();
             animatorHandler = GetComponentInChildren<AnimatorHandler>();
             anim = GetComponentInChildren<Animator>();
