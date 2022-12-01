@@ -7,6 +7,7 @@ namespace NC
     public class PlayerAttacker : MonoBehaviour
     {
         AnimatorHandler animatorHandler;
+        PlayerEquipmentManager playerEquipmentManager;
         PlayerManager playerManager;
         PlayerStats playerStats;
         PlayerInventory playerInventory;
@@ -19,6 +20,7 @@ namespace NC
 
         private void Awake() {
             animatorHandler = GetComponent<AnimatorHandler>();
+            playerEquipmentManager = GetComponent<PlayerEquipmentManager>();
             playerManager = GetComponentInParent<PlayerManager>();
             playerStats = GetComponentInParent<PlayerStats>();
             playerInventory = GetComponentInParent<PlayerInventory>();
@@ -103,6 +105,10 @@ namespace NC
             }
         }
 
+        public void HandleLBAction() {
+            PerformLBBlockingAction();
+        }
+
         public void HandleLTAction() {
             if (playerInventory.leftWeapon.isShieldWeapon) {
                 PerformLTWeaponArt(inputHandler.twoHandFlag);
@@ -163,6 +169,22 @@ namespace NC
 
         private void SuccessfullyCastSpell() {
             playerInventory.currentSpell.SuccessfullyCastSpell(animatorHandler, playerStats);
+        }
+
+        #endregion
+
+        #region Defense Actions
+        private void PerformLBBlockingAction() {
+            if (playerManager.isInteracting) {
+                return;
+            }
+            if (playerManager.isBlocking) {
+                return;
+            }
+
+            animatorHandler.PlayTargetAnimation("Block Start", false, true);
+            playerEquipmentManager.OpenBlockingCollider();
+            playerManager.isBlocking = true;
         }
 
         #endregion

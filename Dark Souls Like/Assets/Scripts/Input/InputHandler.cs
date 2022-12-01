@@ -15,6 +15,7 @@ namespace NC {
         public bool b_Input;
         public bool y_Input;
         public bool rb_Input;
+        public bool lb_Input;
         public bool rt_Input;
         public bool lt_Input;
         public bool critical_attack_Input;
@@ -44,6 +45,7 @@ namespace NC {
         PlayerInventory playerInventory;
         PlayerManager playerManager;
         PlayerStats playerStats;
+        BlockingCollider blockingCollider;
         WeaponSlotManager weaponSlotManager;
         CameraHandler cameraHandler;
         AnimatorHandler animatorHandler;
@@ -58,6 +60,7 @@ namespace NC {
             playerManager = GetComponent<PlayerManager>();
             playerStats = GetComponent<PlayerStats>();
             weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
+            blockingCollider = GetComponentInChildren<BlockingCollider>();
             cameraHandler = FindObjectOfType<CameraHandler>();
             uiManager = FindObjectOfType<UIManager>();
             animatorHandler = GetComponentInChildren<AnimatorHandler>();
@@ -73,6 +76,8 @@ namespace NC {
                 inputActions.PlayerActions.Roll.canceled += i => b_Input = false;
                 inputActions.PlayerActions.RB.performed += i => rb_Input = true;
                 inputActions.PlayerActions.RT.performed += i => rt_Input = true;
+                inputActions.PlayerActions.LB.performed += i => lb_Input = true;
+                inputActions.PlayerActions.LB.canceled += i => lb_Input = false;
                 inputActions.PlayerActions.LT.performed += i => lt_Input = true;
                 inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
                 inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
@@ -95,7 +100,7 @@ namespace NC {
         public void TickInput(float delta) {
             MoveInput(delta);
             HandleRollInput(delta);
-            HandleAttackInput(delta);
+            HandleCombatInput(delta);
             HandleQuickSlotInput();
             HandleInventoryInput();
             HandleLockOnInput();
@@ -134,7 +139,7 @@ namespace NC {
             }
         }
 
-        private void HandleAttackInput(float delta) {
+        private void HandleCombatInput(float delta) {
             if (rb_Input) {
                 playerAttacker.HandleRBAction();
             }     
@@ -153,6 +158,17 @@ namespace NC {
                         return;
                     }
                     playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
+                }
+            }
+
+            if (lb_Input) {
+                playerAttacker.HandleLBAction();
+            }
+            else {
+                playerManager.isBlocking = false;
+
+                if (blockingCollider.blockingCollider.enabled) {
+                    blockingCollider.DisableBlockingCollider();
                 }
             }
 

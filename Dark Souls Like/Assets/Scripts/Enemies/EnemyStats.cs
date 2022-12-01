@@ -45,11 +45,11 @@ namespace NC
             }
         }
 
-        public void TakeDamage(int damage) {
+        public void TakeDamage(int damage, string damageAnimation = "Hurt") {
             if (!isDead) {
                 currentHealth = currentHealth - damage;
 
-                enemyAnimatorHandler.PlayTargetAnimation("Hurt", true);
+                enemyAnimatorHandler.PlayTargetAnimation(damageAnimation, true);
 
                 if (currentHealth <= 0) {
                     HandleDeath();

@@ -23,7 +23,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 1
-  controlID: 103
+  controlID: 4944
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -96,18 +96,18 @@ MonoBehaviour:
       y: 21
       width: 205.20001
       height: 393.2
-    m_Scale: {x: 1.0570859, y: 1.0570859}
-    m_Translation: {x: 102.6, y: 196.6}
+    m_Scale: {x: 1.0609, y: 1.0609}
+    m_Translation: {x: 102.600006, y: 196.6}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -97.05929
-      y: -185.983
-      width: 194.11858
-      height: 371.966
+      x: -96.71035
+      y: -185.31436
+      width: 193.4207
+      height: 370.62872
     m_MinimalGUI: 1
   m_defaultScale: 1
   m_LastWindowPixelSize: {x: 256.5, y: 517.75}
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 104
+  controlID: 4945
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -165,7 +165,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 105
+  controlID: 4946
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -191,7 +191,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 8096}
   vertical: 0
-  controlID: 106
+  controlID: 4947
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -249,9 +249,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: aef8ffff
-      m_LastClickedID: -1874
-      m_ExpandedIDs: 18fbffff
+      m_SelectedIDs: 4c710000
+      m_LastClickedID: 0
+      m_ExpandedIDs: 0af4ffff32f5ffff18fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: SceneView
+  m_Name: AnimatorControllerTool
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -294,15 +294,15 @@ MonoBehaviour:
     y: 0
     width: 415.2
     height: 435.2
-  m_MinSize: {x: 202, y: 221}
+  m_MinSize: {x: 102, y: 121}
   m_MaxSize: {x: 4002, y: 4021}
-  m_ActualView: {fileID: 9}
+  m_ActualView: {fileID: 10}
   m_Panes:
   - {fileID: 9}
   - {fileID: 10}
   - {fileID: 11}
   - {fileID: 12}
-  m_Selected: 0
+  m_Selected: 1
   m_LastSelected: 0
 --- !u!114 &9
 MonoBehaviour:
@@ -337,9 +337,9 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
-      snapOffset: {x: -101, y: -26}
+      snapOffset: {x: 0, y: 24.8}
       snapOffsetDelta: {x: 0, y: 0}
-      snapCorner: 3
+      snapCorner: 0
       id: Tool Settings
       index: 0
       layout: 1
@@ -529,9 +529,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -7.0863247, y: 1.811488, z: 3.1359267}
+    m_Target: {x: -8.74786, y: 0.46289062, z: 6.4259243}
     speed: 2
-    m_Value: {x: -7.0863247, y: 1.811488, z: 3.1359267}
+    m_Value: {x: -8.74786, y: 0.46289062, z: 6.4259243}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -578,13 +578,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.052512188, y: -0.7389616, z: 0.057986233, w: -0.6691936}
+    m_Target: {x: 0.08374302, y: -0.72696877, z: 0.09009002, w: 0.6756011}
     speed: 2
-    m_Value: {x: -0.052598998, y: -0.73795533, z: 0.057907276, w: -0.6702999}
+    m_Value: {x: 0.08374094, y: -0.72695076, z: 0.09008779, w: 0.6755844}
   m_Size:
-    m_Target: 6.527806
+    m_Target: 4.050647
     speed: 2
-    m_Value: 6.246704
+    m_Value: 4.050647
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -602,7 +602,7 @@ MonoBehaviour:
     m_FarClip: 10000
     m_DynamicClip: 1
     m_OcclusionCulling: 0
-  m_LastSceneViewRotation: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
+  m_LastSceneViewRotation: {x: 0.05806175, y: 0.77066386, z: -0.07095395, w: 0.6306348}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
@@ -631,7 +631,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 448
     y: 73.6
-    width: 620.4
+    width: 413.2
     height: 414.2
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -645,15 +645,16 @@ MonoBehaviour:
     - {fileID: 6947674175384803138, guid: ac6435143be06df4c95b4cdf7910b227, type: 2}
     - {fileID: 3525355589548144743, guid: ac6435143be06df4c95b4cdf7910b227, type: 2}
     - {fileID: 5811976089044831811, guid: ac6435143be06df4c95b4cdf7910b227, type: 2}
+    - {fileID: 1721146116953795607, guid: 1db847da583abca40aedc41df58c6cba, type: 2}
     m_ValueSerializationHelper:
-    - e00: 0.39757192
+    - e00: 0.6849524
       e01: 0
       e02: 0
-      e03: 56.02861
+      e03: -177.02553
       e10: 0
-      e11: 0.39757192
+      e11: 0.6849524
       e12: 0
-      e13: 188.42221
+      e13: 99.70801
       e20: 0
       e21: 0
       e22: 1
@@ -662,14 +663,14 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-    - e00: 0.9838155
+    - e00: 0.7108067
       e01: 0
       e02: 0
-      e03: 12.43866
+      e03: -55.30107
       e10: 0
-      e11: 0.9838155
+      e11: 0.7108067
       e12: 0
-      e13: -108.31773
+      e13: -10.919559
       e20: 0
       e21: 0
       e22: 1
@@ -678,14 +679,14 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-    - e00: 0.7371693
+    - e00: 0.5592038
       e01: 0
       e02: 0
-      e03: -202.12671
+      e03: 19.736324
       e10: 0
-      e11: 0.7371693
+      e11: 0.5592038
       e12: 0
-      e13: 335.1858
+      e13: 230.80943
       e20: 0
       e21: 0
       e22: 1
@@ -742,10 +743,26 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
+    - e00: 1.1163436
+      e01: 0
+      e02: 0
+      e03: -393.0815
+      e10: 0
+      e11: 1.1163436
+      e12: 0
+      e13: 75.28156
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: ac6435143be06df4c95b4cdf7910b227, type: 2}
+  m_AnimatorController: {fileID: 9100000, guid: 1db847da583abca40aedc41df58c6cba, type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: -1374835606447056921, guid: ac6435143be06df4c95b4cdf7910b227, type: 2}
+  - m_Target: {fileID: 1721146116953795607, guid: 1db847da583abca40aedc41df58c6cba, type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
   stateMachineGraphGUI: {fileID: 0}
@@ -757,7 +774,7 @@ MonoBehaviour:
     m_IsLocked: 0
   m_CurrentEditor: 1
   m_LayerEditor:
-    m_SelectedLayerIndex: 4
+    m_SelectedLayerIndex: 0
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -788,8 +805,8 @@ MonoBehaviour:
     m_SaveData: []
   m_ActionMapsTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: cd5289fe
-    m_LastClickedID: -24554803
+    m_SelectedIDs: 5d1d4833
+    m_LastClickedID: 860364125
     m_ExpandedIDs: 00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -810,9 +827,9 @@ MonoBehaviour:
     m_SearchString: 
   m_ActionsTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 43a14c41
-    m_LastClickedID: 1095541059
-    m_ExpandedIDs: fa0c4b874df692acda296db01f67d0c7f65d24cb998fa4e00b9339e6cf98acf412b515fccd5289fed7a2e2088d28ff09c0ca7f0e63946f0fc0fcf11996e932325d1d48330a3d9057
+    m_SelectedIDs: 7bd3b8df
+    m_LastClickedID: -541535365
+    m_ExpandedIDs: fa0c4b874df692acda296db01f67d0c7f65d24cb998fa4e00b9339e600d086e9cf98acf412b515fccd5289fed7a2e2088d28ff09c0ca7f0e63946f0fc0fcf11996e932325d1d48330a3d9057
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -828,7 +845,7 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 0
-      m_ClientGUIView: {fileID: 0}
+      m_ClientGUIView: {fileID: 8}
     m_SearchString: 
   m_ControlPickerViewState:
     m_AdvancedDropdownState:
@@ -837,8 +854,8 @@ MonoBehaviour:
         selectedIndex: 3
         scroll: {x: 0, y: 0}
       - itemId: 656259478
-        selectedIndex: 0
-        scroll: {x: 0, y: 0}
+        selectedIndex: 51
+        scroll: {x: 0, y: 750}
       - itemId: 378383742
         selectedIndex: -1
         scroll: {x: 0, y: 0}
@@ -942,6 +959,10 @@ MonoBehaviour:
       \"type\": \"Button\",\n                    \"id\": \"64fe3aa0-32ea-495c-8ec3-9a6c1ee255f1\",\n                   
       \"expectedControlType\": \"Button\",\n                    \"processors\": \"\",\n                   
       \"interactions\": \"\",\n                    \"initialStateCheck\": false\n               
+      },\n                {\n                    \"name\": \"LT\",\n                   
+      \"type\": \"Button\",\n                    \"id\": \"825f6524-d0d4-4fb5-bcbf-cb074cdaa723\",\n                   
+      \"expectedControlType\": \"Button\",\n                    \"processors\": \"\",\n                   
+      \"interactions\": \"\",\n                    \"initialStateCheck\": false\n               
       },\n                {\n                    \"name\": \"CriticalAttack\",\n                   
       \"type\": \"PassThrough\",\n                    \"id\": \"ff2cb13e-48bc-4248-9028-7e4f843828c0\",\n                   
       \"expectedControlType\": \"Button\",\n                    \"processors\": \"\",\n                   
@@ -982,12 +1003,22 @@ MonoBehaviour:
       \"processors\": \"\",\n                    \"groups\": \"\",\n                   
       \"action\": \"RB\",\n                    \"isComposite\": false,\n                   
       \"isPartOfComposite\": false\n                },\n                {\n                   
-      \"name\": \"\",\n                    \"id\": \"ba4303e0-ebed-41c5-b8c0-0803370536c1\",\n                   
+      \"name\": \"\",\n                    \"id\": \"873ad1e7-6c81-4937-8dda-979d90b4228c\",\n                   
+      \"path\": \"<Gamepad>/rightShoulder\",\n                    \"interactions\":
+      \"\",\n                    \"processors\": \"\",\n                    \"groups\":
+      \"\",\n                    \"action\": \"RB\",\n                    \"isComposite\":
+      false,\n                    \"isPartOfComposite\": false\n                },\n               
+      {\n                    \"name\": \"\",\n                    \"id\": \"ba4303e0-ebed-41c5-b8c0-0803370536c1\",\n                   
       \"path\": \"<Keyboard>/r\",\n                    \"interactions\": \"\",\n                   
       \"processors\": \"\",\n                    \"groups\": \"\",\n                   
       \"action\": \"RT\",\n                    \"isComposite\": false,\n                   
       \"isPartOfComposite\": false\n                },\n                {\n                   
-      \"name\": \"\",\n                    \"id\": \"841e0338-feee-4724-8d08-864d8de386d5\",\n                   
+      \"name\": \"\",\n                    \"id\": \"f23b51dc-824e-4421-a3b2-39383194ae9c\",\n                   
+      \"path\": \"<Gamepad>/rightTrigger\",\n                    \"interactions\":
+      \"\",\n                    \"processors\": \"\",\n                    \"groups\":
+      \"\",\n                    \"action\": \"RT\",\n                    \"isComposite\":
+      false,\n                    \"isPartOfComposite\": false\n                },\n               
+      {\n                    \"name\": \"\",\n                    \"id\": \"841e0338-feee-4724-8d08-864d8de386d5\",\n                   
       \"path\": \"<Keyboard>/enter\",\n                    \"interactions\": \"\",\n                   
       \"processors\": \"\",\n                    \"groups\": \"\",\n                   
       \"action\": \"A\",\n                    \"isComposite\": false,\n                   
@@ -1021,9 +1052,20 @@ MonoBehaviour:
       \"path\": \"<Keyboard>/e\",\n                    \"interactions\": \"Hold\",\n                   
       \"processors\": \"\",\n                    \"groups\": \"\",\n                   
       \"action\": \"CriticalAttack\",\n                    \"isComposite\": false,\n                   
-      \"isPartOfComposite\": false\n                }\n            ]\n        },\n       
-      {\n            \"name\": \"Player Quick Slots\",\n            \"id\": \"38ee06b6-4bf8-40a3-b7b7-bba503f6bd5a\",\n           
-      \"actions\": [\n                {\n                    \"name\": \"D-Pad Up\",\n                   
+      \"isPartOfComposite\": false\n                },\n                {\n                   
+      \"name\": \"\",\n                    \"id\": \"370206e7-5e8c-4c62-920c-cde8f745a213\",\n                   
+      \"path\": \"<Keyboard>/z\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"LT\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": false\n                },\n                {\n                   
+      \"name\": \"\",\n                    \"id\": \"dfcee5e4-dad3-4cee-82cb-2bdcdb5b6507\",\n                   
+      \"path\": \"<Gamepad>/leftTrigger\",\n                    \"interactions\":
+      \"\",\n                    \"processors\": \"\",\n                    \"groups\":
+      \"\",\n                    \"action\": \"LT\",\n                    \"isComposite\":
+      false,\n                    \"isPartOfComposite\": false\n                }\n           
+      ]\n        },\n        {\n            \"name\": \"Player Quick Slots\",\n           
+      \"id\": \"38ee06b6-4bf8-40a3-b7b7-bba503f6bd5a\",\n            \"actions\":
+      [\n                {\n                    \"name\": \"D-Pad Up\",\n                   
       \"type\": \"Button\",\n                    \"id\": \"523d23b6-b279-436b-8c28-749a510c3777\",\n                   
       \"expectedControlType\": \"Button\",\n                    \"processors\": \"\",\n                   
       \"interactions\": \"\",\n                    \"initialStateCheck\": false\n               
@@ -1701,7 +1743,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ConsoleWindow
+  m_Name: ProjectBrowser
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -1710,14 +1752,14 @@ MonoBehaviour:
     y: 435.2
     width: 1070.4
     height: 295.59998
-  m_MinSize: {x: 101, y: 121}
-  m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 16}
+  m_MinSize: {x: 231, y: 271}
+  m_MaxSize: {x: 10001, y: 10021}
+  m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
   - {fileID: 16}
-  m_Selected: 1
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1759,22 +1801,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/Player Behavior
+    - Assets/Animations
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts/Player Behavior
+  - Assets/Animations
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Unity\Unity-Games\Dark Souls Like
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 65.400024}
-    m_SelectedIDs: 3a690000
-    m_LastClickedID: 26938
-    m_ExpandedIDs: 000000002a710000
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: be730000
+    m_LastClickedID: 29630
+    m_ExpandedIDs: 000000007472000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1802,7 +1844,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000002a710000
+    m_ExpandedIDs: 000000007472000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1827,10 +1869,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: f6faffff
-    m_LastClickedInstanceID: -1290
-    m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: c6230000765e0000725e00003c660000d2690000ea6e00008e7f00009e800000449900009a630000d0780000e07900008a6100004061000070620000dc7c0000026900006c6c0000d26300003a640000d0600100e6610100fe62010014640100346501004a660100626701007e6801007a68010098780100727500007476000030040100460501006a2301007a2401001a6c0000306700004a68000098830000ae840000d4a70000a07d000024fa000000000000744b0100906c0000a66d0000c06e00004a7f000060800000de180100
+    m_SelectedInstanceIDs: 4c710000
+    m_LastClickedInstanceID: 29004
+    m_HadKeyboardFocusLastEvent: 0
+    m_ExpandedInstanceIDs: c6230000765e0000725e00003c660000d2690000ea6e00008e7f00009e800000449900009a630000d0780000e07900008a6100004061000070620000dc7c0000026900006c6c0000d26300003a640000d0600100e6610100fe62010014640100346501004a660100626701007e6801007a68010098780100727500007476000030040100460501006a2301007a2401001a6c0000306700004a68000098830000ae840000d4a70000a07d000024fa000000000000744b0100906c0000a66d0000c06e00004a7f000060800000de180100587300005a7300001a7b00001e7d0000827800009a790000d8c80000427600006a7800005a770000707800008ade00009edf00002ebb0000b4740000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1905,8 +1947,8 @@ MonoBehaviour:
     y: 0
     width: 465.59998
     height: 730.8
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -1949,7 +1991,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 780.80005
+  m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:

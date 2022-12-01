@@ -29254,7 +29254,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.4
+  - time: 0.43333334
     functionName: DisableIsParrying
     data: 
     objectReferenceParameter: {fileID: 0}

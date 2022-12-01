@@ -30,12 +30,21 @@ namespace NC
             if (collision.tag == "Player") {
                 PlayerStats playerStats = collision.GetComponent<PlayerStats>();
                 CharacterManager enemyCharacterManager = collision.GetComponent<CharacterManager>();
+                BlockingCollider shield = collision.transform.GetComponentInChildren<BlockingCollider>();
 
                 if (enemyCharacterManager != null) {
                     if (enemyCharacterManager.isParrying) {
                         // check if able to parry
                         characterManager.GetComponentInChildren<AnimatorManager>().PlayTargetAnimation("Parried", true);
                         return;
+                    }
+                    else if (shield != null && enemyCharacterManager.isBlocking) {
+                        float physicalDamageAfterBlock = curDamage - (curDamage * shield.blockingPhysicalDamageAbsorption / 100);
+
+                        if (playerStats != null) {
+                            playerStats.TakeDamage(Mathf.RoundToInt(physicalDamageAfterBlock), "Blocked");
+                            return;
+                        }
                     }
                 }
 
@@ -47,12 +56,21 @@ namespace NC
             if (collision.tag == "Enemy") {
                 EnemyStats enemyStats = collision.GetComponent<EnemyStats>();
                 CharacterManager enemyCharacterManager = collision.GetComponent<CharacterManager>();
+                BlockingCollider shield = collision.transform.GetComponentInChildren<BlockingCollider>();
 
                 if (enemyCharacterManager != null) {
                     if (enemyCharacterManager.isParrying) {
                         // check if able to parry
                         characterManager.GetComponentInChildren<AnimatorManager>().PlayTargetAnimation("Parried", true);
                         return;
+                    }
+                    else if (shield != null && enemyCharacterManager.isBlocking) {
+                        float physicalDamageAfterBlock = curDamage - (curDamage * shield.blockingPhysicalDamageAbsorption / 100);
+
+                        if (enemyStats != null) {
+                            enemyStats.TakeDamage(Mathf.RoundToInt(physicalDamageAfterBlock), "Blocked");
+                            return;
+                        }
                     }
                 }
 

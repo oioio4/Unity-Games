@@ -75,7 +75,7 @@ namespace NC
             }
         }
 
-        public void TakeDamage(int damage) {
+        public void TakeDamage(int damage, string damageAnimation = "Hurt") {
             if (playerManager.isInvulnerable) {
                 return;
             }
@@ -86,7 +86,7 @@ namespace NC
 
             healthBar.SetCurrentHealth(currentHealth);
 
-            animatorHandler.PlayTargetAnimation("Hurt", true);
+            animatorHandler.PlayTargetAnimation(damageAnimation, true);
 
             if (currentHealth <= 0) {
                 currentHealth = 0;
