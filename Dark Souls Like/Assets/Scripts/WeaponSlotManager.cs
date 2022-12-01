@@ -90,11 +90,13 @@ namespace NC
         private void LoadLeftWeaponDamageCollider() {
             leftHandDamageCollider = leftHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
             leftHandDamageCollider.curDamage = playerInventory.leftWeapon.baseDamage;
+            leftHandDamageCollider.characterManager = GetComponentInParent<CharacterManager>();
         }
 
         private void LoadRightWeaponDamageCollider() {
             rightHandDamageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
             rightHandDamageCollider.curDamage = playerInventory.rightWeapon.baseDamage;
+            rightHandDamageCollider.characterManager = GetComponentInParent<CharacterManager>();
         }
 
         public void OpenDamageCollider() {

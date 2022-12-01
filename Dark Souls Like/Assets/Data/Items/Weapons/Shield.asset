@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09106b46f98e81b41a5242ae07b67357, type: 3}
+  m_Name: Shield
+  m_EditorClassIdentifier: 
+  itemIcon: {fileID: 21300000, guid: f4782deea264e6c4daec37288cb0daca, type: 3}
+  itemName: Shield
+  modelPrefab: {fileID: 5388711680855262908, guid: b12778cd9d8ea6a44b3cc56e8cc1ca02, type: 3}
+  isUnarmed: 0
+  baseDamage: 10
+  criticalDamageMultiplier: 3
+  right_hand_idle: Right_Arm_Idle
+  left_hand_idle: Left_Arm_Idle
+  th_idle: TH_Idle
+  OH_Light_Attack_1: Sword_Light_Attack_1
+  OH_Light_Attack_2: Sword_Light_Attack_2
+  OH_Heavy_Attack_1: Sword_Heavy_Attack_1
+  OH_Heavy_Attack_2: Sword_Heavy_Attack_2
+  TH_Light_Attack_1: TH_Light_Sword_Attack_1
+  TH_Light_Attack_2: TH_Light_Sword_Attack_2
+  TH_Heavy_Attack_1: TH_Heavy_Sword_Attack_1
+  TH_Heavy_Attack_2: TH_Heavy_Sword_Attack_2
+  weapon_art: Parry
+  baseStamina: 20
+  lightAttackMultiplier: 1
+  heavyAttackMultiplier: 2
+  isSpellCaster: 0
+  isFaithCaster: 0
+  isPyroCaster: 0
+  isMeleeWeapon: 0
+  isShieldWeapon: 1

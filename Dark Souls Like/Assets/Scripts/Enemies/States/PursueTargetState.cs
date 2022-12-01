@@ -9,6 +9,10 @@ namespace NC
         public CombatStanceState combatStanceState;
 
         public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorHandler enemyAnimatorHandler) {
+            if (enemyManager.isInteracting) {
+                return this;
+            }
+
             if (enemyManager.isPerformingAction) {
                 enemyAnimatorHandler.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
                 return this;
@@ -23,10 +27,6 @@ namespace NC
             }
 
             HandleRotateTowardsTarget(enemyManager);
-            enemyManager.transform.position = new Vector3(enemyManager.transform.position.x, enemyManager.navmeshAgent.transform.position.y, enemyManager.transform.position.z);
-            enemyManager.navmeshAgent.nextPosition = transform.position;
-            //navmeshAgent.transform.localPosition = Vector3.zero;
-            enemyManager.navmeshAgent.transform.localRotation = Quaternion.identity;
 
             if (distanceFromTarget <= enemyManager.maximumAttackRange) {
                 return combatStanceState;

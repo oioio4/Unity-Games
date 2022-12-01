@@ -129,7 +129,7 @@ MonoBehaviour:
   radius: 1.2
   interactableText: Open Chest
   playerStandingPosition: {fileID: 263602734}
-  itemSpawner: {fileID: 6135125804673117610, guid: 8780dc4f2773e37408be29db6fa7d24f, type: 3}
+  itemSpawner: {fileID: 6487423539780667969, guid: 4c53d87c2798d0b45af6d173ffc6d4be, type: 3}
   itemInChest: {fileID: 11400000, guid: 303a000b8c2fc67489b76548c50665b6, type: 2}
 --- !u!95 &1493587226
 Animator:

@@ -15,6 +15,8 @@ namespace NC
 
         [Header("Combat Flags")]
         public bool canBeRiposted;
+        public bool canBeParried;
+        public bool isParrying;
 
 
         public int pendingCriticalDamage;

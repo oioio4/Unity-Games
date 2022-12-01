@@ -198,6 +198,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "LT",
+                    "type": "Button",
+                    "id": "825f6524-d0d4-4fb5-bcbf-cb074cdaa723",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "CriticalAttack",
                     "type": "PassThrough",
                     "id": "ff2cb13e-48bc-4248-9028-7e4f843828c0",
@@ -288,8 +297,30 @@
                 },
                 {
                     "name": "",
+                    "id": "873ad1e7-6c81-4937-8dda-979d90b4228c",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RB",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "ba4303e0-ebed-41c5-b8c0-0803370536c1",
                     "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RT",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f23b51dc-824e-4421-a3b2-39383194ae9c",
+                    "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -371,6 +402,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "CriticalAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "370206e7-5e8c-4c62-920c-cde8f745a213",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LT",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dfcee5e4-dad3-4cee-82cb-2bdcdb5b6507",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LT",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -10,6 +10,10 @@ namespace NC
         public PursueTargetState pursueTargetState;
 
         public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorHandler enemyAnimatorHandler) {
+            if (enemyManager.isInteracting) {
+                return this;
+            }
+            
             float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
             // could circle around player
 

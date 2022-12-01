@@ -22,6 +22,9 @@ namespace NC
         public float rotationSpeed = 300f;
         public float maximumAttackRange = 1.5f;
 
+        [Header("Combat Flags")]
+        public bool canDoCombo;
+
         [Header("A.I. Settings")]
         public float detectionRadius = 20f;
         public float maximumDetectionAngle = 50f;
@@ -44,13 +47,18 @@ namespace NC
 
         private void Update() {
             HandleRecoveryTimer();
+            HandleStateMachine();
 
             isInteracting = enemyAnimatorHandler.anim.GetBool("isInteracting");
+            canDoCombo = enemyAnimatorHandler.anim.GetBool("canDoCombo");
             enemyAnimatorHandler.anim.SetBool("isDead", enemyStats.isDead);
         }
 
         private void FixedUpdate() {
-            HandleStateMachine();
+            transform.position = new Vector3(transform.position.x, navmeshAgent.transform.position.y, transform.position.z);
+            navmeshAgent.nextPosition = transform.position;
+            //navmeshAgent.transform.localPosition = Vector3.zero;
+            navmeshAgent.transform.localRotation = Quaternion.identity;
         }
 
         private void HandleStateMachine() {

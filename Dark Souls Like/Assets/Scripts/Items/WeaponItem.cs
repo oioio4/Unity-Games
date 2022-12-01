@@ -19,7 +19,7 @@ namespace NC
         public string left_hand_idle;
         public string th_idle;
 
-        [Header("One Handed Attack Animations")]
+        [Header("Attack Animations")]
         public string OH_Light_Attack_1;
         public string OH_Light_Attack_2;
         public string OH_Heavy_Attack_1;
@@ -28,6 +28,9 @@ namespace NC
         public string TH_Light_Attack_2;
         public string TH_Heavy_Attack_1;
         public string TH_Heavy_Attack_2;
+
+        [Header("Weapon Art")]
+        public string weapon_art;
 
         [Header("Stamina Cost")]
         public int baseStamina;
@@ -39,5 +42,6 @@ namespace NC
         public bool isFaithCaster;
         public bool isPyroCaster;
         public bool isMeleeWeapon;
+        public bool isShieldWeapon;
     }
 }

@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Attack1
   m_EditorClassIdentifier: 
   actionAnimation: Sword_Light_Attack_1
+  canCombo: 1
+  comboAction: {fileID: 11400000, guid: 4aa733e0e84923a4cb040ab6f86bcfda, type: 2}
   attackScore: 3
   recoveryTime: 2
   maximumAttackAngle: 35

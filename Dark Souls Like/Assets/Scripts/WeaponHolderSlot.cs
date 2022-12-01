@@ -34,6 +34,7 @@ namespace NC
                 return;
             }
 
+            // add a two hand position override for instantiate so weapons dont look weird on the back
             GameObject model = Instantiate(weaponItem.modelPrefab) as GameObject;
             if (model != null) {
                 if (parentOverride != null) {
