@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09106b46f98e81b41a5242ae07b67357, type: 3}
+  m_Name: Pyromancy Flame
+  m_EditorClassIdentifier: 
+  itemIcon: {fileID: 0}
+  itemName: Pyro Flame
+  modelPrefab: {fileID: 3707141165856604555, guid: e9ebdfa1e3c74944d894740bc6072296, type: 3}
+  isUnarmed: 0
+  baseDamage: 25
+  criticalDamageMultiplier: 3
+  physicalDamageAbsorption: 0
+  right_hand_idle: Right_Arm_Idle
+  left_hand_idle: Left_Arm_Idle
+  th_idle: TH_Idle
+  OH_Light_Attack_1: 
+  OH_Light_Attack_2: 
+  OH_Heavy_Attack_1: 
+  OH_Heavy_Attack_2: 
+  TH_Light_Attack_1: 
+  TH_Light_Attack_2: 
+  TH_Heavy_Attack_1: 
+  TH_Heavy_Attack_2: 
+  weapon_art: 
+  baseStamina: 0
+  lightAttackMultiplier: 0
+  heavyAttackMultiplier: 0
+  isSpellCaster: 0
+  isFaithCaster: 0
+  isPyroCaster: 1
+  isMeleeWeapon: 0
+  isShieldWeapon: 0

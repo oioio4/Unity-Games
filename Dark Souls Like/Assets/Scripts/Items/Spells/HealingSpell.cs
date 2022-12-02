@@ -9,8 +9,8 @@ namespace NC
     {
         public int healAmount;
 
-        public override void AttemptToCastSpell(AnimatorHandler animatorHandler, PlayerStats playerStats) {
-            base.AttemptToCastSpell(animatorHandler, playerStats);
+        public override void AttemptToCastSpell(AnimatorHandler animatorHandler, PlayerStats playerStats, WeaponSlotManager weaponSlotManager) {
+            base.AttemptToCastSpell(animatorHandler, playerStats, weaponSlotManager);
             GameObject instantiatedWarmUpSpellFX = Instantiate(spellWarmUpFX, animatorHandler.transform);
             Destroy(instantiatedWarmUpSpellFX, 2f);
             animatorHandler.PlayTargetAnimation(spellAnimation, true);
