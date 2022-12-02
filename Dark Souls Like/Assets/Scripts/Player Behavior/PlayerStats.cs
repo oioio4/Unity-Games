@@ -7,7 +7,7 @@ namespace NC
     public class PlayerStats : CharacterStats
     {
         PlayerManager playerManager;
-        HealthBar healthBar;
+        public HealthBar healthBar;
         StaminaBar staminaBar;
         FocusPointBar focusPointBar;
 
@@ -19,8 +19,7 @@ namespace NC
         private void Awake() {
             playerManager = GetComponent<PlayerManager>();
             animatorHandler = GetComponentInChildren<AnimatorHandler>();
-
-            healthBar = FindObjectOfType<HealthBar>();
+            
             staminaBar = FindObjectOfType<StaminaBar>();
             focusPointBar = FindObjectOfType<FocusPointBar>();
         }

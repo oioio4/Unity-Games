@@ -7,6 +7,7 @@ namespace NC
     public class EnemyStats : CharacterStats
     {
         EnemyAnimatorHandler enemyAnimatorHandler;
+        public UIEnemyHealthBar enemyHealthBar;
         private Renderer modelRenderer;
         private float currentDissolve = 1f;
         private float targetDissolve = 1f;
@@ -23,6 +24,7 @@ namespace NC
         {   
             maxHealth = SetMaxHealthFromHealthLevel();
             currentHealth = maxHealth;
+            enemyHealthBar.SetMaxHealth(maxHealth);
         }
 
         private void Update() {
@@ -38,6 +40,7 @@ namespace NC
         public void TakeDamageNoAnimation(int damage) {
             if (!isDead) {
                 currentHealth = currentHealth - damage;
+                 enemyHealthBar.SetHealth(currentHealth);
 
                 if (currentHealth <= 0) {
                     HandleDeath();
@@ -48,6 +51,7 @@ namespace NC
         public void TakeDamage(int damage, string damageAnimation = "Hurt") {
             if (!isDead) {
                 currentHealth = currentHealth - damage;
+                enemyHealthBar.SetHealth(currentHealth);
 
                 enemyAnimatorHandler.PlayTargetAnimation(damageAnimation, true);
 

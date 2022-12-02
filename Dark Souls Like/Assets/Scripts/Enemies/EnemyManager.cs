@@ -29,8 +29,11 @@ namespace NC
         public float detectionRadius = 20f;
         public float maximumDetectionAngle = 50f;
         public float minimumDetectionAngle = -50f;
-
         public float currentRecoveryTime = 0f;
+
+        [Header("A.I. Combat")]
+        public bool allowAIToPerformCombo;
+        public float comboLikelyhood;
 
         private void Awake() {
             enemyMovementManager = GetComponent<EnemyMovementManager>();

@@ -11,16 +11,16 @@ namespace NC
         public EnemyAttackAction[] enemyAttacks;
         public EnemyAttackAction currentAttack;
 
-        bool isComboing = false;
+        bool willDoCombo = false;
 
         public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorHandler enemyAnimatorHandler) {
             if (enemyManager.isInteracting && !enemyManager.canDoCombo) {
                 return this;
             }
             else if (enemyManager.isInteracting && enemyManager.canDoCombo) {
-                if (isComboing) {
+                if (willDoCombo) {
+                    willDoCombo = false;
                     enemyAnimatorHandler.PlayTargetAnimation(currentAttack.actionAnimation, true);
-                    isComboing = false;
                 }
             }
 
@@ -47,8 +47,9 @@ namespace NC
                             enemyAnimatorHandler.anim.SetFloat("Horizontal", 0, 0.1f, Time.deltaTime);
                             enemyAnimatorHandler.PlayTargetAnimation(currentAttack.actionAnimation, true);
                             enemyManager.isPerformingAction = true;
+                            RollForComboChance(enemyManager);
 
-                            if (currentAttack.canCombo) {
+                            if (currentAttack.canCombo && willDoCombo) {
                                 currentAttack = currentAttack.comboAction;
                                 return this;
                             }
@@ -157,6 +158,14 @@ namespace NC
                         }
                     }
                 }
+            }
+        }
+
+        private void RollForComboChance(EnemyManager enemyManager) {
+            float comboChance = Random.Range(0, 100);
+
+            if (enemyManager.allowAIToPerformCombo && comboChance <= enemyManager.comboLikelyhood) {
+                willDoCombo = true;
             }
         }
     }
