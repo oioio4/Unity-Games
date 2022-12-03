@@ -26,7 +26,7 @@ namespace NC
 
         }
 
-        public virtual void SuccessfullyCastSpell(AnimatorHandler animatorHandler, PlayerStats playerStats){
+        public virtual void SuccessfullyCastSpell(AnimatorHandler animatorHandler, PlayerStats playerStats, CameraHandler cameraHandler, WeaponSlotManager weaponSlotManager){
             playerStats.DeductFocusPoints(focusPointCost);
         }
     }

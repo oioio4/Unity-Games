@@ -6,6 +6,7 @@ namespace NC
 {
     public class PlayerAttacker : MonoBehaviour
     {
+        CameraHandler cameraHandler;
         AnimatorHandler animatorHandler;
         PlayerEquipmentManager playerEquipmentManager;
         PlayerManager playerManager;
@@ -19,6 +20,7 @@ namespace NC
         LayerMask riposteLayer = 1 << 15;
 
         private void Awake() {
+            cameraHandler = FindObjectOfType<CameraHandler>();
             animatorHandler = GetComponent<AnimatorHandler>();
             playerEquipmentManager = GetComponent<PlayerEquipmentManager>();
             playerManager = GetComponentInParent<PlayerManager>();
@@ -175,7 +177,7 @@ namespace NC
         }
 
         private void SuccessfullyCastSpell() {
-            playerInventory.currentSpell.SuccessfullyCastSpell(animatorHandler, playerStats);
+            playerInventory.currentSpell.SuccessfullyCastSpell(animatorHandler, playerStats, cameraHandler, weaponSlotManager);
             animatorHandler.anim.SetBool("isFiringSpell", true);
         }
 

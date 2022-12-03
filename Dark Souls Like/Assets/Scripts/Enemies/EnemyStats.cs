@@ -48,7 +48,7 @@ namespace NC
             }
         }
 
-        public void TakeDamage(int damage, string damageAnimation = "Hurt") {
+        public override void TakeDamage(int damage, string damageAnimation = "Hurt") {
             if (!isDead) {
                 currentHealth = currentHealth - damage;
                 enemyHealthBar.SetHealth(currentHealth);

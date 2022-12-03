@@ -16,8 +16,8 @@ namespace NC
             animatorHandler.PlayTargetAnimation(spellAnimation, true);
         }
 
-        public override void SuccessfullyCastSpell(AnimatorHandler animatorHandler, PlayerStats playerStats) {
-            base.SuccessfullyCastSpell(animatorHandler, playerStats);
+        public override void SuccessfullyCastSpell(AnimatorHandler animatorHandler, PlayerStats playerStats, CameraHandler cameraHandler, WeaponSlotManager weaponSlotManager) {
+            base.SuccessfullyCastSpell(animatorHandler, playerStats, cameraHandler, weaponSlotManager);
             GameObject instantiatedSpellFX = Instantiate(spellCastFX, animatorHandler.transform);
             Destroy(instantiatedSpellFX, 2f);
             playerStats.HealPlayer(healAmount);

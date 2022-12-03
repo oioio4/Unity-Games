@@ -22,5 +22,8 @@ MonoBehaviour:
   isMagicSpell: 0
   isPyroSpell: 1
   spellDescription: Shoots a fireball
-  baseDamage: 30
-  projectileVelocity: 50
+  baseDamage: 75
+  projectileForwardVelocity: 500
+  projectileUpwardVelocity: 150
+  projectileMass: 25
+  hasGravity: 1

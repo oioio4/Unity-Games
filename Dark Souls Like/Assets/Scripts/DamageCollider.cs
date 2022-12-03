@@ -8,6 +8,7 @@ namespace NC
     {
         public CharacterManager characterManager;
         BoxCollider damageCollider;
+        public bool enabledOnStart = false;
 
         public int curDamage = 25;
 
@@ -15,7 +16,7 @@ namespace NC
             damageCollider = GetComponent<BoxCollider>();
             damageCollider.gameObject.SetActive(true);
             damageCollider.isTrigger = true;
-            damageCollider.enabled = false;
+            damageCollider.enabled = enabledOnStart;
         }
 
         public void EnableDamageCollider() {
