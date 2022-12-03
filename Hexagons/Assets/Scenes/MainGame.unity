@@ -776,7 +776,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6dc142b6fba3cd40bb23c4043cbbfc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 600
+  moveSpeed: 500
   deathEffect: {fileID: 6372167645387475132, guid: 88d3250b39dfc1342beaa6e8ff6d2754, type: 3}
   cameraShake: {fileID: 519420034}
   gameManager: {fileID: 2126991249}

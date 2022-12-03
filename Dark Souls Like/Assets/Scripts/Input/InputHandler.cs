@@ -13,6 +13,7 @@ namespace NC {
 
         public bool a_Input;
         public bool b_Input;
+        public bool x_Input;
         public bool y_Input;
         public bool rb_Input;
         public bool lb_Input;
@@ -44,6 +45,7 @@ namespace NC {
         PlayerAttacker playerAttacker;
         PlayerInventory playerInventory;
         PlayerManager playerManager;
+        PlayerEffectsManager playerEffectsManager;
         PlayerStats playerStats;
         BlockingCollider blockingCollider;
         WeaponSlotManager weaponSlotManager;
@@ -58,6 +60,7 @@ namespace NC {
             playerAttacker = GetComponentInChildren<PlayerAttacker>();
             playerInventory = GetComponent<PlayerInventory>();
             playerManager = GetComponent<PlayerManager>();
+            playerEffectsManager = GetComponentInChildren<PlayerEffectsManager>();
             playerStats = GetComponent<PlayerStats>();
             weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
             blockingCollider = GetComponentInChildren<BlockingCollider>();
@@ -72,6 +75,7 @@ namespace NC {
                 inputActions.PlayerMovement.Movement.performed += inputActions => movementInput = inputActions.ReadValue<Vector2>();
                 inputActions.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
                 inputActions.PlayerActions.A.performed += i => a_Input = true;
+                inputActions.PlayerActions.X.performed += i => x_Input = true;
                 inputActions.PlayerActions.Roll.performed += i => b_Input = true;
                 inputActions.PlayerActions.Roll.canceled += i => b_Input = false;
                 inputActions.PlayerActions.RB.performed += i => rb_Input = true;
@@ -106,6 +110,7 @@ namespace NC {
             HandleLockOnInput();
             HandleTwoHandInput();
             HandleCriticalAttackInput();
+            HandleUseConsumableInput();
         }
 
         private void MoveInput(float delta) {
@@ -145,20 +150,7 @@ namespace NC {
             }     
 
             if (rt_Input) {
-                if (playerManager.canDoCombo) {
-                    comboFlag = true;
-                    playerAttacker.HandleHeavyWeaponCombo(playerInventory.rightWeapon);
-                    comboFlag = false;
-                }
-                else {
-                    if (playerManager.isInteracting) {
-                        return;
-                    }
-                    if (playerManager.canDoCombo) {
-                        return;
-                    }
-                    playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
-                }
+                playerAttacker.HandleRTAction();
             }
 
             if (lb_Input) {
@@ -262,6 +254,13 @@ namespace NC {
             if (critical_attack_Input) {
                 critical_attack_Input = false;
                 playerAttacker.AttemptBackStabOrRiposte();
+            }
+        }
+
+        private void HandleUseConsumableInput() {
+            if (x_Input) {
+                x_Input = false;
+                playerInventory.currentConsumable.AttemptToConsumeItem(animatorHandler, weaponSlotManager, playerEffectsManager);
             }
         }
     }

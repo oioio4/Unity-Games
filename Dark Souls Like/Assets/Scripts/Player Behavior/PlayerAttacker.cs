@@ -107,6 +107,12 @@ namespace NC
             }
         }
 
+        public void HandleRTAction() {
+            if (playerInventory.rightWeapon.isMeleeWeapon) {
+                PerformRTMeleeActon();
+            }
+        }
+
         public void HandleLBAction() {
             PerformLBBlockingAction();
         }
@@ -140,6 +146,25 @@ namespace NC
 
                 animatorHandler.anim.SetBool("isUsingRightHand", true);
                 HandleLightAttack(playerInventory.rightWeapon);
+            }
+        }
+
+        private void PerformRTMeleeActon() {
+            if (playerManager.canDoCombo) {
+                inputHandler.comboFlag = true;
+                HandleHeavyWeaponCombo(playerInventory.rightWeapon);
+                inputHandler.comboFlag = false;
+            }
+            else {
+                if (playerManager.isInteracting) {
+                    return;
+                }
+                if (playerManager.canDoCombo) {
+                    return;
+                }
+
+                animatorHandler.anim.SetBool("isUsingRightHand", true);
+                HandleHeavyAttack(playerInventory.rightWeapon);
             }
         }
 

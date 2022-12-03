@@ -46,6 +46,11 @@ namespace NC
             }
         }
 
+        public void LoadBothWeaponsOnSlots() {
+            LoadWeaponOnSlot(playerInventory.rightWeapon, false);
+            LoadWeaponOnSlot(playerInventory.leftWeapon, true);
+        }
+
         public void LoadWeaponOnSlot(WeaponItem weaponItem, bool isLeft) {
             if (isLeft) {
                 leftHandSlot.currentWeapon = weaponItem;
