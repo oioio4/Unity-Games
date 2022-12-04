@@ -15,9 +15,9 @@ MonoBehaviour:
   actionAnimation: Sword_Light_Attack_1
   canCombo: 1
   comboAction: {fileID: 11400000, guid: 4aa733e0e84923a4cb040ab6f86bcfda, type: 2}
-  attackScore: 3
+  attackScore: 15
   recoveryTime: 2
   maximumAttackAngle: 35
   minimumAttackAngle: -35
   minimumDistanceNeededToAttack: 0
-  maximumDistanceNeededToAttack: 3
+  maximumDistanceNeededToAttack: 1.3

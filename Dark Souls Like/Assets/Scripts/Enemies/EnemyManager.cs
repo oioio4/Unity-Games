@@ -55,6 +55,7 @@ namespace NC
             isRotatingWithRootMotion = enemyAnimatorHandler.anim.GetBool("isRotatingWithRootMotion");
             isInteracting = enemyAnimatorHandler.anim.GetBool("isInteracting");
             canDoCombo = enemyAnimatorHandler.anim.GetBool("canDoCombo");
+            canRotate = enemyAnimatorHandler.anim.GetBool("canRotate");
             enemyAnimatorHandler.anim.SetBool("isDead", enemyStats.isDead);
         }
 

@@ -7,30 +7,45 @@ namespace NC
     public class CombatStanceState : State
     {
         public AttackState attackState;
+        public EnemyAttackAction[] enemyAttacks;
         public PursueTargetState pursueTargetState;
 
+        private bool randomDestinationSet = false;
+        private float verticalMovementValue = 0;
+        private float horizontalMovementValue = 0;
+
         public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorHandler enemyAnimatorHandler) {
+            float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
+            enemyAnimatorHandler.anim.SetFloat("Vertical", verticalMovementValue, 0.2f, Time.deltaTime);
+            enemyAnimatorHandler.anim.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);
+            attackState.hasPerformedAttack = false;
+
             if (enemyManager.isInteracting) {
+                enemyAnimatorHandler.anim.SetFloat("Vertical", 0);
+                enemyAnimatorHandler.anim.SetFloat("Horizontal", 0);
                 return this;
             }
-            
-            float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
-            // could circle around player
+
+            if (distanceFromTarget > enemyManager.maximumAttackRange) {
+                return pursueTargetState;
+            }
+
+            if (!randomDestinationSet) {
+                randomDestinationSet = true;
+                DecideCirclingAction(enemyAnimatorHandler);
+            }
 
             HandleRotateTowardsTarget(enemyManager);
 
-            if (enemyManager.isPerformingAction) {
-                enemyAnimatorHandler.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
-            }
-            if (enemyManager.currentRecoveryTime <= 0 && distanceFromTarget <= enemyManager.maximumAttackRange) {
+            if (enemyManager.currentRecoveryTime <= 0 && attackState.currentAttack != null) {
+                randomDestinationSet = false;
                 return attackState;
             }
-            else if (distanceFromTarget > enemyManager.maximumAttackRange) {
-                return pursueTargetState;
-            }
             else {
-                return this;
+                GetNewAttack(enemyManager);
             }
+
+            return this;
         }
 
         private void HandleRotateTowardsTarget(EnemyManager enemyManager) {
@@ -78,6 +93,66 @@ namespace NC
                 enemyManager.enemyRigidbody.velocity = targetVelocity;
                 enemyManager.transform.rotation = Quaternion.Slerp(enemyManager.transform.rotation, enemyManager.navmeshAgent.transform.rotation, enemyManager.rotationSpeed * Time.deltaTime);
            */ 
+                }
+            }
+        }
+
+        private void DecideCirclingAction(EnemyAnimatorHandler enemyAnimatorHandler) {
+            WalkAroundTarget(enemyAnimatorHandler);
+        }
+
+        private void WalkAroundTarget(EnemyAnimatorHandler enemyAnimatorHandler) {
+            verticalMovementValue = 0.5f;
+
+            horizontalMovementValue = Random.Range(-1, 1);
+
+            if (horizontalMovementValue <= 1 && horizontalMovementValue >= 0) {
+                horizontalMovementValue = 1f;
+            }
+            else if (horizontalMovementValue >= -1 && horizontalMovementValue < 0) {
+                horizontalMovementValue = -1f;
+            }
+        }
+
+        private void GetNewAttack(EnemyManager enemyManager) {
+            Vector3 targetDirection = enemyManager.currentTarget.transform.position - enemyManager.transform.position;
+            float viewableAngle = Vector3.Angle(targetDirection, enemyManager.transform.forward);
+            float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
+
+            int maxScore = 0;
+
+            for (int i = 0; i < enemyAttacks.Length; i++) {
+                EnemyAttackAction enemyAttackAction = enemyAttacks[i];
+
+                if (distanceFromTarget  <= enemyAttackAction.maximumDistanceNeededToAttack
+                    && distanceFromTarget  >= enemyAttackAction.minimumDistanceNeededToAttack) {
+                        if (viewableAngle <= enemyAttackAction.maximumAttackAngle
+                            && viewableAngle >= enemyAttackAction.minimumAttackAngle) {
+                                maxScore += enemyAttackAction.attackScore;
+                            }
+                }
+            }
+
+            int randomValue = Random.Range(0, maxScore);
+            int temporaryScore = 0;
+
+            for (int i = 0; i < enemyAttacks.Length; i++) {
+                EnemyAttackAction enemyAttackAction = enemyAttacks[i];
+
+                if (distanceFromTarget  <= enemyAttackAction.maximumDistanceNeededToAttack
+                    && distanceFromTarget  >= enemyAttackAction.minimumDistanceNeededToAttack) {
+                    if (viewableAngle <= enemyAttackAction.maximumAttackAngle
+                        && viewableAngle >= enemyAttackAction.minimumAttackAngle) {
+                        if (attackState.currentAttack != null) {
+                            return;
+                        }
+
+                        temporaryScore += enemyAttackAction.attackScore;
+
+                        if (temporaryScore > randomValue) {
+                            attackState.currentAttack = enemyAttackAction;
+                        }
+                    }
                 }
             }
         }
