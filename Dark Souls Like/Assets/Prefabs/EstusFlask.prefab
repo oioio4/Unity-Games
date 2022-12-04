@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3022585943806287536
+--- !u!1 &677841696165126266
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,47 +8,47 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3024229383417334680}
-  - component: {fileID: 2990390786545236462}
-  - component: {fileID: 3001235435768240104}
+  - component: {fileID: 683875757538658414}
+  - component: {fileID: 656061428018562614}
+  - component: {fileID: 666017003709271502}
   m_Layer: 0
-  m_Name: EstusFlask
+  m_Name: Cristal_Flask_
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3024229383417334680
+--- !u!4 &683875757538658414
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3022585943806287536}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: -0.364, z: -0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_GameObject: {fileID: 677841696165126266}
+  m_LocalRotation: {x: 0, y: -1.6062286e-17, z: -0, w: 1}
+  m_LocalPosition: {x: -0.0000000029543548, y: 0.2519691, z: 0.000000044055668}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5892769577902247125}
-  m_Father: {fileID: 8392495808583771471}
+  - {fileID: 683906646234120366}
+  m_Father: {fileID: 8161357382977572643}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &2990390786545236462
+--- !u!33 &656061428018562614
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3022585943806287536}
-  m_Mesh: {fileID: 4300000, guid: 3674654d4c61d4c43b23da21e14be368, type: 3}
---- !u!23 &3001235435768240104
+  m_GameObject: {fileID: 677841696165126266}
+  m_Mesh: {fileID: 4300002, guid: 3674654d4c61d4c43b23da21e14be368, type: 3}
+--- !u!23 &666017003709271502
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3022585943806287536}
+  m_GameObject: {fileID: 677841696165126266}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -84,7 +84,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &5895738041792284251
+--- !u!1 &678655231546426080
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,9 +92,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5892809126342296597}
-  - component: {fileID: 5886055021419046927}
-  - component: {fileID: 5874151021750943269}
+  - component: {fileID: 683906646234120366}
+  - component: {fileID: 654631692406254772}
+  - component: {fileID: 666500782324333214}
   m_Layer: 0
   m_Name: Cristal_Flask_Glass
   m_TagString: Untagged
@@ -102,36 +102,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5892809126342296597
+--- !u!4 &683906646234120366
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5895738041792284251}
+  m_GameObject: {fileID: 678655231546426080}
   m_LocalRotation: {x: 0, y: -1.6062286e-17, z: -0, w: 1}
   m_LocalPosition: {x: 2.2737367e-15, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5892769577902247125}
+  m_Father: {fileID: 683875757538658414}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &5886055021419046927
+--- !u!33 &654631692406254772
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5895738041792284251}
+  m_GameObject: {fileID: 678655231546426080}
   m_Mesh: {fileID: 4300004, guid: 3674654d4c61d4c43b23da21e14be368, type: 3}
---- !u!23 &5874151021750943269
+--- !u!23 &666500782324333214
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5895738041792284251}
+  m_GameObject: {fileID: 678655231546426080}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -167,7 +167,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &5895943191476325737
+--- !u!1 &1216871771292937318
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -175,31 +175,31 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5897675261085636673}
+  - component: {fileID: 3939508568574800273}
   m_Layer: 0
-  m_Name: EstusFlask
+  m_Name: Weapon Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5897675261085636673
+--- !u!4 &3939508568574800273
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5895943191476325737}
+  m_GameObject: {fileID: 1216871771292937318}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8392495808583771471}
-  m_Father: {fileID: 0}
+  - {fileID: 8161357382977572643}
+  m_Father: {fileID: 8761150981607647043}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5896024155460904129
+--- !u!1 &8162965861882780171
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -207,47 +207,47 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5892769577902247125}
-  - component: {fileID: 5881705176307434125}
-  - component: {fileID: 5874071854975961461}
+  - component: {fileID: 8161357382977572643}
+  - component: {fileID: 8159061578501684565}
+  - component: {fileID: 8150469068030710611}
   m_Layer: 0
-  m_Name: Cristal_Flask_
+  m_Name: EstusFlask 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5892769577902247125
+--- !u!4 &8161357382977572643
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5896024155460904129}
-  m_LocalRotation: {x: 0, y: -1.6062286e-17, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0000000029543548, y: 0.2519691, z: 0.000000044055668}
+  m_GameObject: {fileID: 8162965861882780171}
+  m_LocalRotation: {x: -0.35318822, y: 0.51190466, z: 0.56766045, w: 0.53941953}
+  m_LocalPosition: {x: 0.115, y: -0.091, z: -0.045}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5892809126342296597}
-  m_Father: {fileID: 3024229383417334680}
+  - {fileID: 683875757538658414}
+  m_Father: {fileID: 3939508568574800273}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &5881705176307434125
+  m_LocalEulerAnglesHint: {x: -74.198, y: 33.748, z: 67.083}
+--- !u!33 &8159061578501684565
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5896024155460904129}
-  m_Mesh: {fileID: 4300002, guid: 3674654d4c61d4c43b23da21e14be368, type: 3}
---- !u!23 &5874071854975961461
+  m_GameObject: {fileID: 8162965861882780171}
+  m_Mesh: {fileID: 4300000, guid: 3674654d4c61d4c43b23da21e14be368, type: 3}
+--- !u!23 &8150469068030710611
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5896024155460904129}
+  m_GameObject: {fileID: 8162965861882780171}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -283,7 +283,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &5922482268240656568
+--- !u!1 &8761150981607947107
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -291,27 +291,27 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8392495808583771471}
+  - component: {fileID: 8761150981607647043}
   m_Layer: 0
-  m_Name: Weapon Pivot
+  m_Name: EstusFlask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8392495808583771471
+--- !u!4 &8761150981607647043
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5922482268240656568}
-  m_LocalRotation: {x: -0.6101571, y: -0.52660394, z: 0.5441992, w: 0.23290335}
-  m_LocalPosition: {x: 0.094, y: 0.039, z: -0.011}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_GameObject: {fileID: 8761150981607947107}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3024229383417334680}
-  m_Father: {fileID: 5897675261085636673}
+  - {fileID: 3939508568574800273}
+  m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 16.794, y: -108.212, z: 110.603}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

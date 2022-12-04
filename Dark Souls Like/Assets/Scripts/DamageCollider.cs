@@ -79,6 +79,12 @@ namespace NC
                     enemyStats.TakeDamage(curDamage);
                 }
             }
+
+            if (collision.tag == "Illusionary Wall") {
+                IllusionaryWall illusionaryWall = collision.GetComponent<IllusionaryWall>();
+
+                illusionaryWall.wallHit = true;
+            }
         }
     }
 }

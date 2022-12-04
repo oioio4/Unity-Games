@@ -49,15 +49,13 @@ namespace NC
         }
 
         public override void TakeDamage(int damage, string damageAnimation = "Hurt") {
-            if (!isDead) {
-                currentHealth = currentHealth - damage;
-                enemyHealthBar.SetHealth(currentHealth);
+            base.TakeDamage(damage, damageAnimation = "Hurt");
 
-                enemyAnimatorHandler.PlayTargetAnimation(damageAnimation, true);
+            enemyHealthBar.SetHealth(currentHealth);
+            enemyAnimatorHandler.PlayTargetAnimation(damageAnimation, true);
 
-                if (currentHealth <= 0) {
-                    HandleDeath();
-                }
+            if (currentHealth <= 0) {
+                HandleDeath();
             }
         }
 

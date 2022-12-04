@@ -16,7 +16,7 @@ MonoBehaviour:
   itemName: Estus Flask
   maxItemAmount: 10
   currentItemAmount: 10
-  itemModel: {fileID: 5895943191476325737, guid: 0643931eeeb240548a4d4e43992b3048, type: 3}
+  itemModel: {fileID: 8761150981607947107, guid: 0643931eeeb240548a4d4e43992b3048, type: 3}
   consumeAnimation: Drink
   isInteracting: 0
   estusFlask: 1

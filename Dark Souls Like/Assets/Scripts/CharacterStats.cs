@@ -20,8 +20,39 @@ namespace NC
 
         public int soulCount = 0;
 
+        [Header("Armor Absorption")]
+        public float physicalDamageAbsorptionHead;
+        public float physicalDamageAbsorptionBody;
+        public float physicalDamageAbsorptionCape;
+        public float physicalDamageAbsorptionHands;
+        public float physicalDamageAbsorptionLegs;
+        public float physicalDamageAbsorptionFeet;
+
         public bool isDead;
 
-        public virtual void TakeDamage(int damage, string damageAnimation = "Hurt"){}
+        public virtual void TakeDamage(int physicalDamage, string damageAnimation = "Hurt"){
+            if (isDead) {
+                return;
+            }
+
+            float totalPhysicalDamageAbsorption = 1 - 
+            (1 - physicalDamageAbsorptionHead / 100) * 
+            (1 - physicalDamageAbsorptionBody / 100) *
+            (1 - physicalDamageAbsorptionCape / 100) *
+            (1 - physicalDamageAbsorptionHands / 100) *
+            (1 - physicalDamageAbsorptionLegs / 100) *
+            (1 - physicalDamageAbsorptionFeet / 100);
+
+            physicalDamage = Mathf.RoundToInt(physicalDamage - (physicalDamage * totalPhysicalDamageAbsorption));
+
+            int finalDamage = physicalDamage;
+
+            currentHealth = currentHealth - finalDamage;
+
+            if (currentHealth <= 0) {
+                currentHealth = 0;
+                isDead = true;
+            }
+        }
     }
 }

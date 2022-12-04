@@ -8,10 +8,19 @@ namespace NC
     {
         WeaponSlotManager weaponSlotManager;
 
+        [Header("Quick Slots")]
         public ConsumableItem currentConsumable;
         public SpellItem currentSpell;
         public WeaponItem rightWeapon;
         public WeaponItem leftWeapon;
+
+        [Header("Current Equipment")]
+        public HelmetEquipment currentHelmet;
+        public CapeEquipment currentCape;
+        public TorsoEquipment currentTorso;
+        public HandEquipment currentHand;
+        public LegEquipment currentLeg;
+        public FootEquipment currentFoot;
 
         public WeaponItem unarmedWeapon;
 

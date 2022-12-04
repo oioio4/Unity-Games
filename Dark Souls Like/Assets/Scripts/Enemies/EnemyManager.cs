@@ -52,6 +52,7 @@ namespace NC
             HandleRecoveryTimer();
             HandleStateMachine();
 
+            isRotatingWithRootMotion = enemyAnimatorHandler.anim.GetBool("isRotatingWithRootMotion");
             isInteracting = enemyAnimatorHandler.anim.GetBool("isInteracting");
             canDoCombo = enemyAnimatorHandler.anim.GetBool("canDoCombo");
             enemyAnimatorHandler.anim.SetBool("isDead", enemyStats.isDead);

@@ -78,13 +78,10 @@ namespace NC
             if (playerManager.isInvulnerable) {
                 return;
             }
-            if (isDead) {
-                return;
-            }
-            currentHealth = currentHealth - damage;
 
+            base.TakeDamage(damage, damageAnimation = "Hurt");
+            
             healthBar.SetCurrentHealth(currentHealth);
-
             animatorHandler.PlayTargetAnimation(damageAnimation, true);
 
             if (currentHealth <= 0) {
