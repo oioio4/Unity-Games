@@ -78,6 +78,9 @@ namespace NC
             if (playerManager.isInvulnerable) {
                 return;
             }
+            if (isDead) {
+                return;
+            }
 
             base.TakeDamage(damage, damageAnimation = "Hurt");
             

@@ -145,6 +145,16 @@ namespace NC {
             transform.position = playerStandingPosition.transform.position;
             animatorHandler.PlayTargetAnimation("Open Chest", true);
         }
+
+        public void PassThroughFogWallInteraction(Transform fogWallEntrance) {
+            playerMovement.rigidbody.velocity = Vector3.zero;
+
+            Vector3 rotationDirection = fogWallEntrance.transform.forward;
+            Quaternion turnRotation = Quaternion.LookRotation(rotationDirection);
+            transform.rotation = turnRotation;
+            
+            animatorHandler.PlayTargetAnimation("Pass Through Fog", true);
+        }
         
         #endregion
         

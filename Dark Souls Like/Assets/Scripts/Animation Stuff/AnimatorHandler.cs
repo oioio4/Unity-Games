@@ -116,6 +116,16 @@ namespace NC {
             }
         }
 
+        public void DisableCollision() {
+            playerMovement.characterCollider.enabled = false;
+            playerMovement.characterCollisionBlockerCollider.enabled = false;
+        }
+
+        public void EnableCollision() {
+            playerMovement.characterCollider.enabled = true;
+            playerMovement.characterCollisionBlockerCollider.enabled = true;
+        }
+
         private void OnAnimatorMove() {
             if (playerManager.isInteracting == false) {
                 return;

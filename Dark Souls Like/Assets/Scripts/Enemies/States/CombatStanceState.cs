@@ -128,7 +128,10 @@ namespace NC
                     && distanceFromTarget  >= enemyAttackAction.minimumDistanceNeededToAttack) {
                         if (viewableAngle <= enemyAttackAction.maximumAttackAngle
                             && viewableAngle >= enemyAttackAction.minimumAttackAngle) {
-                                maxScore += enemyAttackAction.attackScore;
+                                if (enemyAttackAction.attackScore > maxScore) {
+                                    maxScore = enemyAttackAction.attackScore;
+                                }
+                                //maxScore += enemyAttackAction.attackScore;
                             }
                 }
             }
@@ -147,9 +150,10 @@ namespace NC
                             return;
                         }
 
-                        temporaryScore += enemyAttackAction.attackScore;
+                        temporaryScore = enemyAttackAction.attackScore;
+                        //temporaryScore += enemyAttackAction.attackScore;
 
-                        if (temporaryScore > randomValue) {
+                        if (temporaryScore >= randomValue) {
                             attackState.currentAttack = enemyAttackAction;
                         }
                     }

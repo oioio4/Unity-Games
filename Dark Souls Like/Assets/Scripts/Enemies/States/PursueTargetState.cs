@@ -16,10 +16,6 @@ namespace NC
 
             HandleRotateTowardsTarget(enemyManager);
 
-            if (viewableAngle > 65 || viewableAngle < -65) {
-                return rotateTowardsTargetState;
-            }
-
             if (enemyManager.isInteracting) {
                 return this;
             }
