@@ -34,6 +34,7 @@ namespace NC
         [Header("A.I. Combat")]
         public bool allowAIToPerformCombo;
         public float comboLikelyhood;
+        public bool isPhaseShifting;
 
         private void Awake() {
             enemyMovementManager = GetComponent<EnemyMovementManager>();
@@ -54,6 +55,8 @@ namespace NC
 
             isRotatingWithRootMotion = enemyAnimatorHandler.anim.GetBool("isRotatingWithRootMotion");
             isInteracting = enemyAnimatorHandler.anim.GetBool("isInteracting");
+            isPhaseShifting = enemyAnimatorHandler.anim.GetBool("isPhaseShifting");
+            isInvulnerable = enemyAnimatorHandler.anim.GetBool("isInvulnerable");
             canDoCombo = enemyAnimatorHandler.anim.GetBool("canDoCombo");
             canRotate = enemyAnimatorHandler.anim.GetBool("canRotate");
             enemyAnimatorHandler.anim.SetBool("isDead", enemyStats.isDead);

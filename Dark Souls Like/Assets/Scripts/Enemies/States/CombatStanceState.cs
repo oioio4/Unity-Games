@@ -10,9 +10,9 @@ namespace NC
         public EnemyAttackAction[] enemyAttacks;
         public PursueTargetState pursueTargetState;
 
-        private bool randomDestinationSet = false;
-        private float verticalMovementValue = 0;
-        private float horizontalMovementValue = 0;
+        protected bool randomDestinationSet = false;
+        protected float verticalMovementValue = 0;
+        protected float horizontalMovementValue = 0;
 
         public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorHandler enemyAnimatorHandler) {
             float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
@@ -48,7 +48,7 @@ namespace NC
             return this;
         }
 
-        private void HandleRotateTowardsTarget(EnemyManager enemyManager) {
+        protected void HandleRotateTowardsTarget(EnemyManager enemyManager) {
             if (enemyManager.isPerformingAction) {
                 Vector3 direction = enemyManager.currentTarget.transform.position - transform.position;
                 direction.y = 0;
@@ -97,11 +97,11 @@ namespace NC
             }
         }
 
-        private void DecideCirclingAction(EnemyAnimatorHandler enemyAnimatorHandler) {
+        protected void DecideCirclingAction(EnemyAnimatorHandler enemyAnimatorHandler) {
             WalkAroundTarget(enemyAnimatorHandler);
         }
 
-        private void WalkAroundTarget(EnemyAnimatorHandler enemyAnimatorHandler) {
+        protected void WalkAroundTarget(EnemyAnimatorHandler enemyAnimatorHandler) {
             verticalMovementValue = 0.5f;
 
             horizontalMovementValue = Random.Range(-1, 1);
@@ -114,7 +114,7 @@ namespace NC
             }
         }
 
-        private void GetNewAttack(EnemyManager enemyManager) {
+        protected virtual void GetNewAttack(EnemyManager enemyManager) {
             Vector3 targetDirection = enemyManager.currentTarget.transform.position - enemyManager.transform.position;
             float viewableAngle = Vector3.Angle(targetDirection, enemyManager.transform.forward);
             float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
@@ -128,10 +128,12 @@ namespace NC
                     && distanceFromTarget  >= enemyAttackAction.minimumDistanceNeededToAttack) {
                         if (viewableAngle <= enemyAttackAction.maximumAttackAngle
                             && viewableAngle >= enemyAttackAction.minimumAttackAngle) {
+                                /*
                                 if (enemyAttackAction.attackScore > maxScore) {
                                     maxScore = enemyAttackAction.attackScore;
                                 }
-                                //maxScore += enemyAttackAction.attackScore;
+                                */
+                                maxScore += enemyAttackAction.attackScore;
                             }
                 }
             }
@@ -150,8 +152,8 @@ namespace NC
                             return;
                         }
 
-                        temporaryScore = enemyAttackAction.attackScore;
-                        //temporaryScore += enemyAttackAction.attackScore;
+                        //temporaryScore = enemyAttackAction.attackScore;
+                        temporaryScore += enemyAttackAction.attackScore;
 
                         if (temporaryScore >= randomValue) {
                             attackState.currentAttack = enemyAttackAction;

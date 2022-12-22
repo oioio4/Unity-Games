@@ -25,8 +25,7 @@ namespace NC {
         public bool canDoCombo;
         public bool isUsingRightHand;
         public bool isUsingLeftHand;
-        public bool isInvulnerable;
-
+        
         private void Awake() {
             //cameraHandler = CameraHandler.singleton;
             inputHandler = GetComponent<InputHandler>();

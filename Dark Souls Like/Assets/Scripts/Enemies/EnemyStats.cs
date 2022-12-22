@@ -6,6 +6,7 @@ namespace NC
 {
     public class EnemyStats : CharacterStats
     {
+        EnemyManager enemyManager;
         EnemyAnimatorHandler enemyAnimatorHandler;
         EnemyBossManager enemyBossManager;
         public UIEnemyHealthBar enemyHealthBar;
@@ -18,6 +19,7 @@ namespace NC
         public int soulsAwardedOnDeath = 50;
 
         private void Awake() {
+            enemyManager = GetComponent<EnemyManager>();
             enemyAnimatorHandler = GetComponentInChildren<EnemyAnimatorHandler>();
             enemyBossManager = GetComponent<EnemyBossManager>();
             modelRenderer = GetComponentInChildren<Renderer>();
@@ -45,8 +47,18 @@ namespace NC
 
         public void TakeDamageNoAnimation(int damage) {
             if (!isDead) {
+                if (enemyManager.isInvulnerable) {
+                    return;
+                }
+
                 currentHealth = currentHealth - damage;
-                 enemyHealthBar.SetHealth(currentHealth);
+                
+                if (!isBoss) {
+                    enemyHealthBar.SetHealth(currentHealth); 
+                }
+                else if (isBoss && enemyBossManager != null) {
+                    enemyBossManager.UpdateBossHealthBar(currentHealth, maxHealth);
+                }
 
                 if (currentHealth <= 0) {
                     HandleDeath();
@@ -55,13 +67,17 @@ namespace NC
         }
 
         public override void TakeDamage(int damage, string damageAnimation = "Hurt") {
+            if (enemyManager.isInvulnerable) {
+                return;
+            }
+
             base.TakeDamage(damage, damageAnimation = "Hurt");
 
             if (!isBoss) {
                enemyHealthBar.SetHealth(currentHealth); 
             }
             else if (isBoss && enemyBossManager != null) {
-                enemyBossManager.UpdateBossHealthBar(currentHealth);
+                enemyBossManager.UpdateBossHealthBar(currentHealth, maxHealth);
             }
 
             enemyAnimatorHandler.PlayTargetAnimation(damageAnimation, true);

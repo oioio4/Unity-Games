@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a8be4b9c14c8a74bb3b142b4e76a346, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combatStanceState: {fileID: 2500989321200166846}
+  combatStanceState: {fileID: 0}
   pursueTargetState: {fileID: 2500989319893772382}
   rotateTowardsTargetState: {fileID: 4826792593934449069}
   currentAttack: {fileID: 0}
@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 608fae3beec96294889505e67f237aef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combatStanceState: {fileID: 2500989321200166846}
+  combatStanceState: {fileID: 0}
   rotateTowardsTargetState: {fileID: 4826792593934449069}
 --- !u!1 &2500989319934929806
 GameObject:
@@ -408,7 +408,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2500989321200166847}
-  - component: {fileID: 2500989321200166846}
   m_Layer: 9
   m_Name: Combat Stance State
   m_TagString: Untagged
@@ -431,25 +430,6 @@ Transform:
   m_Father: {fileID: 2500989319934929805}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2500989321200166846
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2500989321200166840}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aecdab1b723457d479466b0e5a37ff3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackState: {fileID: 2500989319411775240}
-  enemyAttacks:
-  - {fileID: 11400000, guid: d19c34d0e16ed09469ab7f6989c1b12c, type: 2}
-  - {fileID: 11400000, guid: 4aa733e0e84923a4cb040ab6f86bcfda, type: 2}
-  - {fileID: 11400000, guid: 41748e77ef7298f4aa443ecec842f73d, type: 2}
-  - {fileID: 11400000, guid: 1607e5a6e0a6ee34d8618623b559a730, type: 2}
-  pursueTargetState: {fileID: 2500989319893772382}
 --- !u!1 &2500989321305297812
 GameObject:
   m_ObjectHideFlags: 0
@@ -696,6 +676,7 @@ MonoBehaviour:
   physicalDamageAbsorptionFeet: 0
   isDead: 0
   enemyHealthBar: {fileID: 0}
+  isBoss: 0
   soulsAwardedOnDeath: 50
 --- !u!114 &2500989320967366062
 MonoBehaviour:
@@ -762,6 +743,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossName: Ifrit Follower
+  particleFX: {fileID: 0}
 --- !u!1 &4826792593934449070
 GameObject:
   m_ObjectHideFlags: 0
@@ -806,7 +788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bba3a1ccb03e6f468cf23c0d0a0d744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combatStanceState: {fileID: 2500989321200166846}
+  combatStanceState: {fileID: 0}
 --- !u!1 &5951850526434950766
 GameObject:
   m_ObjectHideFlags: 0

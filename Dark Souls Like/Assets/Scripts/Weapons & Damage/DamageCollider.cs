@@ -76,7 +76,12 @@ namespace NC
                 }
 
                 if (enemyStats != null) {
-                    enemyStats.TakeDamage(curDamage);
+                    if (enemyStats.isBoss) {
+                        enemyStats.TakeDamageNoAnimation(curDamage);
+                    }
+                    else {
+                        enemyStats.TakeDamage(curDamage);
+                    }
                 }
             }
 
