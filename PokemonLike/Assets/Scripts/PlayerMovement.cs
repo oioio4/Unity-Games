@@ -60,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private bool IsWalkable(Vector3 targetPos) {
-        if (Physics2D.OverlapCircle(targetPos, 0.1f, obstaclesLayer) != null) {
+        if (Physics2D.OverlapCircle(targetPos, 0.2f, obstaclesLayer) != null) {
             return false;
         }
 
@@ -74,4 +74,11 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+
+    /*
+    private void OnDrawGizmosSelected() {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(transform.position, 1f);
+    }
+    */
 }
