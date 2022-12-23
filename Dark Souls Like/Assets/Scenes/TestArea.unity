@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 1
+  m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5882353}
   m_FogMode: 3
   m_FogDensity: 0.01
@@ -4352,9 +4352,9 @@ MonoBehaviour:
   environmentLayer:
     serializedVersion: 2
     m_Bits: 256
-  lookSpeed: 12
+  lookSpeed: 0.00006
   followSpeed: 0.1
-  pivotSpeed: 6
+  pivotSpeed: 0.00006
   minimumPivot: -35
   maximumPivot: 35
   cameraSphereRadius: 0.2

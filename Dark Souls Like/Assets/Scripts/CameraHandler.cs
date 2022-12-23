@@ -21,9 +21,9 @@ namespace NC {
 
         public static CameraHandler singleton;
 
-        public float lookSpeed = 15f;
+        public float lookSpeed = 0.0001f;
         public float followSpeed = 0.1f;
-        public float pivotSpeed = 6f;
+        public float pivotSpeed = 0.00006f;
 
         private float targetPosition;
         private float defaultPosition;
@@ -47,8 +47,8 @@ namespace NC {
         public CharacterManager currentLockOnTarget;
 
         private void Awake() {
-            lookSpeed /= Screen.width;
-            pivotSpeed /= Screen.height;
+            lookSpeed *= Screen.width;
+            pivotSpeed *= Screen.height;
             singleton = this;
             myTransform = transform;
             targetTransform = FindObjectOfType<PlayerManager>().transform;
