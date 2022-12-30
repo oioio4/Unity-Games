@@ -11,6 +11,7 @@ public class Interactable : MonoBehaviour
     public Color highlightColor;
     public GameObject interact;
     public UnityEvent interactAction;
+    public GameObject particles;
 
     private bool isInRange;
 
@@ -58,5 +59,9 @@ public class Interactable : MonoBehaviour
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, 2f);
+    }
+
+    public void DestroyParticles() {
+        Destroy(particles);
     }
 }

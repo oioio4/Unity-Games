@@ -5,10 +5,15 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public bool puzzle1 = false;
-    public bool puzzle2 = false;
-    public bool puzzle3 = false;
-    public bool puzzle4 = false;
+    private bool p1 = false;
+    private bool p2 = false;
+    private bool p3 = false;
+    private bool p4 = false;
+
+    public Interactable puzzle1;
+    public Interactable puzzle2;
+    public Interactable puzzle3;
+    public Interactable puzzle4;
 
     private int pusheens = 0;
     public Text counterText;
@@ -23,5 +28,19 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         counterText.text = pusheens + "/4";
+    }
+
+    public void SolvedPuzzle1() {
+        p1 = true;
+        pusheens++;
+        Destroy(puzzle1.particles);
+    }
+
+    public bool Completed() {
+        return pusheens == 4;
+    }
+
+    public void FinishGame() {
+
     }
 }
