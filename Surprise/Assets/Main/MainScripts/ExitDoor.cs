@@ -9,27 +9,10 @@ public class ExitDoor : MonoBehaviour
     public Transform Player;
     private GameManager gameManager;
 
-    private bool isInRange;
-
     private void Start()
     {
         open = false;
         gameManager = FindObjectOfType<GameManager>();
-    }
-
-    private void Update() {
-        bool playerExists = false;
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 2f);
-        foreach (var collider in colliders) {
-            if (collider.tag == "Player") {
-                isInRange = true;
-                playerExists = true;
-            }
-            else if (!playerExists) {
-                isInRange = false;
-            }
-        }
-        playerExists = false;
     }
 
     void OnMouseOver()

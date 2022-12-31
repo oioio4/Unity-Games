@@ -5,11 +5,6 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    private bool p1 = false;
-    private bool p2 = false;
-    private bool p3 = false;
-    private bool p4 = false;
-
     public Interactable puzzle1;
     public Interactable puzzle2;
     public Interactable puzzle3;
@@ -31,9 +26,15 @@ public class GameManager : MonoBehaviour
     }
 
     public void SolvedPuzzle1() {
-        p1 = true;
         pusheens++;
+        puzzle1.active = false;
         Destroy(puzzle1.particles);
+    }
+
+    public void SolvedPuzzle2() {
+        pusheens++;
+        puzzle2.active = false;
+        Destroy(puzzle2.particles);
     }
 
     public bool Completed() {

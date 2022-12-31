@@ -12,6 +12,7 @@ public class Interactable : MonoBehaviour
     public GameObject interact;
     public UnityEvent interactAction;
     public GameObject particles;
+    public bool active = true;
 
     private bool isInRange;
 
@@ -36,7 +37,7 @@ public class Interactable : MonoBehaviour
     }
 
     private void OnMouseOver() {
-        if (isInRange) {
+        if (isInRange && active) {
             meshRenderer.material.color = highlightColor;
             interact.SetActive(true);
             if (Input.GetKeyDown(KeyCode.E)) {
