@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public Interactable puzzle2;
     public Interactable puzzle3;
     public Interactable puzzle4;
+    public Interactable puzzle5;
 
     private int pusheens = 0;
     public Text counterText;
@@ -22,7 +23,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        counterText.text = pusheens + "/4";
+        counterText.text = pusheens + "/5";
     }
 
     public void SolvedPuzzle1() {
@@ -49,8 +50,14 @@ public class GameManager : MonoBehaviour
         Destroy(puzzle4.particles);
     }
 
+    public void SolvedPuzzle5() {
+        pusheens++;
+        puzzle5.active = false;
+        Destroy(puzzle5.particles);
+    }
+
     public bool Completed() {
-        return pusheens == 4;
+        return pusheens == 5;
     }
 
     public void FinishGame() {
