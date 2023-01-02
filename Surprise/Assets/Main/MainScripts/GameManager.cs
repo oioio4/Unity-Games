@@ -37,6 +37,18 @@ public class GameManager : MonoBehaviour
         Destroy(puzzle2.particles);
     }
 
+    public void SolvedPuzzle3() {
+        pusheens++;
+        puzzle3.active = false;
+        Destroy(puzzle3.particles);
+    }
+
+    public void SolvedPuzzle4() {
+        pusheens++;
+        puzzle4.active = false;
+        Destroy(puzzle4.particles);
+    }
+
     public bool Completed() {
         return pusheens == 4;
     }

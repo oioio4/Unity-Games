@@ -11,10 +11,11 @@ public class KeyPad : MonoBehaviour
     private int digit3 = 0;
     private int digit4 = 0;
     private int counter = 0;
-    private int ans1 = 1;
-    private int ans2 = 2;
-    private int ans3 = 4;
-    private int ans4 = 3;
+
+    [SerializeField] private int ans1 = 1;
+    [SerializeField] private int ans2 = 2;
+    [SerializeField] private int ans3 = 4;
+    [SerializeField] private int ans4 = 3;
 
     public Text numberText;
     public UnityEvent winAction;
