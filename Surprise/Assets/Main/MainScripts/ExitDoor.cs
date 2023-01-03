@@ -6,6 +6,7 @@ public class ExitDoor : MonoBehaviour
 {
     public Animator openandclose;
     public bool open;
+    public GameObject locked;
     public Transform Player;
     private GameManager gameManager;
 
@@ -15,7 +16,7 @@ public class ExitDoor : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
     }
 
-    void OnMouseOver()
+    private void OnMouseOver()
     {
         {
             if (Player)
@@ -28,16 +29,23 @@ public class ExitDoor : MonoBehaviour
                         if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.E))
                         {
                             StartCoroutine(opening());
+                            FindObjectOfType<GameManager>().OpenedExit();
                         }
+                    }
+                    else {
+                        locked.SetActive(true);
                     }
                 }
             }
 
         }
-
     }
 
-    IEnumerator opening()
+    private void OnMouseExit() {
+        locked.SetActive(false);
+    }
+
+    public IEnumerator opening()
     {
         print("you are opening the door");
         openandclose.Play("Opening");
@@ -45,7 +53,7 @@ public class ExitDoor : MonoBehaviour
         yield return new WaitForSeconds(.5f);
     }
 
-    IEnumerator closing()
+    public IEnumerator closing()
     {
         print("you are closing the door");
         openandclose.Play("Closing");

@@ -19,6 +19,7 @@ public class EndTrigger : MonoBehaviour
             FindObjectOfType<AudioManager>().Stop("Theme1");
             FindObjectOfType<AudioManager>().Play("PartyHorn");
             Instantiate(confetti, transform.position + offset, transform.rotation);
+            StartCoroutine(FindObjectOfType<ExitDoor>().closing());
             ended = true;
         }
     }

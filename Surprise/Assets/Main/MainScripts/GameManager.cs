@@ -11,19 +11,22 @@ public class GameManager : MonoBehaviour
     public Interactable puzzle4;
     public Interactable puzzle5;
 
-    private int pusheens = 0;
+    [SerializeField] private int pusheens = 0;
+    [SerializeField] private int cubes = 0;
+    private CubeBar cubeBar;
     public Text counterText;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        cubeBar = FindObjectOfType<CubeBar>();
     }
 
     // Update is called once per frame
     void Update()
     {
         counterText.text = pusheens + "/5";
+        cubeBar.targetPower = cubes;
     }
 
     public void SolvedPuzzle1() {
@@ -56,11 +59,15 @@ public class GameManager : MonoBehaviour
         Destroy(puzzle5.particles);
     }
 
-    public bool Completed() {
-        return pusheens == 5;
+    public void CollectedCube() {
+        cubes++;
     }
 
-    public void FinishGame() {
+    public bool Completed() {
+        return pusheens == 5 && cubes == 10;
+    }
 
+    public void OpenedExit() {
+        cubes = 0;
     }
 }
