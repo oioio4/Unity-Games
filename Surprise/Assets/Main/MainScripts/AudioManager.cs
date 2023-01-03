@@ -31,9 +31,10 @@ public class AudioManager : MonoBehaviour
     }
 
     private void Start() {
+        Play("Theme1");
     }
 
-    public void Play (string name) {
+    public void Play(string name) {
         Sound s = null;
         for (int i = 0; i < sounds.Length; i++) {
             if (sounds[i].name == name) {
@@ -44,5 +45,18 @@ public class AudioManager : MonoBehaviour
             return;
         }
         s.source.Play();
+    }
+
+    public void Stop(string name) {
+        Sound s = null;
+        for (int i = 0; i < sounds.Length; i++) {
+            if (sounds[i].name == name) {
+                s = sounds[i];
+            }
+        }
+        if (s == null) {
+            return;
+        }
+        s.source.Stop();
     }
 }

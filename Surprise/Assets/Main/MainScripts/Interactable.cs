@@ -14,7 +14,7 @@ public class Interactable : MonoBehaviour
     public GameObject particles;
     public bool active = true;
 
-    private bool isInRange;
+    [SerializeField] private bool isInRange;
 
     private void Start() {
         meshRenderer = GetComponent<MeshRenderer>();
