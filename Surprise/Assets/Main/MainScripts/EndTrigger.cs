@@ -30,7 +30,9 @@ public class EndTrigger : MonoBehaviour
 
         FindObjectOfType<AudioManager>().Play("HappyBirthday");
 
-        yield return new WaitForSeconds(19f);
+        yield return new WaitForSeconds(20f);
+
+        FindObjectOfType<AudioManager>().Play("EndTheme");
 
         FindObjectOfType<GameManager>().GameEnded();
     }

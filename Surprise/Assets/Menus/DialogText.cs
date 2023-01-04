@@ -15,6 +15,8 @@ public class DialogText : MonoBehaviour
     public string[] instructions;
 
     private void Start() {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         StartCoroutine(TypeDialog(instructions));
         continueButton.SetActive(false);
     }
@@ -24,6 +26,7 @@ public class DialogText : MonoBehaviour
         for (int i = 0; i < dialog.Length; i++) {
             foreach (var letter in dialog[i].ToCharArray()) {
                 dialogText.text += letter;
+                FindObjectOfType<AudioManager>().Play("Text");
                 yield return new WaitForSeconds(1f / textSpeed);
             }
 

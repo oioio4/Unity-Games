@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         cubeBar = FindObjectOfType<CubeBar>();
+        FindObjectOfType<AudioManager>().Play("Theme1");
     }
 
     // Update is called once per frame
@@ -62,6 +63,7 @@ public class GameManager : MonoBehaviour
 
     public void CollectedCube() {
         cubes++;
+        FindObjectOfType<AudioManager>().Play("CollectCube");
     }
 
     public bool Completed() {
