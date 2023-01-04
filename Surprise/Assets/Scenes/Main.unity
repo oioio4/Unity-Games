@@ -1522,7 +1522,7 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: HappyBirthday
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: e30e1c57e1a5a3e42b8f107110e32a9d, type: 3}
     volume: 0.75
     pitch: 1
     loop: 0
@@ -2346,6 +2346,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2120624992}
     m_Modifications:
+    - target: {fileID: 1040976326340024849, guid: 1091ee0a141f2ba429668a6cc5a0f03e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1040976326340024849, guid: 1091ee0a141f2ba429668a6cc5a0f03e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1040976326340024849, guid: 1091ee0a141f2ba429668a6cc5a0f03e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1167177008488376570, guid: 1091ee0a141f2ba429668a6cc5a0f03e, type: 3}
       propertyPath: m_Name
       value: Monitor_Apt_01

@@ -27,7 +27,7 @@ public class DialogText : MonoBehaviour
                 yield return new WaitForSeconds(1f / textSpeed);
             }
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(2f);
             dialogText.text = "";  
         }
 
@@ -36,5 +36,9 @@ public class DialogText : MonoBehaviour
 
     public void ContinueToGame() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void EndGame() {
+        Application.Quit();
     }
 }

@@ -20,7 +20,18 @@ public class EndTrigger : MonoBehaviour
             FindObjectOfType<AudioManager>().Play("PartyHorn");
             Instantiate(confetti, transform.position + offset, transform.rotation);
             StartCoroutine(FindObjectOfType<ExitDoor>().closing());
+            StartCoroutine(BirthdaySong());
             ended = true;
         }
+    }
+
+    private IEnumerator BirthdaySong() {
+        yield return new WaitForSeconds(1f);
+
+        FindObjectOfType<AudioManager>().Play("HappyBirthday");
+
+        yield return new WaitForSeconds(19f);
+
+        FindObjectOfType<GameManager>().GameEnded();
     }
 }
