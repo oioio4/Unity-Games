@@ -516,7 +516,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66c85c685b3a4c347929006b9686047f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textSpeed: 15
+  textSpeed: 20
   dialogText: {fileID: 219819820}
   continueButton: {fileID: 528514609}
   instructions:
@@ -524,7 +524,11 @@ MonoBehaviour:
   - Press E to interact with puzzles
   - Left click or press E to open doors
   - Look around with the mouse (FP)
-  - 'Goal: Collect pusheens and cubes to open the red door'
+  - GOAL
+  - Complete puzzles to collect pusheens
+  - Find hidden cubes throughout the house
+  - Exit through the red door
+  - HAVE FUN!
 --- !u!1 &930066038
 GameObject:
   m_ObjectHideFlags: 0
@@ -1030,7 +1034,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}

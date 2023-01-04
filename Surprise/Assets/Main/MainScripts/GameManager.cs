@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int cubes = 0;
     private CubeBar cubeBar;
     public Text counterText;
+    public GameObject counterAnimation;
 
     // Start is called before the first frame update
     void Start()
@@ -31,32 +32,39 @@ public class GameManager : MonoBehaviour
         cubeBar.targetPower = cubes;
     }
 
-    public void SolvedPuzzle1() {
+    private void Solved() {
         pusheens++;
+        GameObject effect = Instantiate(counterAnimation, counterText.gameObject.transform);
+        Destroy(effect, 1f);
+        FindObjectOfType<AudioManager>().Play("CollectPusheen");
+    }
+
+    public void SolvedPuzzle1() {
+        Solved();
         puzzle1.active = false;
         Destroy(puzzle1.particles);
     }
 
     public void SolvedPuzzle2() {
-        pusheens++;
+        Solved();
         puzzle2.active = false;
         Destroy(puzzle2.particles);
     }
 
     public void SolvedPuzzle3() {
-        pusheens++;
+        Solved();
         puzzle3.active = false;
         Destroy(puzzle3.particles);
     }
 
     public void SolvedPuzzle4() {
-        pusheens++;
+        Solved();
         puzzle4.active = false;
         Destroy(puzzle4.particles);
     }
 
     public void SolvedPuzzle5() {
-        pusheens++;
+        Solved();
         puzzle5.active = false;
         Destroy(puzzle5.particles);
     }

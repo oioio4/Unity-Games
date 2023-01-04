@@ -32,7 +32,7 @@ public class ExitDoor : MonoBehaviour
                             FindObjectOfType<GameManager>().OpenedExit();
                         }
                     }
-                    else {
+                    else if (!gameManager.Completed()) {
                         locked.SetActive(true);
                     }
                 }

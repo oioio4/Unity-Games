@@ -9626,6 +9626,7 @@ MonoBehaviour:
   pusheens: 0
   cubes: 0
   counterText: {fileID: 698964886}
+  counterAnimation: {fileID: 768516204454429305, guid: eff120460014cef4cb933ba5b56f6e2c, type: 3}
 --- !u!1 &817922737
 GameObject:
   m_ObjectHideFlags: 0
@@ -12111,8 +12112,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba79753c18b62ed45b4a14aba19a90e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensX: 400
-  sensY: 400
+  sensX: 300
+  sensY: 300
   orientation: {fileID: 705182807}
 --- !u!1 &973949254
 GameObject:

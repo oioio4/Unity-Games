@@ -540,9 +540,27 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
-  - name: CollectCube
+  - name: CollectPusheen
     clip: {fileID: 8300000, guid: 9fcf17a056014a147b2675d88bd7dbf5, type: 3}
     volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CollectCube
+    clip: {fileID: 8300000, guid: 5da228273bf7e1142beee37ca2f3c02c, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Text
+    clip: {fileID: 8300000, guid: 30d4586e7f98e304495e5cebe885f59a, type: 3}
+    volume: 0.2
+    pitch: 0.5
+    loop: 0
+    source: {fileID: 0}
+  - name: StartGame
+    clip: {fileID: 8300000, guid: a3ce690c7d2333f4ab63c175a6c2c4c5, type: 3}
+    volume: 0.6
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -557,18 +575,6 @@ MonoBehaviour:
     volume: 0.6
     pitch: 1
     loop: 1
-    source: {fileID: 0}
-  - name: StartGame
-    clip: {fileID: 8300000, guid: a3ce690c7d2333f4ab63c175a6c2c4c5, type: 3}
-    volume: 0.6
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: Text
-    clip: {fileID: 8300000, guid: 30d4586e7f98e304495e5cebe885f59a, type: 3}
-    volume: 0.2
-    pitch: 0.5
-    loop: 0
     source: {fileID: 0}
 --- !u!4 &917153816
 Transform:
@@ -1128,7 +1134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -1205,6 +1211,7 @@ GameObject:
   - component: {fileID: 2121374245}
   - component: {fileID: 2121374247}
   - component: {fileID: 2121374246}
+  - component: {fileID: 2121374248}
   m_Layer: 5
   m_Name: BG
   m_TagString: Untagged
@@ -1246,7 +1253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.08015308, g: 0.098652355, b: 0.1792453, a: 0.78431374}
+  m_Color: {r: 0.088590235, g: 0.10965238, b: 0.1981132, a: 0.78431374}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1271,3 +1278,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2121374244}
   m_CullTransparentMesh: 1
+--- !u!95 &2121374248
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2121374244}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6f47a6bcab1304d499c71085d1ff93f7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
