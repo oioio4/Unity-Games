@@ -122,7 +122,7 @@ public class SlidingPuzzle : MonoBehaviour {
   }
 
   // Brute force shuffling.
-  private void Shuffle() {
+  public void Shuffle() {
     int count = 0;
     int last = 0;
     while (count < (size * size * size)) {

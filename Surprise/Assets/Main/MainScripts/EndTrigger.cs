@@ -26,7 +26,7 @@ public class EndTrigger : MonoBehaviour
     }
 
     private IEnumerator BirthdaySong() {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
         FindObjectOfType<AudioManager>().Play("HappyBirthday");
 

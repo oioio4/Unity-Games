@@ -521,6 +521,7 @@ MonoBehaviour:
   continueButton: {fileID: 528514609}
   instructions:
   - CONTROLS
+  - WASD to move
   - Press E to interact with puzzles
   - Left click or press E to open doors
   - Look around with the mouse (FP)
