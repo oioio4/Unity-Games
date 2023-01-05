@@ -522,6 +522,7 @@ MonoBehaviour:
   instructions:
   - CONTROLS
   - WASD to move
+  - Press Esc to pause
   - Press E to interact with puzzles
   - Left click or press E to open doors
   - Look around with the mouse (FP)

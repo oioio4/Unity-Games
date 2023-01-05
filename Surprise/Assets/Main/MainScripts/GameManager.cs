@@ -17,12 +17,17 @@ public class GameManager : MonoBehaviour
     private CubeBar cubeBar;
     public Text counterText;
     public GameObject counterAnimation;
+    public GameObject pauseMenu;
+    [SerializeField] private bool paused = false;
 
     // Start is called before the first frame update
     void Start()
     {
         cubeBar = FindObjectOfType<CubeBar>();
         FindObjectOfType<AudioManager>().Play("Theme1");
+        pauseMenu.SetActive(false);
+        pusheens = 0;
+        cubes = 0;
     }
 
     // Update is called once per frame
@@ -30,6 +35,12 @@ public class GameManager : MonoBehaviour
     {
         counterText.text = pusheens + "/5";
         cubeBar.targetPower = cubes;
+
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            paused = !paused;
+        }
+
+        PauseMenu();
     }
 
     private void Solved() {
@@ -84,5 +95,28 @@ public class GameManager : MonoBehaviour
 
     public void GameEnded() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    private void PauseMenu() {
+        if (paused) {
+            Time.timeScale = 0;
+            pauseMenu.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else {
+            Time.timeScale = 1;
+            pauseMenu.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+    }
+
+    public void Resume() {
+        paused = false;
+    }
+
+    public void Quit() { 
+        Application.Quit();
     }
 }
