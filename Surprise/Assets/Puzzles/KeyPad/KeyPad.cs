@@ -20,6 +20,11 @@ public class KeyPad : MonoBehaviour
     public Text numberText;
     public UnityEvent winAction;
 
+    private void Start() {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
     private void Update() {
         numberText.text = digit1 + " " + digit2 + " " + digit3 + " " + digit4;
     }

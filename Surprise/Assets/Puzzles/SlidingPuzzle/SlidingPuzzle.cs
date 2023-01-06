@@ -53,6 +53,9 @@ public class SlidingPuzzle : MonoBehaviour {
 
   // Start is called before the first frame update
   void Start() {
+    Cursor.lockState = CursorLockMode.None;
+    Cursor.visible = true;
+    
     pieces = new List<Transform>();
     size = 4;
     CreateGamePieces(0.01f);

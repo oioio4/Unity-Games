@@ -16,6 +16,11 @@ public class PathPuzzle : MonoBehaviour
         }
     }
 
+    private void Start() {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
     private void Update() {
         bool won = true;
         for (int i = 0; i < paths.Count; i++) {

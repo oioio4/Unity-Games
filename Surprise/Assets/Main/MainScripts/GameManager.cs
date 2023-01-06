@@ -38,6 +38,15 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape)) {
             paused = !paused;
+
+            if (paused) {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            else {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
         }
 
         PauseMenu();
@@ -101,19 +110,17 @@ public class GameManager : MonoBehaviour
         if (paused) {
             Time.timeScale = 0;
             pauseMenu.SetActive(true);
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
         }
         else {
             Time.timeScale = 1;
             pauseMenu.SetActive(false);
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
         }
     }
 
     public void Resume() {
         paused = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     public void Quit() { 

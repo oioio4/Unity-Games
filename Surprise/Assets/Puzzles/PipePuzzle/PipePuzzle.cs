@@ -14,6 +14,9 @@ public class PipePuzzle : MonoBehaviour
     public UnityEvent winAction;
 
     private void Start() {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
         totalPipes = PipeHolder.transform.childCount;
 
         Pipes = new GameObject[totalPipes];
