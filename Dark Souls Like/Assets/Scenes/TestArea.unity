@@ -4352,9 +4352,9 @@ MonoBehaviour:
   environmentLayer:
     serializedVersion: 2
     m_Bits: 256
-  lookSpeed: 0.00006
+  lookSpeed: 0.00015
   followSpeed: 0.1
-  pivotSpeed: 0.00006
+  pivotSpeed: 0.00008
   minimumPivot: -35
   maximumPivot: 35
   cameraSphereRadius: 0.2

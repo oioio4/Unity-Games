@@ -21,9 +21,9 @@ namespace NC {
 
         public static CameraHandler singleton;
 
-        public float lookSpeed = 0.0001f;
+        public float lookSpeed = 0.00015f;
         public float followSpeed = 0.1f;
-        public float pivotSpeed = 0.00006f;
+        public float pivotSpeed = 0.00008f;
 
         private float targetPosition;
         private float defaultPosition;
