@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public float walkSpeed;
     public float sprintSpeed;
     public float slideSpeed;
+    public float wallrunSpeed;
 
     private float desiredMoveSpeed;
     private float lastDesiredMoveSpeed;
@@ -22,7 +23,6 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
-    public float gravity;
     [SerializeField] private bool canJump;
 
     [Header("Crouching")]
@@ -57,10 +57,11 @@ public class PlayerMovement : MonoBehaviour
 
     public MovementState state;
     public enum MovementState {
-        walking, sprinting, crouching, sliding, air
+        walking, sprinting, crouching, sliding, wallrunning, air
     }
 
     public bool sliding;
+    public bool wallrunning;
 
     // Start is called before the first frame update
     private void Start()
@@ -82,12 +83,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (grounded) {
             rb.drag = groundDrag;
+            GetComponent<WallRunning>().prevWallNormal = Vector3.zero;
         }
         else {
             rb.drag = 0;
         }
 
-        rb.AddForce(-transform.up * gravity, ForceMode.Force);
         slope = OnSlope();
     }
 
@@ -117,7 +118,11 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void StateHandler() {
-        if (sliding) {
+        if (wallrunning) {
+            state = MovementState.wallrunning;
+            desiredMoveSpeed = wallrunSpeed;
+        }
+        else if (sliding) {
             state = MovementState.sliding;
 
             if (OnSlope() && rb.velocity.y < 0.1f) {
@@ -195,7 +200,9 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
         }
 
-        rb.useGravity = !OnSlope();
+        if (!wallrunning) {
+            rb.useGravity = !OnSlope();
+        }
     }
 
     private void SpeedControl() {
