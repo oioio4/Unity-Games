@@ -30,7 +30,10 @@ public class WallRunning : MonoBehaviour
     private RaycastHit rightWallhit;
     private bool wallLeft;
     private bool wallRight;
-    public Vector3 prevWallNormal;
+
+    public Transform lastWall;
+    private Vector3 prevWallNormal;
+    public float minWallNormalChange;
 
     [Header("Exiting")]
     private bool exitingWall;
@@ -45,10 +48,12 @@ public class WallRunning : MonoBehaviour
     public Transform orientation;
     public PlayerCam cam;
     private PlayerMovement pm;
+    public LedgeGrabbing lg;
     private Rigidbody rb;
 
     private void Start() {
         pm = GetComponent<PlayerMovement>();
+        lg = GetComponent<LedgeGrabbing>();
         rb = GetComponent<Rigidbody>();
     }
 
@@ -81,8 +86,10 @@ public class WallRunning : MonoBehaviour
 
         if ((wallLeft || wallRight) && vInput > 0 && AboveGround() && !exitingWall) {
             Vector3 wallNormal = wallRight ? rightWallhit.normal : leftWallhit.normal;
+            Transform currentWall = wallRight ? rightWallhit.transform : leftWallhit.transform;
+            bool newWall = currentWall != lastWall || Mathf.Abs(Vector3.Angle(prevWallNormal, wallNormal)) > minWallNormalChange;
 
-            if (!pm.wallrunning && wallNormal != prevWallNormal) {
+            if (!pm.wallrunning && newWall) {
                 StartWallRun();
             }
 
@@ -133,6 +140,10 @@ public class WallRunning : MonoBehaviour
         else if (wallRight) {
             cam.DoTilt(5f);
         }
+
+        // save last wall data
+        prevWallNormal = wallRight ? rightWallhit.normal : leftWallhit.normal;
+        lastWall = wallRight ? rightWallhit.transform : leftWallhit.transform;
     }
 
     private void WallRunningMovement() {
@@ -157,8 +168,6 @@ public class WallRunning : MonoBehaviour
         if (useGravity) {
             rb.AddForce(transform.up * gravityCounterForce, ForceMode.Force);
         }
-
-        prevWallNormal = wallNormal;
     }
 
     private void StopWallRun() {
@@ -169,6 +178,10 @@ public class WallRunning : MonoBehaviour
     }
 
     private void WallJump() {
+        if (lg.holding || lg.exitingLedge) {
+            return;
+        }
+
         exitingWall = true;
         exitWallTimer = exitWallTime;
 

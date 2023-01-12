@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     public float slopeIncreaseMultiplier;
 
     public float groundDrag;
+    private bool keepMomentum;
 
     [Header("Jumping")]
     public float jumpForce;
@@ -60,12 +61,16 @@ public class PlayerMovement : MonoBehaviour
 
     public MovementState state;
     public enum MovementState {
-        walking, sprinting, crouching, sliding, wallrunning, climbing, air
+       freeze, unlimited, walking, sprinting, crouching, sliding, wallrunning, climbing, air
     }
 
     public bool sliding;
     public bool wallrunning;
     public bool climbing;
+
+    public bool freeze;
+    public bool unlimited;
+    public bool restricted;
 
     // Start is called before the first frame update
     private void Start()
@@ -87,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (grounded) {
             rb.drag = groundDrag;
-            GetComponent<WallRunning>().prevWallNormal = Vector3.zero;
+            GetComponent<WallRunning>().lastWall = null;
         }
         else {
             rb.drag = 0;
@@ -122,7 +127,17 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void StateHandler() {
-        if (climbing) {
+        if (freeze) {
+            state = MovementState.freeze;
+            rb.velocity = Vector3.zero;
+            desiredMoveSpeed = 0f;
+        }
+        else if (unlimited) {
+            state = MovementState.unlimited;
+            desiredMoveSpeed = 999f;
+            return;
+        }
+        else if (climbing) {
             state = MovementState.climbing;
             desiredMoveSpeed = climbSpeed;
         }
@@ -135,6 +150,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (OnSlope() && rb.velocity.y < 0.1f) {
                 desiredMoveSpeed = slideSpeed;
+                keepMomentum = true;
             }
             else {
                 desiredMoveSpeed = sprintSpeed;
@@ -156,6 +172,19 @@ public class PlayerMovement : MonoBehaviour
             state = MovementState.air;
         }
 
+        bool desiredMoveSpeedChange = desiredMoveSpeed != lastDesiredMoveSpeed;
+
+        if (desiredMoveSpeedChange) {
+            if (keepMomentum) {
+                StopAllCoroutines();
+                StartCoroutine(TransitionMoveSpeed());
+            }
+            else {
+                moveSpeed = desiredMoveSpeed;
+            }
+        }
+
+        /*
         if (Mathf.Abs(desiredMoveSpeed - lastDesiredMoveSpeed) > 4f && moveSpeed != 0) {
             StopAllCoroutines();
             StartCoroutine(TransitionMoveSpeed());
@@ -163,8 +192,13 @@ public class PlayerMovement : MonoBehaviour
         else {
             moveSpeed = desiredMoveSpeed;
         }
+        */
 
         lastDesiredMoveSpeed = desiredMoveSpeed;
+
+        if (Mathf.Abs(desiredMoveSpeed - moveSpeed) < 0.1f) {
+            keepMomentum = false;
+        }
     }
 
     private IEnumerator TransitionMoveSpeed() {
@@ -192,7 +226,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void MovePlayer() {
-        if (climbingScript.exitingWall) {
+        if (restricted || climbingScript.exitingWall) {
             return;
         }
         
@@ -218,15 +252,25 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void SpeedControl() {
+        // slope momentum
         if (OnSlope() && !exitingSlope) {
             if (rb.velocity.magnitude > moveSpeed) {
                 rb.velocity = rb.velocity.normalized * moveSpeed;
             }
         }
         else {
+            //float time = 0f;
             Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
             if (flatVel.magnitude > moveSpeed) {
+                /*
+                float difference = Mathf.Abs(rb.velocity.magnitude - moveSpeed);
+
+                while (time < difference) {
+                    rb.velocity = rb.velocity.normalized * Mathf.Lerp(rb.velocity.magnitude, moveSpeed, time / difference);
+                    time += Time.deltaTime;
+                }
+                */
                 Vector3 limitedVel = flatVel.normalized * moveSpeed;
                 rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
             }
