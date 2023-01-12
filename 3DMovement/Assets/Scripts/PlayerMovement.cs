@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public float sprintSpeed;
     public float slideSpeed;
     public float wallrunSpeed;
+    public float climbSpeed;
 
     private float desiredMoveSpeed;
     private float lastDesiredMoveSpeed;
@@ -38,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Ground Check")]
     public float playerHeight;
     public LayerMask groundLayer;
-    [SerializeField] private bool grounded;
+    public bool grounded;
 
     [Header("Slope Handling")]
     public float maxSlopeAngle;
@@ -46,7 +47,9 @@ public class PlayerMovement : MonoBehaviour
     private bool exitingSlope;
     [SerializeField] private bool slope;
 
+    [Header("References")]
     public Transform orientation;
+    public Climbing climbingScript;
 
     float hInput;
     float vInput;
@@ -57,11 +60,12 @@ public class PlayerMovement : MonoBehaviour
 
     public MovementState state;
     public enum MovementState {
-        walking, sprinting, crouching, sliding, wallrunning, air
+        walking, sprinting, crouching, sliding, wallrunning, climbing, air
     }
 
     public bool sliding;
     public bool wallrunning;
+    public bool climbing;
 
     // Start is called before the first frame update
     private void Start()
@@ -118,7 +122,11 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void StateHandler() {
-        if (wallrunning) {
+        if (climbing) {
+            state = MovementState.climbing;
+            desiredMoveSpeed = climbSpeed;
+        }
+        else if (wallrunning) {
             state = MovementState.wallrunning;
             desiredMoveSpeed = wallrunSpeed;
         }
@@ -184,6 +192,10 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void MovePlayer() {
+        if (climbingScript.exitingWall) {
+            return;
+        }
+        
         moveDirection = orientation.forward * vInput + orientation.right * hInput;
 
         if (OnSlope() && !exitingSlope) {
