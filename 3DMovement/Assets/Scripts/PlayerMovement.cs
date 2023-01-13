@@ -152,8 +152,11 @@ public class PlayerMovement : MonoBehaviour
                 desiredMoveSpeed = slideSpeed;
                 keepMomentum = true;
             }
-            else {
+            else if (!OnSlope() || rb.velocity.y < 0.1f) {
                 desiredMoveSpeed = sprintSpeed;
+            }
+            else {
+                desiredMoveSpeed = walkSpeed;
             }
         }
         else if (Input.GetKey(crouchKey)) {
