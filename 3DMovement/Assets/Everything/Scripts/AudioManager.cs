@@ -31,7 +31,7 @@ public class AudioManager : MonoBehaviour
     }
 
     private void Start() {
-        Play("OpeningTheme");
+        Play("BGM1");
     }
 
     public void Play(string name) {

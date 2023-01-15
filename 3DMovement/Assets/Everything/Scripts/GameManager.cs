@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
 
     private void Awake() {
         am = FindObjectOfType<AudioManager>();
-        am.Play("BGM1");
 
         glitch = FindObjectOfType<Camera>().GetComponent<GlitchEffect>();
     }
