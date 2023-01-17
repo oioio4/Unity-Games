@@ -9,6 +9,8 @@ public class Sliding : MonoBehaviour
     public Transform player;
     private Rigidbody rb;
     private PlayerMovement pm;
+    public PlayerCam cam;
+    public GameObject speedLines;
 
     [Header("Sliding")]
     public float maxSlideTime;
@@ -34,7 +36,7 @@ public class Sliding : MonoBehaviour
         hInput = Input.GetAxisRaw("Horizontal");
         vInput = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKeyDown(slideKey) && (hInput != 0 || vInput != 0)) {
+        if (Input.GetKeyDown(slideKey) && (hInput != 0 || vInput != 0) && !pm.crouching) {
             StartSlide();
         }
         else if (Input.GetKeyUp(slideKey) && pm.sliding) {
@@ -55,6 +57,10 @@ public class Sliding : MonoBehaviour
         rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
 
         slideTimer = maxSlideTime;
+
+        cam.DoFov(90f);
+
+        speedLines.SetActive(true);
     }
 
     private void SlidingMovement() {
@@ -77,5 +83,9 @@ public class Sliding : MonoBehaviour
     private void StopSlide() {
         pm.sliding = false;
         player.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
+
+        cam.DoFov(80f);
+
+        speedLines.SetActive(false);
     }
 }

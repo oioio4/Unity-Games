@@ -108,9 +108,9 @@ public class LedgeGrabbing : MonoBehaviour
         Vector3 directionToLedge = curLedge.position - transform.position;
         float distanceToLedge = Vector3.Distance(transform.position, curLedge.position);
 
-        if (distanceToLedge > 1f) {
+        if (distanceToLedge > 0.7f) {
             if (rb.velocity.magnitude < moveToLedgeSpeed) {
-                rb.AddForce(directionToLedge.normalized * moveToLedgeSpeed * 1000f * Time.deltaTime);
+                rb.AddForce(directionToLedge.normalized * moveToLedgeSpeed * 1500f * Time.deltaTime);
             }
         }    
         else {
@@ -151,7 +151,7 @@ public class LedgeGrabbing : MonoBehaviour
     private void LedgeJump() {
         ExitLedgeHold();
 
-        Invoke(nameof(DelayedJumpForce), 0.05f);
+        Invoke(nameof(DelayedJumpForce), 0.1f);
     }
 
     private void DelayedJumpForce() {

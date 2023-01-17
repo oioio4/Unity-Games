@@ -48,12 +48,13 @@ public class WallRunning : MonoBehaviour
     public Transform orientation;
     public PlayerCam cam;
     private PlayerMovement pm;
-    public LedgeGrabbing lg;
+    public LedgeGrabbing2 lg;
     private Rigidbody rb;
+    public GameObject speedLines;
 
     private void Start() {
         pm = GetComponent<PlayerMovement>();
-        lg = GetComponent<LedgeGrabbing>();
+        lg = GetComponent<LedgeGrabbing2>();
         rb = GetComponent<Rigidbody>();
     }
 
@@ -132,7 +133,7 @@ public class WallRunning : MonoBehaviour
 
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
-        cam.DoFov(90f);
+        cam.DoFov(100f);
 
         if (wallLeft) {
             cam.DoTilt(-5f);
@@ -140,6 +141,8 @@ public class WallRunning : MonoBehaviour
         else if (wallRight) {
             cam.DoTilt(5f);
         }
+
+        speedLines.SetActive(true);
 
         // save last wall data
         prevWallNormal = wallRight ? rightWallhit.normal : leftWallhit.normal;
@@ -175,6 +178,8 @@ public class WallRunning : MonoBehaviour
 
         cam.DoFov(80f);
         cam.DoTilt(0);
+
+        speedLines.SetActive(false);
     }
 
     private void WallJump() {

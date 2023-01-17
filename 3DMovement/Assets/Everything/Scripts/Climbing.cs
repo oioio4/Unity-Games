@@ -9,7 +9,7 @@ public class Climbing : MonoBehaviour
     public Rigidbody rb;
     public LayerMask wallLayer;
     public PlayerMovement pm;
-    public LedgeGrabbing lg;
+    public LedgeGrabbing2 lg;
 
     [Header("Climbing")]
     public float climbSpeed;
@@ -43,7 +43,7 @@ public class Climbing : MonoBehaviour
     private float exitWallTimer;
 
     private void Start() {
-        lg = GetComponent<LedgeGrabbing>();
+        lg = GetComponent<LedgeGrabbing2>();
     }
 
     private void Update() {

@@ -67,6 +67,7 @@ public class PlayerMovement : MonoBehaviour
     public bool sliding;
     public bool wallrunning;
     public bool climbing;
+    public bool crouching;
 
     public bool freeze;
     public bool unlimited;
@@ -93,6 +94,9 @@ public class PlayerMovement : MonoBehaviour
         if (grounded) {
             rb.drag = groundDrag;
             GetComponent<WallRunning>().lastWall = null;
+            unlimited = false;
+            freeze = false;
+            restricted = false;
         }
         else {
             rb.drag = 0;
@@ -109,7 +113,7 @@ public class PlayerMovement : MonoBehaviour
         hInput = Input.GetAxisRaw("Horizontal");
         vInput = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKey(jumpKey) && canJump && grounded) {
+        if (Input.GetKey(jumpKey) && canJump && grounded && !wallrunning && !climbing) {
             canJump = false;
 
             Jump();
@@ -117,12 +121,14 @@ public class PlayerMovement : MonoBehaviour
             Invoke(nameof(ResetJump), jumpCooldown);
         }
 
-        if (Input.GetKeyDown(crouchKey)) {
+        if (Input.GetKeyDown(crouchKey) && rb.velocity.magnitude < 2f && !sliding) {
             transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
             rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
+            crouching = true;
         }
         else if (Input.GetKeyUp(crouchKey)) {
             transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
+            crouching = false;
         }
     }
 
@@ -152,8 +158,11 @@ public class PlayerMovement : MonoBehaviour
                 desiredMoveSpeed = slideSpeed;
                 keepMomentum = true;
             }
-            else if (!OnSlope() || rb.velocity.y < 0.1f) {
+            else if (!OnSlope()) {
                 desiredMoveSpeed = sprintSpeed;
+            }
+            else if (OnSlope() && rb.velocity.y > 0.1f) {
+                desiredMoveSpeed = crouchSpeed;
             }
             else {
                 desiredMoveSpeed = walkSpeed;
@@ -173,6 +182,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else {
             state = MovementState.air;
+            restricted = false;
         }
 
         bool desiredMoveSpeedChange = desiredMoveSpeed != lastDesiredMoveSpeed;
@@ -229,9 +239,12 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void MovePlayer() {
-        if (restricted || climbingScript.exitingWall) {
+        if (restricted)
             return;
-        }
+
+        if (climbingScript.exitingWall)
+            return;
+        
         
         moveDirection = orientation.forward * vInput + orientation.right * hInput;
 

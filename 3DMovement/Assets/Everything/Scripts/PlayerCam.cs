@@ -43,5 +43,10 @@ public class PlayerCam : MonoBehaviour
     public void DoTilt(float zTilt) {
         transform.DOLocalRotate(new Vector3(0, 0, zTilt), 0.25f);
     }
+
+    private void OnDrawGizmosSelected() {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + transform.forward);
+    }
 }
 
