@@ -164,6 +164,8 @@ MonoBehaviour:
     m_Bits: 64
   bounceMat: {fileID: 6200000, guid: 9ddfeb83889816f44a52dba7cdc3c944, type: 2}
   normMat: {fileID: 6200000, guid: 0023558f8156aac4a966fc253581d744, type: 2}
+  touchPos: {x: 0, y: 0}
+  wallRaycast: {fileID: 0}
 --- !u!95 &5865664431499418372
 Animator:
   serializedVersion: 4

@@ -57,13 +57,34 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("Fall", falling);
         animator.SetBool("Land", landing);
 
-        // increment jump timer
+        // while in the air
         if (jumping || falling) {
+
+            // increment jump timer
             jumpTimer += Time.deltaTime;
 
             if (jumpTimer > 0.3f && isGrounded) {
                 jumping = false;
                 jumpTimer = 0f;
+            }
+
+            // check to bounce off walls when jumping 
+            
+            int dir = left ? -1 : 1;
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right * dir, 1.5f, groundLayer);
+            Debug.DrawRay(transform.position, Vector2.right * 1.5f * dir, Color.red);
+
+            if (hit.collider != null) {
+                /*
+                float speed = rb.velocity.magnitude;
+                Vector3 direction = Vector3.Reflect(rb.velocity.normalized, hit.normal);
+
+                rb.velocity = direction * speed;
+                */
+
+                rb.sharedMaterial = bounceMat;
+            } else {
+                rb.sharedMaterial = normMat;
             }
         }
 
@@ -73,7 +94,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        // check if falling long enough to flat land
+        // check if falling long enough to land face first
         if (falling) {
             jumping = false;
             if (jumpTimer >= 2f) {
@@ -84,6 +105,8 @@ public class PlayerMovement : MonoBehaviour
 
         // check transition when hitting ground after falling
         if (isGrounded) {
+            rb.sharedMaterial = normMat;
+
             if (landing) {
                 Invoke("ReenableMovement", 1f);
                 jumpTimer = 0f;
@@ -95,6 +118,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if (isGrounded && canMove) {
+
+            // if not holding jump then count down jump cooldown timer
+            if (!jumpHold) {
+                jumpCooldown -= Time.deltaTime;
+            }
             
             
             if (Input.touchCount > 0) {
@@ -110,28 +138,33 @@ public class PlayerMovement : MonoBehaviour
                 left = false;
             }
             */
-            
-            // if not holding jump then count down jump timer
-            if (!jumpHold) {
-                jumpCooldown -= Time.deltaTime;
-            }
 
             if (touch.phase == TouchPhase.Began /* Input.GetKeyDown(KeyCode.Space)*/ && jumpCooldown <= 0f) {
                 if (jumpHold == false) {
                     jumpHold = true;
                     
-                    /* check direction of jump */
+                    /* check direction of jump & flip sprite accordingly */
                     
                     if (touchPos.x < screenDiv) {
                         left = true;
                     } else {
                         left = false;
                     }
+
+                    if (left) {
+                        sr.flipX = true;
+                    } else {
+                        sr.flipX = false;
+                    }
                     
                 }
 
                 jumpCooldown = 0.2f;
             } 
+
+            if (jumpHold) {
+                jumpStrength += Time.deltaTime*40;
+            }
             
             if (touch.phase == TouchPhase.Ended /*Input.GetKeyUp(KeyCode.Space)*/ && jumpHold) {
                 /* ceiling on jump strength */
@@ -147,18 +180,7 @@ public class PlayerMovement : MonoBehaviour
                 /* resets jump strength and jumphold vars */
                 Invoke("ResetJump", 0.01f);
             }
-
-            if (jumpHold) {
-                jumpStrength += Time.deltaTime*40;
-            }
             //} 
-
-            /* flip sprite left or right depending on direction of jump */
-            if (left) {
-                sr.flipX = true;
-            } else {
-                sr.flipX = false;
-            }
         }
         }
     }
