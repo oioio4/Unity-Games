@@ -32,6 +32,9 @@ public class AudioManager : MonoBehaviour
 
     private void Start() {
         Play("BGM1");
+        Play("Birds");
+        Play("StrongWind");
+        Play("WeakWind");
     }
 
     public void Play(string name) {

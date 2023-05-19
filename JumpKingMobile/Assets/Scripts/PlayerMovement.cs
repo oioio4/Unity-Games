@@ -28,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private AudioManager audioManager;
 
+    public Vector2 touchPos;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +38,8 @@ public class PlayerMovement : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         audioManager = FindObjectOfType<AudioManager>();
-        //screenDiv = Screen.width / 2;
+        
+        screenDiv = Screen.width / 2;
 
         rb.sharedMaterial = normMat;
     }
@@ -82,7 +85,6 @@ public class PlayerMovement : MonoBehaviour
         // check transition when hitting ground after falling
         if (isGrounded) {
             if (landing) {
-                audioManager.Play("Fall");
                 Invoke("ReenableMovement", 1f);
                 jumpTimer = 0f;
             } else if (falling) {
@@ -93,41 +95,47 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if (isGrounded && canMove) {
-            /*
+            
+            
             if (Input.touchCount > 0) {
                 Touch touch = Input.GetTouch(0);
-                Vector2 pos = touch.position;
-
-*/
+                touchPos = touch.position;
+            
+            
+            // Keyboard input changing direction
+            /*
             if (Input.GetKeyDown(KeyCode.A)) {
                 left = true;
             } else if (Input.GetKeyDown(KeyCode.D)) {
                 left = false;
             }
-
+            */
+            
             // if not holding jump then count down jump timer
             if (!jumpHold) {
                 jumpCooldown -= Time.deltaTime;
             }
 
-            if (/*touch.phase == TouchPhase.Began*/ Input.GetKeyDown(KeyCode.Space) && jumpCooldown <= 0f) {
+            if (touch.phase == TouchPhase.Began /* Input.GetKeyDown(KeyCode.Space)*/ && jumpCooldown <= 0f) {
                 if (jumpHold == false) {
                     jumpHold = true;
                     
                     /* check direction of jump */
-                    /*
-                    if (pos.x < screenDiv) {
+                    
+                    if (touchPos.x < screenDiv) {
                         left = true;
                     } else {
                         left = false;
                     }
-                    */
+                    
                 }
 
                 jumpCooldown = 0.2f;
-            } else if (/*touch.phase == TouchPhase.Ended*/ Input.GetKeyUp(KeyCode.Space) && jumpHold) {
+            } 
+            
+            if (touch.phase == TouchPhase.Ended /*Input.GetKeyUp(KeyCode.Space)*/ && jumpHold) {
                 /* ceiling on jump strength */
-                jumpStrength = Mathf.Min(jumpStrength, 50f);
+                jumpStrength = Mathf.Min(jumpStrength, 40f);
 
                 /* determine direction & strength of jump */
                 int dir = left ? -1 : 1;
@@ -141,7 +149,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
             if (jumpHold) {
-                jumpStrength += Time.deltaTime*50;
+                jumpStrength += Time.deltaTime*40;
             }
             //} 
 
@@ -152,9 +160,7 @@ public class PlayerMovement : MonoBehaviour
                 sr.flipX = false;
             }
         }
-
-
-
+        }
     }
 
     private void ResetJump() {
@@ -164,9 +170,13 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void ReenableMovement() {
-        canMove = true;
         falling = false;
         landing = false;
+        canMove = true;
+    }
+
+    private void LandSound() {
+        audioManager.Play("Fall");
     }
 
     private bool groundCheck() {
@@ -176,3 +186,4 @@ public class PlayerMovement : MonoBehaviour
         return raycastHit.collider != null;
     }
 }
+
