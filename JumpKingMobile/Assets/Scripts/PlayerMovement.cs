@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    // mobile controls
+    public bool mobile = true;
+
     /* jump mechanics */
     [SerializeField] private bool jumpHold = false;
     [SerializeField] private bool jumping = false;
@@ -15,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float screenDiv;
 
     [SerializeField] private bool left = false;
+    [SerializeField] private bool bounce = false;
     [SerializeField] private float jumpCooldown = 0.2f;
     [SerializeField] private float jumpTimer = 0f;
 
@@ -83,6 +87,10 @@ public class PlayerMovement : MonoBehaviour
                 */
 
                 rb.sharedMaterial = bounceMat;
+                if (bounce) {
+                    audioManager.Play("WallBounce");
+                    bounce = false;
+                }
             } else {
                 rb.sharedMaterial = normMat;
             }
@@ -106,6 +114,7 @@ public class PlayerMovement : MonoBehaviour
         // check transition when hitting ground after falling
         if (isGrounded) {
             rb.sharedMaterial = normMat;
+            bounce = true;
 
             if (landing) {
                 Invoke("ReenableMovement", 1f);
@@ -117,7 +126,8 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (isGrounded && canMove) {
+        if (mobile) {
+            if (isGrounded && canMove) {
 
             // if not holding jump then count down jump cooldown timer
             if (!jumpHold) {
@@ -183,7 +193,58 @@ public class PlayerMovement : MonoBehaviour
             //} 
         }
         }
-    }
+
+        } else {
+            if (isGrounded && canMove) {
+
+            // if not holding jump then count down jump cooldown timer
+            if (!jumpHold) {
+                jumpCooldown -= Time.deltaTime;
+            }
+            
+            
+            // Keyboard input changing direction
+            if (Input.GetKeyDown(KeyCode.A)) {
+                left = true;
+            } else if (Input.GetKeyDown(KeyCode.D)) {
+                left = false;
+            }
+
+            if (left) {
+                sr.flipX = true;
+            } else {
+                sr.flipX = false;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space) && jumpCooldown <= 0f) {
+                if (jumpHold == false) {
+                    jumpHold = true;
+                }
+
+                jumpCooldown = 0.2f;
+            } 
+
+            if (jumpHold) {
+                jumpStrength += Time.deltaTime*40;
+            }
+            
+            if (Input.GetKeyUp(KeyCode.Space) && jumpHold) {
+                /* ceiling on jump strength */
+                jumpStrength = Mathf.Min(jumpStrength, 40f);
+
+                /* determine direction & strength of jump */
+                int dir = left ? -1 : 1;
+
+                rb.velocity = new Vector2(dir * horizontalStrength, jumpStrength);
+
+                audioManager.Play("Jump");
+
+                /* resets jump strength and jumphold vars */
+                Invoke("ResetJump", 0.01f);
+            }
+        } 
+        }
+        }
 
     private void ResetJump() {
         jumping = true;
