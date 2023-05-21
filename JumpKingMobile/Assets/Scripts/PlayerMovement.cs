@@ -17,22 +17,27 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float horizontalStrength = 6f;
     [SerializeField] private float screenDiv;
 
+    // trackers
     [SerializeField] private bool left = false;
     [SerializeField] private bool bounce = false;
     [SerializeField] private float jumpCooldown = 0.2f;
     [SerializeField] private float jumpTimer = 0f;
+    public Vector2 touchPos;
 
+    // materials & layers
     [SerializeField] private bool isGrounded = true;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private PhysicsMaterial2D bounceMat, normMat;
 
+    // effects
+    [SerializeField] private GameObject landingParticles;
+
+    // components
     private Rigidbody2D rb;
     private BoxCollider2D boxCollider2d;
     private SpriteRenderer sr;
     private Animator animator;
     private AudioManager audioManager;
-
-    public Vector2 touchPos;
 
     // Start is called before the first frame update
     void Start()
@@ -87,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
                 */
 
                 rb.sharedMaterial = bounceMat;
-                if (bounce) {
+                if (bounce && !isGrounded) {
                     audioManager.Play("WallBounce");
                     bounce = false;
                 }
@@ -123,8 +128,14 @@ public class PlayerMovement : MonoBehaviour
                 falling = false;
                 audioManager.Play("Land");
                 jumpTimer = 0f;
+
+                GameObject particles = Instantiate(landingParticles, transform.position - new Vector3(0f, 0.8f, 1f), Quaternion.Euler(-90f, 0f, 0f));
+                //Destroy(particles, 1.5f);
             }
         }
+
+
+        /* Mobile controls */
 
         if (mobile) {
             if (isGrounded && canMove) {
@@ -178,7 +189,7 @@ public class PlayerMovement : MonoBehaviour
             
             if (touch.phase == TouchPhase.Ended /*Input.GetKeyUp(KeyCode.Space)*/ && jumpHold) {
                 /* ceiling on jump strength */
-                jumpStrength = Mathf.Min(jumpStrength, 40f);
+                jumpStrength = Mathf.Min(jumpStrength, 35f);
 
                 /* determine direction & strength of jump */
                 int dir = left ? -1 : 1;
@@ -188,7 +199,7 @@ public class PlayerMovement : MonoBehaviour
                 audioManager.Play("Jump");
 
                 /* resets jump strength and jumphold vars */
-                Invoke("ResetJump", 0.01f);
+                Invoke("ResetJump", 0.1f);
             }
             //} 
         }
@@ -230,7 +241,7 @@ public class PlayerMovement : MonoBehaviour
             
             if (Input.GetKeyUp(KeyCode.Space) && jumpHold) {
                 /* ceiling on jump strength */
-                jumpStrength = Mathf.Min(jumpStrength, 40f);
+                jumpStrength = Mathf.Min(jumpStrength, 35f);
 
                 /* determine direction & strength of jump */
                 int dir = left ? -1 : 1;
@@ -240,7 +251,7 @@ public class PlayerMovement : MonoBehaviour
                 audioManager.Play("Jump");
 
                 /* resets jump strength and jumphold vars */
-                Invoke("ResetJump", 0.01f);
+                Invoke("ResetJump", 0.1f);
             }
         } 
         }
@@ -263,8 +274,8 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private bool groundCheck() {
-        float extraHeight = 1f;
-        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider2d.bounds.center, boxCollider2d.bounds.size, 0f, Vector2.down, extraHeight, groundLayer);
+        float extraHeight = 0.5f;
+        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider2d.bounds.center, boxCollider2d.bounds.size - new Vector3(0f, 0.5f, 0f), 0f, Vector2.down, extraHeight, groundLayer);
 
         return raycastHit.collider != null;
     }
