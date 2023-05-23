@@ -130,7 +130,7 @@ public class PlayerMovement : MonoBehaviour
                 jumpTimer = 0f;
 
                 GameObject particles = Instantiate(landingParticles, transform.position - new Vector3(0f, 0.8f, 1f), Quaternion.Euler(-90f, 0f, 0f));
-                //Destroy(particles, 1.5f);
+                Destroy(particles, 1.5f);
             }
         }
 
