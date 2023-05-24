@@ -147,6 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81f48ca7ca629eb47996c662f42088cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mobile: 1
   jumpHold: 0
   jumping: 0
   falling: 0
@@ -156,16 +157,17 @@ MonoBehaviour:
   horizontalStrength: 6
   screenDiv: 0
   left: 0
+  bounce: 0
   jumpCooldown: 1
   jumpTimer: 0
+  touchPos: {x: 0, y: 0}
   isGrounded: 1
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
   bounceMat: {fileID: 6200000, guid: 9ddfeb83889816f44a52dba7cdc3c944, type: 2}
   normMat: {fileID: 6200000, guid: 0023558f8156aac4a966fc253581d744, type: 2}
-  touchPos: {x: 0, y: 0}
-  wallRaycast: {fileID: 0}
+  landingParticles: {fileID: 0}
 --- !u!95 &5865664431499418372
 Animator:
   serializedVersion: 4

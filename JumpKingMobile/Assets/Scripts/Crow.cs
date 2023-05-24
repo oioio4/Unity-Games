@@ -7,6 +7,8 @@ public class Crow : MonoBehaviour
     private Animator animator;
     private AudioManager audioManager;
 
+    private bool played = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,8 +22,9 @@ public class Crow : MonoBehaviour
         RaycastHit2D hit = Physics2D.CircleCast(transform.position, 10f, Vector2.up);
 
         if (hit.collider != null) {
-            if (hit.collider.gameObject.tag == "Player") {
+            if (hit.collider.gameObject.tag == "Player" && !played) {
                 animator.Play("Say");
+                played = true;
             }
         }
     }

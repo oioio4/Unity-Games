@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     // trackers
     [SerializeField] private bool left = false;
     [SerializeField] private bool bounce = false;
-    [SerializeField] private float jumpCooldown = 0.2f;
+    [SerializeField] private float jumpCooldown = 0.1f;
     [SerializeField] private float jumpTimer = 0f;
     public Vector2 touchPos;
 
@@ -80,8 +80,10 @@ public class PlayerMovement : MonoBehaviour
             // check to bounce off walls when jumping 
             
             int dir = left ? -1 : 1;
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right * dir, 1.5f, groundLayer);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0f, 1f, 0f), Vector2.right * dir, 1.5f, groundLayer);
             Debug.DrawRay(transform.position, Vector2.right * 1.5f * dir, Color.red);
+
+            RaycastHit2D bounceCancel = Physics2D.Raycast(transform.position, Vector2.down, 2f, groundLayer);
 
             if (hit.collider != null) {
                 /*
@@ -90,22 +92,24 @@ public class PlayerMovement : MonoBehaviour
 
                 rb.velocity = direction * speed;
                 */
-
-                rb.sharedMaterial = bounceMat;
                 if (bounce && !isGrounded) {
+                    rb.sharedMaterial = bounceMat;
                     audioManager.Play("WallBounce");
                     bounce = false;
                 }
             } else {
                 rb.sharedMaterial = normMat;
             }
+
+            if (bounceCancel.collider != null) {
+                rb.sharedMaterial = normMat;
+            }
         }
 
-        // check if falling in the air after jumping
-        if (!isGrounded && jumping && rb.velocity.y < 0.5f) {
+        // check if falling in the air after jumping or just falling in general
+        if (!isGrounded && jumping && rb.velocity.y < 0.5f || rb.velocity.y < -0.5f) {
             falling = true;
         }
-
 
         // check if falling long enough to land face first
         if (falling) {
@@ -128,6 +132,9 @@ public class PlayerMovement : MonoBehaviour
                 falling = false;
                 audioManager.Play("Land");
                 jumpTimer = 0f;
+
+                jumpHold = false;
+                jumpStrength = 0f;
 
                 GameObject particles = Instantiate(landingParticles, transform.position - new Vector3(0f, 0.8f, 1f), Quaternion.Euler(-90f, 0f, 0f));
                 Destroy(particles, 1.5f);
@@ -227,19 +234,26 @@ public class PlayerMovement : MonoBehaviour
                 sr.flipX = false;
             }
 
-            if (Input.GetKeyDown(KeyCode.Space) && jumpCooldown <= 0f) {
+            if (Input.GetKeyDown(KeyCode.Space) && jumpCooldown <= 0f && isGrounded) {
                 if (jumpHold == false) {
                     jumpHold = true;
                 }
 
-                jumpCooldown = 0.2f;
+                jumpCooldown = 0.1f;
             } 
 
             if (jumpHold) {
-                jumpStrength += Time.deltaTime*40;
+                if (isGrounded) {
+                    jumpStrength += Time.deltaTime*40;
+                } else if (!jumping) {
+                    jumpHold = false;
+                    falling = true;
+
+                    jumpStrength = 0f;
+                }
             }
             
-            if (Input.GetKeyUp(KeyCode.Space) && jumpHold) {
+            if (Input.GetKeyUp(KeyCode.Space) && jumpHold && isGrounded) {
                 /* ceiling on jump strength */
                 jumpStrength = Mathf.Min(jumpStrength, 35f);
 
@@ -269,8 +283,11 @@ public class PlayerMovement : MonoBehaviour
         canMove = true;
     }
 
-    private void LandSound() {
+    private void Land() {
         audioManager.Play("Fall");
+
+        jumpHold = false;
+        jumpStrength = 0f;
     }
 
     private bool groundCheck() {
