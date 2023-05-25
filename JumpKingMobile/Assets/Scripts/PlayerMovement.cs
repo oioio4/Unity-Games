@@ -83,7 +83,8 @@ public class PlayerMovement : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0f, 1f, 0f), Vector2.right * dir, 1.5f, groundLayer);
             Debug.DrawRay(transform.position, Vector2.right * 1.5f * dir, Color.red);
 
-            RaycastHit2D bounceCancel = Physics2D.Raycast(transform.position, Vector2.down, 2f, groundLayer);
+            //RaycastHit2D bounceCancel = Physics2D.Raycast(transform.position, Vector2.down, 2f, groundLayer);
+            RaycastHit2D bounceCancel = Physics2D.BoxCast(boxCollider2d.bounds.center, boxCollider2d.bounds.size, 0f, Vector2.down, 0f, groundLayer);
 
             if (hit.collider != null) {
                 /*
@@ -107,7 +108,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // check if falling in the air after jumping or just falling in general
-        if (!isGrounded && jumping && rb.velocity.y < 0.5f || rb.velocity.y < -0.5f) {
+        if (!isGrounded && jumping && rb.velocity.y < 0.5f || rb.velocity.y < -0.5f && !isGrounded) {
             falling = true;
         }
 
@@ -245,7 +246,7 @@ public class PlayerMovement : MonoBehaviour
             if (jumpHold) {
                 if (isGrounded) {
                     jumpStrength += Time.deltaTime*40;
-                } else if (!jumping) {
+                } else if (!jumping && jumpStrength > 1f) {
                     jumpHold = false;
                     falling = true;
 
