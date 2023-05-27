@@ -276,7 +276,7 @@ namespace SlimUI.ModernMenu{
 					loadPromptText.text = "Press " + userPromptKey.ToString().ToUpper() + " to continue";
 					loadingBar.value = 1;
 
-					if (Input.GetKeyDown(userPromptKey)){
+					if (Input.GetKeyDown(userPromptKey) || (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)){
 						operation.allowSceneActivation = true;
 					}
                 }else if(operation.progress >= 0.9f && !waitForInput){

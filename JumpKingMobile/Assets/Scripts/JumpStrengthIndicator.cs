@@ -20,7 +20,7 @@ public class JumpStrengthIndicator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        jumpStrength = player.jumpStrength;
+        jumpStrength = Mathf.Min(player.jumpStrength, 40f);
         jumpStrengthText.text = jumpStrength.ToString();
     }
 }

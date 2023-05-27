@@ -83,8 +83,8 @@ public class PlayerMovement : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0f, 1f, 0f), Vector2.right * dir, 1.5f, groundLayer);
             Debug.DrawRay(transform.position, Vector2.right * 1.5f * dir, Color.red);
 
-            //RaycastHit2D bounceCancel = Physics2D.Raycast(transform.position, Vector2.down, 2f, groundLayer);
-            RaycastHit2D bounceCancel = Physics2D.BoxCast(boxCollider2d.bounds.center, boxCollider2d.bounds.size, 0f, Vector2.down, 0f, groundLayer);
+            RaycastHit2D bounceCancel1 = Physics2D.Raycast(transform.position, Vector2.down, 2f, groundLayer);
+            RaycastHit2D bounceCancel2 = Physics2D.BoxCast(boxCollider2d.bounds.center, boxCollider2d.bounds.size, 0f, Vector2.down, 0f, groundLayer);
 
             if (hit.collider != null) {
                 /*
@@ -102,7 +102,7 @@ public class PlayerMovement : MonoBehaviour
                 rb.sharedMaterial = normMat;
             }
 
-            if (bounceCancel.collider != null) {
+            if (bounceCancel1.collider != null || bounceCancel2.collider != null) {
                 rb.sharedMaterial = normMat;
             }
         }
@@ -256,7 +256,7 @@ public class PlayerMovement : MonoBehaviour
             
             if (Input.GetKeyUp(KeyCode.Space) && jumpHold && isGrounded) {
                 /* ceiling on jump strength */
-                jumpStrength = Mathf.Min(jumpStrength, 35f);
+                jumpStrength = Mathf.Min(jumpStrength, 40f);
 
                 /* determine direction & strength of jump */
                 int dir = left ? -1 : 1;
