@@ -6,6 +6,9 @@ public class TrapDoor : MonoBehaviour
 {
     public float delay = 5f;
 
+    public float r1 = -90;
+    public float r2 = 0;
+
     void Start()
     {
         StartCoroutine(loop(delay));
@@ -34,8 +37,8 @@ public class TrapDoor : MonoBehaviour
     }
 
     IEnumerator loop(float delayTime) {
-        Quaternion rot1 = Quaternion.Euler(new Vector3(0, 0, -90));
-        Quaternion rot2 = Quaternion.Euler(new Vector3(0, 0, 0));
+        Quaternion rot1 = Quaternion.Euler(new Vector3(0, 0, r1));
+        Quaternion rot2 = Quaternion.Euler(new Vector3(0, 0, r2));
 
         while (true) {
             StartCoroutine(rotateObject(rot1, 0.2f));
