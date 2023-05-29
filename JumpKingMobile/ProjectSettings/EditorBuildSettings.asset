@@ -6,9 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Imports/SlimUI/Modern Menu 1/Scenes/Demos/Demo1.unity
-    guid: 829a86ba161cdd840842063447f41aab
+    path: Assets/Scenes/Menu.unity
+    guid: 53276be62d99ac5418a4ed9598e6dae0
   - enabled: 1
     path: Assets/Scenes/Main.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/End.unity
+    guid: 5bc8aa64f4bd5d54a889db29c74f818c
   m_configObjects: {}

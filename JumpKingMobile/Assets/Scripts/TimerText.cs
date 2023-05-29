@@ -7,7 +7,7 @@ public class TimerText : MonoBehaviour
 {
     private Text timerText;
 
-    private float t;
+    public float t;
 
     private void Awake() {
         timerText = GetComponent<Text>();
@@ -20,7 +20,7 @@ public class TimerText : MonoBehaviour
 
         float minutes = Mathf.FloorToInt(t / 60) % 60;
         float seconds = Mathf.FloorToInt(t % 60);
-        float milliseconds = Mathf.FloorToInt(t * 1000f) % 1000;
+        //float milliseconds = Mathf.FloorToInt(t * 1000f) % 1000;
 
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }

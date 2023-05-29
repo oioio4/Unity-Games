@@ -141,6 +141,9 @@ namespace SlimUI.ModernMenu{
 			if(scene != ""){
 				StartCoroutine(LoadAsynchronously(scene));
 			}
+
+			GameManager gm = FindObjectOfType<GameManager>();
+			gm.Load();
 		}
 
 		public void  DisablePlayCampaign(){
@@ -273,10 +276,10 @@ namespace SlimUI.ModernMenu{
 				loadingBar.value = progress;
 
 				if (operation.progress >= 0.9f && waitForInput){
-					loadPromptText.text = "Press " + userPromptKey.ToString().ToUpper() + " to continue";
+					loadPromptText.text = "Press any key to continue";
 					loadingBar.value = 1;
 
-					if (Input.GetKeyDown(userPromptKey) || (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)){
+					if (Input.anyKey || (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)){
 						operation.allowSceneActivation = true;
 					}
                 }else if(operation.progress >= 0.9f && !waitForInput){
