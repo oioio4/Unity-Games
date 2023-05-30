@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    public GameObject pauseMenu;
+    [SerializeField] private bool paused = false;
+
     public float currentTime;
     private float highScoreTime = float.MaxValue;
 
@@ -23,6 +26,14 @@ public class GameManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
+        pauseMenu.SetActive(false);
+    }
+
+    void Update() {
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            paused = !paused;
+            PauseMenu();
+        }
     }
 
     public void levelIncrement() {
@@ -31,6 +42,26 @@ public class GameManager : MonoBehaviour
 
     public void levelDecrement() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+    }
+
+    private void PauseMenu() {
+        if (paused) {
+            Time.timeScale = 0;
+            pauseMenu.SetActive(true);
+        }
+        else {
+            Time.timeScale = 1;
+            pauseMenu.SetActive(false);
+        }
+    }
+
+    public void Resume() {
+        paused = false;
+        PauseMenu();
+    }
+
+    public void Quit() { 
+        Application.Quit();
     }
 
     public void Save() {

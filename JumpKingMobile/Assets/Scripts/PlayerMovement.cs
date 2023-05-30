@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -29,8 +30,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private PhysicsMaterial2D bounceMat, normMat;
 
-    // effects
+    // particles
     [SerializeField] private GameObject landingParticles;
+
+    // landing effects
+    public PostProcessVolume volume;
+    private Bloom bloom;
+    public AnimationCurve bloomCurve;
 
     // components
     private Rigidbody2D rb;
@@ -51,6 +57,8 @@ public class PlayerMovement : MonoBehaviour
         screenDiv = Screen.width / 2;
 
         rb.sharedMaterial = normMat;
+
+        volume.profile.TryGetSettings(out bloom);
     }
 
     // Update is called once per frame
@@ -129,6 +137,8 @@ public class PlayerMovement : MonoBehaviour
             if (landing) {
                 Invoke("ReenableMovement", 1f);
                 jumpTimer = 0f;
+
+                StartCoroutine(OscillateBloom());
             } else if (falling) {
                 falling = false;
                 audioManager.Play("Land");
@@ -139,6 +149,8 @@ public class PlayerMovement : MonoBehaviour
 
                 GameObject particles = Instantiate(landingParticles, transform.position - new Vector3(0f, 0.8f, 1f), Quaternion.Euler(-90f, 0f, 0f));
                 Destroy(particles, 1.5f);
+
+                StartCoroutine(OscillateBloom());
             }
         }
 
@@ -289,6 +301,17 @@ public class PlayerMovement : MonoBehaviour
 
         jumpHold = false;
         jumpStrength = 0f;
+    }
+
+    IEnumerator OscillateBloom() {
+        float t = 0f;
+
+        while (t < 1f) {
+            t += Time.deltaTime;
+            float a = bloomCurve.Evaluate(t);
+            bloom.intensity.value = 5*a + 15;
+            yield return 0;
+        }
     }
 
     private bool groundCheck() {
