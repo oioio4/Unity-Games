@@ -4,32 +4,33 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class TypewriterText : MonoBehaviour
+public class DelayedDialogText : MonoBehaviour
 {
     [SerializeField] private int textSpeed;
+    [SerializeField] private float startDelay = 2f;
+    [SerializeField] private float endDelay = 0.5f;
 
     public Text dialogText;
-    public GameObject continueButton;
 
     [TextArea]
     public string[] instructions;
 
     private void Start() {
+        StartCoroutine(TypeDialog(instructions));
     }
 
     public IEnumerator TypeDialog(string[] dialog) {
+        yield return new WaitForSeconds(startDelay);
         dialogText.text = "";
         for (int i = 0; i < dialog.Length; i++) {
             foreach (var letter in dialog[i].ToCharArray()) {
                 dialogText.text += letter;
-                //FindObjectOfType<AudioManager>().Play("Text");
+                FindObjectOfType<AudioManager>().Play("Text");
                 yield return new WaitForSeconds(1f / textSpeed);
             }
 
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(endDelay);
             dialogText.text = "";  
         }
-
-        continueButton.SetActive(true);
     }
 }
