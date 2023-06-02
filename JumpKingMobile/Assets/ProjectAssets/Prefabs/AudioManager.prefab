@@ -48,7 +48,7 @@ MonoBehaviour:
   - name: Jump
     clip: {fileID: 8300000, guid: 2bed87cdeea45fb49a17b3243d4bc363, type: 3}
     volume: 0.3
-    pitch: 1
+    pitch: 0.8
     loop: 0
     source: {fileID: 0}
   - name: Fall
@@ -63,15 +63,57 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: WallBounce
+    clip: {fileID: 8300000, guid: 4b51f9e56878a684e92e444bae1f76b7, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Caw
+    clip: {fileID: 8300000, guid: 2e530661c1a424541bdb9e354c3d4cda, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Fly
+    clip: {fileID: 8300000, guid: 16bb26916783ea74c8946e131ad17ee0, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Birds
+    clip: {fileID: 8300000, guid: b2efe8897b509564fba96a6325e6aa4b, type: 3}
+    volume: 0.03
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: StrongWind
+    clip: {fileID: 8300000, guid: 8ef4dd4892c048445ba15be7a3a915b9, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: WeakWind
+    clip: {fileID: 8300000, guid: 8fe948e13ba01814c82326c107144fb2, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
   - name: BGM1
     clip: {fileID: 8300000, guid: 3032a5db4aa4e7742a2e66042d4343f3, type: 3}
-    volume: 0.2
+    volume: 0.15
     pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: BGM2
     clip: {fileID: 8300000, guid: 582ec72e4fd208247bab235c136c080e, type: 3}
-    volume: 0.2
+    volume: 0.15
     pitch: 1
     loop: 1
+    source: {fileID: 0}
+  - name: Text
+    clip: {fileID: 8300000, guid: 5b38a9df17a072042a6f28d3521243ce, type: 3}
+    volume: 0.15
+    pitch: 0.7
+    loop: 0
     source: {fileID: 0}
