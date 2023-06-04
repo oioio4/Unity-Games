@@ -141,9 +141,6 @@ namespace SlimUI.ModernMenu{
 			if(scene != ""){
 				StartCoroutine(LoadAsynchronously(scene));
 			}
-
-			GameManager gm = FindObjectOfType<GameManager>();
-			gm.Load();
 		}
 
 		public void  DisablePlayCampaign(){

@@ -30,13 +30,6 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    private void Start() {
-        Play("BGM1");
-        Play("Birds");
-        Play("StrongWind");
-        Play("WeakWind");
-    }
-
     public void Play(string name) {
         Sound s = null;
         for (int i = 0; i < sounds.Length; i++) {

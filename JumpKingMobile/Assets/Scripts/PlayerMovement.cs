@@ -316,7 +316,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool groundCheck() {
         float extraHeight = 0.5f;
-        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider2d.bounds.center, boxCollider2d.bounds.size - new Vector3(0f, 0.5f, 0f), 0f, Vector2.down, extraHeight, groundLayer);
+        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider2d.bounds.center, boxCollider2d.bounds.size, 0f, Vector2.down, extraHeight, groundLayer);
 
         return raycastHit.collider != null;
     }

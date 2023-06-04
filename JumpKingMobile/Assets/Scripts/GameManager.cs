@@ -29,6 +29,17 @@ public class GameManager : MonoBehaviour
         pauseMenu.SetActive(false);
     }
 
+    private void Start() {
+        AudioManager am = FindObjectOfType<AudioManager>();
+
+        if (am != null) {
+            am.Play("BGM1");
+            am.Play("Birds");
+            am.Play("StrongWind");
+            am.Play("WeakWind");
+        }
+    }
+
     void Update() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
             paused = !paused;

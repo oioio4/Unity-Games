@@ -29,4 +29,12 @@ public class CheckpointSystem : MonoBehaviour
             respawnPoint = col.gameObject.transform.position; 
         }
     } 
+
+    public void Respawn() {
+        transform.position = respawnPoint;
+        rb.velocity = new Vector2(0f, 0f);
+        animator.Play("Respawn");
+        GameObject particles = Instantiate(respawnParticles, this.transform);
+        Destroy(particles, 1.5f);
+    }
 }
