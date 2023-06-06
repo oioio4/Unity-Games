@@ -254,11 +254,7 @@ namespace SlimUI.ModernMenu{
 		}
 
 		public void QuitGame(){
-			#if UNITY_EDITOR
-				UnityEditor.EditorApplication.isPlaying = false;
-			#else
-				Application.Quit();
-			#endif
+			Application.Quit();
 		}
 
 		// Load Bar synching animation
