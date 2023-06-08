@@ -8,6 +8,9 @@ public class PlayerNearby : MonoBehaviour
     private Animator animator;
     private AudioManager audioManager;
 
+    [SerializeField] private bool activated = false;
+    [SerializeField] RaycastHit2D hit;
+
     public UnityEvent action;
 
     // Start is called before the first frame update
@@ -18,22 +21,14 @@ public class PlayerNearby : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void OnTriggerEnter2D(Collider2D col)
     {
-        RaycastHit2D hit = Physics2D.CircleCast(transform.position, 5f, Vector2.up);
-
-        if (hit.collider != null) {
-            if (hit.collider.gameObject.tag == "Player") {
+        if (col != null) {
+            if (col.gameObject.tag == "Player") {
                 action.Invoke();
+                activated = true;
             }
         }
     }
-
-
-    private void OnDrawGizmosSelected() {
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(transform.position, 8f);
-    }
-
 }
 
