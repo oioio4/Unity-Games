@@ -4,24 +4,43 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
-    private Inventory inventory;
+    public Inventory inventory;
     public GameObject itemButton;
+
+    private MeshRenderer meshRenderer;
+    private Outline outline;
+    private Color origColor;
+    public Color highlightColor;
 
     // Start is called before the first frame update
     void Start()
     {
-        inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+        meshRenderer = GetComponent<MeshRenderer>();
+        outline = GetComponent<Outline>();
+        origColor = meshRenderer.material.color;
     }
 
-    void OnTriggerEnter2D(Collider2D other) {
-        if (other.CompareTag("Player")) {
-            for (int i = 0; i < inventory.slots.Length; i++) {
-                if (inventory.isFull[i] == false) {
-                    inventory.isFull[i] = true;
-                    Instantiate(itemButton, inventory.slots[i].transform, false);
-                    Destroy(gameObject);
-                    break;
-                }
+    private void OnMouseOver() {
+        meshRenderer.material.color = highlightColor;
+        outline.enabled = true;
+
+        if (Input.GetKeyDown(KeyCode.E)) {
+                inventoryAdd();
+        }
+    }
+
+    private void OnMouseExit() {
+        meshRenderer.material.color = origColor;
+        outline.enabled = false;
+    }
+
+    private void inventoryAdd() {
+        for (int i = 0; i < inventory.slots.Length; i++) {
+            if (inventory.isFull[i] == false) {
+                inventory.isFull[i] = true;
+                Instantiate(itemButton, inventory.slots[i].transform, false);
+                Destroy(gameObject);
+                break;
             }
         }
     }
