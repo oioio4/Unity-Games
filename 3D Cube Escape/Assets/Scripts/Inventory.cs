@@ -10,7 +10,7 @@ public class Inventory : MonoBehaviour
     public GameObject[] slots;
 
     // selecting object from bar
-    public GameObject curSelected;
+    public GameObject curSelected = null;
     public bool[] isSelected;
     public Color defaultColor;
     public Color selectedColor;
@@ -81,11 +81,24 @@ public class Inventory : MonoBehaviour
             }
         }
 
+
+        bool selection = false;
+
         for (int i = 0; i < isSelected.Length; i++) {
             if (isSelected[i]) {
+                selection = true;
+
+                // reset image color 
+                if (curSelected != null) {
+                    curSelected.GetComponent<Image>().color = selectedColor;
+                }
+                
                 // set the current selected slot
                 if (slots[i].transform.childCount > 0) {
                     curSelected = slots[i].transform.GetChild(0).gameObject;
+                    curSelected.GetComponent<Image>().color = defaultColor;
+                } else {
+                    curSelected = null;
                 }
 
                 // instantiate popup w/ item name
@@ -96,6 +109,12 @@ public class Inventory : MonoBehaviour
                     //Destroy(popup, 3f);                
                 }
             }
+        }
+
+        // handles case of selecting and unselecting same slot 
+        if (!selection && curSelected != null) {
+            curSelected.GetComponent<Image>().color = selectedColor;
+            curSelected = null;
         }
     }
 }

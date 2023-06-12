@@ -182,7 +182,7 @@ namespace TheFirstPerson
         [ConditionalHide("customInputNames", true)]
         public string jumpBtnCustom = "Jump";
         [ConditionalHide("customInputNames", true)]
-        public string crouchBtnCustom = "Fire1";
+        public string crouchBtnCustom = "LShift";
         [ConditionalHide("customInputNames", true)]
         public string runBtnCustom = "Fire3";
         [ConditionalHide("customInputNames", true)]
@@ -251,7 +251,7 @@ namespace TheFirstPerson
 
         //Input Name Defaults (assuming default unity axes are set up)
         string jumpBtn = "Jump";
-        string crouchBtn = "Fire1";
+        string crouchBtn = "LShift";
         string runBtn = "Fire3";
         string unlockMouseBtn = "Cancel";
         string xInName = "Horizontal";
