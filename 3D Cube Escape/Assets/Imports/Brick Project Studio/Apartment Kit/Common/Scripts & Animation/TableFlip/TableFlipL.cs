@@ -10,6 +10,7 @@ public class TableFlipL: MonoBehaviour {
 
 	void Start (){
 		open = false;
+		Player = GameObject.FindWithTag("Player").GetComponent<Transform>();
 	}
 
 	void OnMouseOver (){
