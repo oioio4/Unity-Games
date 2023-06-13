@@ -24,6 +24,10 @@ namespace TheFirstPerson
 
         CharacterController controller;
 
+        [Header("Animation")]
+        public Animator anim;
+        private int vertical;
+        private int horizontal;
 
         [Header("Options")]
         public bool movementEnabled = true;
@@ -182,7 +186,7 @@ namespace TheFirstPerson
         [ConditionalHide("customInputNames", true)]
         public string jumpBtnCustom = "Jump";
         [ConditionalHide("customInputNames", true)]
-        public string crouchBtnCustom = "LShift";
+        public string crouchBtnCustom = "LCtrl";
         [ConditionalHide("customInputNames", true)]
         public string runBtnCustom = "Fire3";
         [ConditionalHide("customInputNames", true)]
@@ -251,7 +255,7 @@ namespace TheFirstPerson
 
         //Input Name Defaults (assuming default unity axes are set up)
         string jumpBtn = "Jump";
-        string crouchBtn = "LShift";
+        string crouchBtn = "Fire1";
         string runBtn = "Fire3";
         string unlockMouseBtn = "Cancel";
         string xInName = "Horizontal";
@@ -308,6 +312,10 @@ namespace TheFirstPerson
 
             controllerInfo = GetInfo();
             ExecuteExtension(ExtFunc.Start);
+
+            anim = GetComponent<Animator>();
+            vertical = Animator.StringToHash("Vertical");
+            horizontal = Animator.StringToHash("Horizontal");
         }
 
         void Update()
@@ -776,6 +784,10 @@ namespace TheFirstPerson
                 xIn = normalised.x;
                 yIn = normalised.y;
             }
+
+            anim.SetFloat(horizontal, xIn, 0.1f, Time.deltaTime);
+            anim.SetFloat(vertical, yIn, 0.1f, Time.deltaTime);
+
             xMouse = standard ? Input.GetAxis(xMouseName) : customInputSystem.XMouse();
             yMouse = standard ? Input.GetAxis(yMouseName) : customInputSystem.YMouse();
             moving = Mathf.Abs(xIn) > 0.1 || Mathf.Abs(yIn) > 0.1;
