@@ -18,6 +18,8 @@ public class Pickup : MonoBehaviour
         meshRenderer = GetComponent<MeshRenderer>();
         outline = GetComponent<Outline>();
         origColor = meshRenderer.material.color;
+
+        outline.enabled = false;
     }
 
     private void OnMouseOver() {
@@ -25,7 +27,7 @@ public class Pickup : MonoBehaviour
         outline.enabled = true;
 
         if (/*Input.GetKeyDown(KeyCode.E)*/ Input.GetMouseButtonDown(0)) {
-                inventoryAdd();
+                InventoryAdd();
         }
     }
 
@@ -34,7 +36,7 @@ public class Pickup : MonoBehaviour
         outline.enabled = false;
     }
 
-    private void inventoryAdd() {
+    private void InventoryAdd() {
         for (int i = 0; i < inventory.slots.Length; i++) {
             if (inventory.isFull[i] == false) {
                 inventory.isFull[i] = true;

@@ -353,6 +353,9 @@ namespace TheFirstPerson
                 UpdateMovement(Time.deltaTime);
             }
             ExecuteExtension(ExtFunc.PostUpdate);
+
+
+            cam = FindObjectOfType<ChangeCameras>().curCam.transform;
         }
 
         void FixedUpdate()
@@ -714,8 +717,8 @@ namespace TheFirstPerson
 
                 horizontalLook += xMouse * sensitivity;
 
-                if (verticalLookEnabled)
-                {
+                //if (verticalLookEnabled)
+                //{
                     verticalLook -= yMouse * sensitivity;
                     if (verticalLook > verticalLookLimit && verticalLook < 180)
                     {
@@ -727,7 +730,7 @@ namespace TheFirstPerson
                     }
 
                     cam.localEulerAngles = new Vector3(verticalLook, 0, 0);
-                }
+                //}
 
                 transform.localEulerAngles = new Vector3(0, horizontalLook, 0);
             }

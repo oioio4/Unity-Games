@@ -7,6 +7,8 @@ public class ChangeCameras : MonoBehaviour
     public Camera[] cams;
     private int camIndex = 0;
 
+    public Camera curCam;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +17,8 @@ public class ChangeCameras : MonoBehaviour
         for (int i = 1; i < cams.Length; i++) {
             cams[i].enabled = false;
         }
+
+        curCam = cams[0];
     }
 
     // Update is called once per frame
@@ -26,6 +30,7 @@ public class ChangeCameras : MonoBehaviour
             camIndex = (camIndex + 1) % cams.Length;
 
             cams[camIndex].enabled = true;
+            curCam = cams[camIndex];
         }
     }
 

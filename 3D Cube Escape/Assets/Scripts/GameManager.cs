@@ -31,6 +31,9 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         am = FindObjectOfType<AudioManager>();
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
@@ -39,6 +42,15 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape)) {
             paused = !paused;
             PauseMenu();
+
+            if (paused) {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            else {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
         }
     }
 
@@ -56,6 +68,8 @@ public class GameManager : MonoBehaviour
 
     public void Resume() {
         paused = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         PauseMenu();
     }
 

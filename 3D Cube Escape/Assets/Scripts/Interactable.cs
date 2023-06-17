@@ -11,10 +11,9 @@ public class Interactable : MonoBehaviour
     public Color highlightColor;
 
     public UnityEvent interactAction;
-    public bool active = true;
 
     [SerializeField] private float range = 2f;
-    [SerializeField] private bool isInRange;
+    [SerializeField] private bool isInRange = false;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +21,8 @@ public class Interactable : MonoBehaviour
         meshRenderer = GetComponent<MeshRenderer>();
         outline = GetComponent<Outline>();
         origColor = meshRenderer.material.color;
+
+        outline.enabled = false;
     }
 
     private void Update() {
@@ -36,12 +37,12 @@ public class Interactable : MonoBehaviour
     }
 
     private void OnMouseOver() {
-        if (isInRange && active) {
+        if (isInRange) {
             meshRenderer.material.color = highlightColor;
             outline.enabled = true;
 
             if (/*Input.GetKeyDown(KeyCode.E)*/ Input.GetMouseButtonDown(0)) {
-                    InteractionEvent();
+                InteractionEvent();
             }
         } else {
             meshRenderer.material.color = origColor;
