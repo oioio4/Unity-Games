@@ -265,6 +265,8 @@ namespace TheFirstPerson
 
         TFPInfo controllerInfo;
 
+        GameManager gm;
+
         void Start()
         {
             controller = GetComponent<CharacterController>();
@@ -316,6 +318,8 @@ namespace TheFirstPerson
             anim = GetComponent<Animator>();
             vertical = Animator.StringToHash("Vertical");
             horizontal = Animator.StringToHash("Horizontal");
+
+            gm = FindObjectOfType<GameManager>();
         }
 
         void Update()
@@ -710,7 +714,7 @@ namespace TheFirstPerson
 
         void MouseLook()
         {
-            if (mouseLookEnabled)
+            if (mouseLookEnabled && !gm.paused)
             {
                 float horizontalLook = transform.localEulerAngles.y;
                 float verticalLook = cam.localEulerAngles.x;

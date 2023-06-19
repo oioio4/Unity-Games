@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     private AudioManager am;
 
     public GameObject pauseMenu;
-    [SerializeField] private bool paused = false;
+    public bool paused = false;
 
     // spring stuff
     public bool spring = true;
@@ -40,7 +40,11 @@ public class GameManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
-        pauseMenu.SetActive(false);
+
+        pauseMenu = GameObject.FindGameObjectsWithTag("PauseMenu")[0];
+        if (pauseMenu != null) {
+            pauseMenu.SetActive(false);
+        }
     }
 
     // Start is called before the first frame update
@@ -60,7 +64,6 @@ public class GameManager : MonoBehaviour
         if (pauseMenu != null) {
             if (Input.GetKeyDown(KeyCode.Escape)) {
                 paused = !paused;
-                PauseMenu();
 
                 if (paused) {
                     Cursor.lockState = CursorLockMode.None;
@@ -70,6 +73,8 @@ public class GameManager : MonoBehaviour
                     Cursor.lockState = CursorLockMode.Locked;
                     Cursor.visible = false;
                 }
+
+                PauseMenu();
             }
         }
     }
