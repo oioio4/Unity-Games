@@ -14,6 +14,22 @@ public class GameManager : MonoBehaviour
     public GameObject pauseMenu;
     [SerializeField] private bool paused = false;
 
+    // spring stuff
+    public bool spring = true;
+    public GameObject[] springSlots;
+
+    // summer stuff
+    public bool summer = false;
+    public GameObject[] summerSlots;
+
+    // fall stuff
+    public bool fall = false;
+    public GameObject[] fallSlots;
+
+    // winter stuff
+    public bool winter = false;
+    public GameObject[] winterSlots;
+
     private void Awake() {
         if (instance == null) {
             instance = this;
@@ -32,6 +48,8 @@ public class GameManager : MonoBehaviour
     {
         am = FindObjectOfType<AudioManager>();
 
+        paused = false;
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -39,17 +57,19 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
-            paused = !paused;
-            PauseMenu();
+        if (pauseMenu != null) {
+            if (Input.GetKeyDown(KeyCode.Escape)) {
+                paused = !paused;
+                PauseMenu();
 
-            if (paused) {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-            }
-            else {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
+                if (paused) {
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                }
+                else {
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                }
             }
         }
     }
