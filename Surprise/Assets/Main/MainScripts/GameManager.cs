@@ -36,17 +36,17 @@ public class GameManager : MonoBehaviour
         counterText.text = pusheens + "/5";
         cubeBar.targetPower = cubes;
 
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+        if (Input.GetKeyDown(KeyCode.E)) {
             paused = !paused;
+        }
 
-            if (paused) {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-            }
-            else {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-            }
+        if (paused) {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
 
         PauseMenu();

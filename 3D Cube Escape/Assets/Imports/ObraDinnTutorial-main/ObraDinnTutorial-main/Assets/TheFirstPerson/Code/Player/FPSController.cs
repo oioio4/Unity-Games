@@ -687,6 +687,7 @@ namespace TheFirstPerson
 
         void UpdateMouseLock()
         {
+            /*
             if (mouseLockToggleEnabled && Time.timeScale > 0)
             {
                 if (customInputSystem == null ? Input.GetButtonDown(unlockMouseBtn) : customInputSystem.UnlockMouseButton())
@@ -709,12 +710,12 @@ namespace TheFirstPerson
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
             }
-
+            */
         }
 
         void MouseLook()
         {
-            if (mouseLookEnabled && !gm.paused)
+            if (mouseLookEnabled)
             {
                 float horizontalLook = transform.localEulerAngles.y;
                 float verticalLook = cam.localEulerAngles.x;

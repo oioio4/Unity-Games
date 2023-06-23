@@ -11,9 +11,6 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     private AudioManager am;
 
-    public GameObject pauseMenu;
-    public bool paused = false;
-
     // spring stuff
     public bool spring = true;
     public GameObject[] springSlots;
@@ -40,66 +37,17 @@ public class GameManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
-
-        pauseMenu = GameObject.FindGameObjectsWithTag("PauseMenu")[0];
-        if (pauseMenu != null) {
-            pauseMenu.SetActive(false);
-        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
         am = FindObjectOfType<AudioManager>();
-
-        paused = false;
-
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (pauseMenu != null) {
-            if (Input.GetKeyDown(KeyCode.Escape)) {
-                paused = !paused;
-
-                if (paused) {
-                    Cursor.lockState = CursorLockMode.None;
-                    Cursor.visible = true;
-                }
-                else {
-                    Cursor.lockState = CursorLockMode.Locked;
-                    Cursor.visible = false;
-                }
-
-                PauseMenu();
-            }
-        }
-    }
-
-    // pause menu stuff 
-    private void PauseMenu() {
-        if (paused) {
-            Time.timeScale = 0;
-            pauseMenu.SetActive(true);
-        }
-        else {
-            Time.timeScale = 1;
-            pauseMenu.SetActive(false);
-        }
-    }
-
-    public void Resume() {
-        paused = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        PauseMenu();
-    }
-
-    public void Quit() { 
-        Application.Quit();
     }
 
     // scene loading stuff 
