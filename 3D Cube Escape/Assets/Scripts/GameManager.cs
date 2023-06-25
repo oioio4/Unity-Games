@@ -92,6 +92,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // have a separate load for each level
+
     [Serializable]
     class PlayerData {
         //public float fastestTime;
