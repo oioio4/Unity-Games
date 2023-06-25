@@ -5,6 +5,9 @@ using UnityEngine.Events;
 
 public class Interactable : MonoBehaviour
 {
+    public GameManager gm;
+    public Inventory inventory;
+    
     private MeshRenderer meshRenderer;
     private Outline outline;
     private Color origColor;
@@ -18,6 +21,8 @@ public class Interactable : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gm = FindObjectOfType<GameManager>();
+
         meshRenderer = GetComponent<MeshRenderer>();
         outline = GetComponent<Outline>();
         origColor = meshRenderer.material.color;

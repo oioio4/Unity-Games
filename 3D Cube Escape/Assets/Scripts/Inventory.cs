@@ -11,6 +11,7 @@ public class Inventory : MonoBehaviour
 
     // selecting object from bar
     public GameObject curSelected = null;
+    public int curSlotIndex = 0;
     public bool[] isSelected;
     public Color defaultColor;
     public Color selectedColor;
@@ -87,6 +88,7 @@ public class Inventory : MonoBehaviour
         for (int i = 0; i < isSelected.Length; i++) {
             if (isSelected[i]) {
                 selection = true;
+                curSlotIndex = i;
 
                 // reset image color 
                 if (curSelected != null) {
@@ -106,7 +108,7 @@ public class Inventory : MonoBehaviour
                     GameObject popup = Instantiate(itemPopup, curSelected.transform.position + new Vector3(0f, 40f, 0f), Quaternion.identity);
                     popup.transform.SetParent(curSelected.transform, true);
                     popup.GetComponentInChildren<Text>().text = curSelected.name.Substring(0, curSelected.name.Length - 7);
-                    //Destroy(popup, 3f);                
+                    Destroy(popup, 3f);                
                 }
             }
         }
@@ -116,5 +118,13 @@ public class Inventory : MonoBehaviour
             curSelected.GetComponent<Image>().color = selectedColor;
             curSelected = null;
         }
+    }
+
+    public void DeselectAll() {
+        for (int i = 0; i < isSelected.Length; i++) {
+            isSelected[i] = false;
+        }
+
+        SwapSelected();
     }
 }
