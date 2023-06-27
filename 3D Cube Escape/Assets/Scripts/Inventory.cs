@@ -69,6 +69,27 @@ public class Inventory : MonoBehaviour
             }
             isSelected[6] = !isSelected[6];
             SwapSelected();         
+        } else if (Input.GetKeyDown(KeyCode.Alpha8)) {
+            for (int i = 0; i < isSelected.Length; i++) {
+                if (i != 7)
+                    isSelected[i] = false;
+            }
+            isSelected[7] = !isSelected[7];
+            SwapSelected();         
+        } else if (Input.GetKeyDown(KeyCode.Alpha9)) {
+            for (int i = 0; i < isSelected.Length; i++) {
+                if (i != 8)
+                    isSelected[i] = false;
+            }
+            isSelected[8] = !isSelected[8];
+            SwapSelected();         
+        } else if (Input.GetKeyDown(KeyCode.Alpha0)) {
+            for (int i = 0; i < isSelected.Length; i++) {
+                if (i != 9)
+                    isSelected[i] = false;
+            }
+            isSelected[9] = !isSelected[9];
+            SwapSelected();         
         }
     }
 

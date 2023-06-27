@@ -15,6 +15,8 @@ public class Pickup : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        inventory = FindObjectOfType<Inventory>();
+
         meshRenderer = GetComponent<MeshRenderer>();
         outline = GetComponent<Outline>();
         origColor = meshRenderer.material.color;
