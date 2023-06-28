@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] springSlots;
     // flags (for interactions)
     public bool logFlag = false;
+    public bool logFireFlag = false;
 
     // summer stuff
     public bool summer = false;

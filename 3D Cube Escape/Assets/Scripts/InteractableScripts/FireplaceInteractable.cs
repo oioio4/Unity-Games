@@ -9,13 +9,11 @@ public class FireplaceInteractable : Interactable
         if (item != null) {
             if (item.name.Substring(0, item.name.Length - 7) == "log") {
                 // gets rid of the item from the inventory
-                Destroy(item);
-                inventory.curSelected = null;
-                inventory.isFull[inventory.curSlotIndex] = false;
-                inventory.DeselectAll();
+                inventory.DestroyCur();
 
                 gm.logFlag = true;
                 interactAction.Invoke();
+                active = false;
             }
         }
     }

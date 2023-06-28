@@ -17,11 +17,13 @@ public class Interactable : MonoBehaviour
 
     [SerializeField] private float range = 2f;
     [SerializeField] private bool isInRange = false;
+    public bool active = true;
 
     // Start is called before the first frame update
     void Start()
     {
         gm = FindObjectOfType<GameManager>();
+        inventory = FindObjectOfType<Inventory>();
 
         meshRenderer = GetComponent<MeshRenderer>();
         outline = GetComponent<Outline>();
@@ -42,7 +44,7 @@ public class Interactable : MonoBehaviour
     }
 
     private void OnMouseOver() {
-        if (isInRange) {
+        if (isInRange && active) {
             meshRenderer.material.color = highlightColor;
             outline.enabled = true;
 

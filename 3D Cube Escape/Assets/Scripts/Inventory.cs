@@ -148,4 +148,11 @@ public class Inventory : MonoBehaviour
 
         SwapSelected();
     }
+
+    public void DestroyCur() {
+        Destroy(curSelected);
+        curSelected = null;
+        isFull[curSlotIndex] = false;
+        DeselectAll();
+    }
 }
