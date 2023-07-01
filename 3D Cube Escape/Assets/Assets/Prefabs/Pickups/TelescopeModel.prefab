@@ -2208,5 +2208,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 0}
-  itemButton: {fileID: 0}
+  itemButton: {fileID: 2574058975481996534, guid: 9fbb562a49c68ae4e920c32af2ef6136, type: 3}
   highlightColor: {r: 0, g: 0, b: 0, a: 0}

@@ -17,6 +17,11 @@ public class GameManager : MonoBehaviour
     // flags (for interactions)
     public bool logFlag = false;
     public bool logFireFlag = false;
+    public bool candleFireFlag = false;
+    public bool waterFlag = false;
+    public bool potFlag = false;
+    public bool cookedEggFlag = false;
+    public bool eggHolderFlag = false;
 
     // summer stuff
     public bool summer = false;
