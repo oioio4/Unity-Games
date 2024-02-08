@@ -14,3 +14,9 @@ Cube Run - Basic 3D platform runner with a cube with levels and obstacles. Basic
 Hexagons - A mobile implementation of an endless game with a score and high score that saves. Rotate around an anchor and dodge the incoming obstacles to survive as long as possible.
 
 Pixel Platformer - Basic platformer to test basic movement such as jumping and moving around on platforms.
+
+JumpKingMobile - Using the Jump King sprite, created a 2D sidescroller platforming game that utilizes the same jump mechanics as Jump King
+
+Surprise - 3D escape room game with 5 puzzles of varying difficulties
+
+3D Cube Escape - 3D version of Cube Escape Seasons with the same puzzles and gameplay but converted into a 3D escape room game
