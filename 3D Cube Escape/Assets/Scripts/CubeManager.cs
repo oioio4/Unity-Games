@@ -1,48 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+// Shows the season cubes on the level select: unlocked ones solid, locked ones as a faint ghost.
 public class CubeManager : MonoBehaviour
 {
     public GameObject c1, c2, c3, c4;
-    // Start is called before the first frame update
+
+    [SerializeField] private float lockedAlpha = 0.08f;
+
     void Start()
     {
-        GameManager gm = FindObjectOfType<GameManager>();
+        foreach (GameObject cube in new[] { c1, c2, c3, c4 }) {
+            if (cube == null || !cube.TryGetComponent(out CubeSelect select)) continue;
 
-        Color cube1 = c1.GetComponent<MeshRenderer>().material.color;
-        Color cube2 = c2.GetComponent<MeshRenderer>().material.color;
-        Color cube3 = c3.GetComponent<MeshRenderer>().material.color;
-        Color cube4 = c4.GetComponent<MeshRenderer>().material.color;
-
-        // controls alpha of cube colors 
-        if (gm != null) {
-            if (gm.winter) {
-                cube1.a = 1;
-                cube2.a = 1;
-                cube3.a = 1;
-                cube4.a = 1;
-            } else if (gm.fall) {
-                cube1.a = 0;
-                cube2.a = 0;
-                cube3.a = 1;
-                cube4.a = 0;
-            } else if (gm.summer) {
-                cube1.a = 0;
-                cube2.a = 1;
-                cube3.a = 0;
-                cube4.a = 0;
-            } else if (gm.spring) {
-                cube1.a = 0;
-                cube2.a = 1;
-                cube3.a = 0;
-                cube4.a = 0;
-            } else {
-                cube1.a = 1;
-                cube2.a = 0;
-                cube3.a = 0;
-                cube4.a = 0;
-            }
+            // the cube materials are transparent (fade), so alpha does the hiding
+            var material = cube.GetComponent<MeshRenderer>().material;
+            Color color = material.color;
+            color.a = select.Unlocked ? 1f : lockedAlpha;
+            material.color = color;
         }
     }
 }

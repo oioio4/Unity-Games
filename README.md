@@ -19,4 +19,4 @@ JumpKingMobile - Using the Jump King sprite, created a 2D sidescroller platformi
 
 Surprise - 3D escape room game with 5 puzzles of varying difficulties
 
-3D Cube Escape - 3D version of Cube Escape Seasons with the same puzzles and gameplay but converted into a 3D escape room game
+3D Cube Escape - 3D version of Cube Escape Seasons with the same puzzles and gameplay but converted into a 3D escape room game. Unity 6.3; the Spring room is playable from start to escape (see its README).

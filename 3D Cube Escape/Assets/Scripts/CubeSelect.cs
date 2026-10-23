@@ -1,27 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// One of the season cubes on the level select. Click an unlocked cube to enter its room.
 public class CubeSelect : MonoBehaviour
 {
-    private Color cubeColor;
     [SerializeField] private string cubeSceneName;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        cubeColor = GetComponent<MeshRenderer>().material.color;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public string Season => GameManager.SeasonOf(cubeSceneName);
+    public bool Unlocked => GameManager.IsUnlocked(Season);
 
     private void OnMouseOver() {
-        if (cubeColor.a == 1 && Input.GetMouseButtonDown(0)) {
+        if (!Input.GetMouseButtonDown(0)) return;
+
+        if (!Unlocked) {
+            HintText.Show("Not yet.");
+        }
+        else if (!Application.CanStreamedLevelBeLoaded(cubeSceneName)) {
+            HintText.Show(Season + " is still being built.");
+        }
+        else {
             SceneManager.LoadScene(cubeSceneName);
         }
     }
