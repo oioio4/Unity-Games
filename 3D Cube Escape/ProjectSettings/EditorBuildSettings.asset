@@ -14,4 +14,14 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SpringLevel.unity
     guid: 504ad08d99a471845a4b3708969102de
+  - enabled: 1
+    path: Assets/Scenes/SummerLevel.unity
+    guid: 20c44828f9b463f44b00b6634ba37d89
+  - enabled: 1
+    path: Assets/Scenes/FallLevel.unity
+    guid: 71251ff05c7972148a8a52c30df8ed02
+  - enabled: 1
+    path: Assets/Scenes/WinterLevel.unity
+    guid: 58471eb2b3be82e4292620ca9d0979c8
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0
