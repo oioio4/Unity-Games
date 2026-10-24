@@ -13,8 +13,11 @@ public class CodeLock : MonoBehaviour
     [SerializeField] private string setFlag;
     [TextArea] [SerializeField] private string solvedHint;
     [SerializeField] private UnityEvent onSolved = new UnityEvent();
+    [Tooltip("The wheels still turn once it's open, e.g. the clock's hands (for time travel).")]
+    [SerializeField] private bool keepTurning;
 
     public bool Solved { get; private set; }
+    public bool KeepTurning => keepTurning;
     public string LockedHint => lockedHint;
 
     public bool Ready {
@@ -33,7 +36,9 @@ public class CodeLock : MonoBehaviour
         }
 
         Solved = true;
-        foreach (var wheel in wheels) wheel.active = false;
+        if (!keepTurning) {
+            foreach (var wheel in wheels) wheel.active = false;
+        }
         if (GameManager.instance != null) GameManager.instance.SetFlag(setFlag);
         HintText.Show(solvedHint);
         onSolved.Invoke();

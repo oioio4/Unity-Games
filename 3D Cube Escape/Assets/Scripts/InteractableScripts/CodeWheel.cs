@@ -27,7 +27,7 @@ public class CodeWheel : Interactable
     }
 
     public override void InteractionEvent() {
-        if (codeLock != null && codeLock.Solved) {
+        if (codeLock != null && codeLock.Solved && !codeLock.KeepTurning) {
             Say(description);
             return;
         }

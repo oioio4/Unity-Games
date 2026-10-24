@@ -2,7 +2,9 @@
 
 A 3D take on Rusty Lake's *Cube Escape: Seasons*: the same puzzles, but in a first-person room you
 walk around in. Pick a season's cube on the level select, solve the room, and escaping it unlocks
-the next season: Spring 1964, Summer 1971, Autumn 1971, Winter 1981.
+the next season: Spring 1964, Summer 1971, Autumn 1971, Winter 1981. Like the original, there's a
+secret ending: Winter's clock takes you back to the earlier seasons, and what you do there changes
+the future.
 
 **Unity 6.3** (6000.3.5f2), built-in render pipeline with Post Processing. Scenes in build order:
 `StartMenu`, `LevelSelection`, `SpringLevel`, `SummerLevel`, `FallLevel`, `WinterLevel`. Every
@@ -21,8 +23,8 @@ Winter has snow outside and the window boarded up.
 
 ## Walkthroughs (spoilers)
 
-Each room ends the same way: fill the frame above the fireplace with its four pieces (Spring has no
-pieces), then put the season's cube in the hollow behind it.
+Each room ends the same way: fill the frame above the fireplace with its four pieces, then put the
+season's cube in the hollow behind it.
 
 ### Spring 1964
 
@@ -33,9 +35,12 @@ pieces), then put the season's cube in the hollow behind it.
 4. Put it on the stove, turn the red knob, light the burner with the matches, drop the egg in, and
    once it's boiled fish it out with the spoon.
 5. Put the **boiled egg** in the pink egg cup by the sink and tap it six times with the spoon: a
-   **black cube**.
-6. Stack the wood in the fireplace and light it.
-7. Put the cube behind the painting above the fireplace.
+   **black cube**, and a photo piece.
+6. The other photo pieces: knock on the window three times; switch on the light by the kitchen door
+   (a piece is caught in the ceiling light it turns on, in the room behind the door); look behind
+   the radio.
+7. Stack the wood in the fireplace and light it.
+8. Put the four pieces in the frame above the fireplace, then the cube behind it.
 
 ### Summer 1971
 
@@ -74,6 +79,35 @@ pieces), then put the season's cube in the hollow behind it.
 5. Stack the firewood in the fireplace and light it; the cube won't go in while the room is
    freezing.
 
+### The secret ending
+
+Each earlier season's clock has stopped: Spring at **9:05**, Summer at **3:55**, Autumn at **11:25**.
+In Winter, set the wall clock to one of those times (its hands still turn after 1:10) and click its
+face: you're back in that season, and a few things are there that weren't before. Click that
+room's clock face to go forward to Winter again. What you do in the past is remembered (saved
+between sessions) and Winter changes to match; Winter itself starts over each time you come back.
+
+1. **Spring, 9:05.** A **key** and a **coat hanger** have fallen out of the clock.
+   - Put the hanger on the radio as an aerial: FM 105.0, and Harvey whistles along.
+   - Feed Harvey, then use the key on the padlock of his cage. He flies off out of the window.
+   - The safe by the fireplace opens with Summer's **1487**: a **seed**. Dig the flower up with the
+     spoon and plant the seed. (The safe and the flowerpot work on an ordinary visit too.)
+   - Light the candle.
+2. **Summer, 3:55.** A **wrench** on the kitchen counter: loosen the joint of the water pipe on the
+   kitchen wall. Light the candle.
+3. **Autumn, 11:25.** **Matches** in the drawer of the end table in the room behind the door: light
+   what's left of the candle.
+4. **Winter.**
+   - The candle has burned all the way down. Chip the wax away with the hatchet: **Prozac**.
+   - The seed is a cactus now: pick its **fruit**. Under the leaking pipe: mould, and a **mushroom**.
+   - Turn the tuning knob on the radio to FM 105.0 and take the boards off the window: Harvey flies
+     in with a **flower**.
+   - Take the **cup** by the sink. For each of the four: put it in the blender, switch it on, pour
+     it into the cup, and pour that into its tank by the north wall. The note on the cork board
+     says which: flower one dot, cactus fruit two, mushroom three, pills four.
+   - Pull the switch beside the tanks.
+5. **Spring, 9:05, again.** The phone is ringing. Answer it, then go to the woman by the window.
+
 ## How the puzzles are built
 
 Everything is configured in the inspector:
@@ -88,8 +122,9 @@ Everything is configured in the inspector:
   "not yet", each click, and done.
 - **`UseItemTrigger`**: use an item as often as you like, e.g. the telescope at the window.
 - **`CodeWheel`** + **`CodeLock`**: combinations. Each wheel steps through its values when
-  clicked, shown as a digit (the safe) or by turning (the clock hands); the lock opens when they
-  all match its answer, optionally only once some flags are set (the padlock).
+  clicked, shown as a digit (the safe, the radio's station) or by turning (the clock hands); the
+  lock opens when they all match its answer, optionally only once some flags are set (the
+  padlock). `keepTurning` leaves the wheels working after it opens (Winter's clock).
 - **`ChannelTV`** + **`ChannelButton`**: a TV whose channels each show the next clue on a route.
 - **`PeekView`**: a camera you look through for a few seconds (the telescope).
 - **`SwingOpen`**: swings a door open (the oven, the safe).
@@ -99,8 +134,17 @@ Everything is configured in the inspector:
   back to the level select.
 - **`HintText`**: the line of text above the hotbar; any script can call `HintText.Show("...")`.
 - **`SceneMusic`**: which theme the AudioManager plays in a scene.
+- **`TimeTravel`**: a clock face. In Winter it reads two `CodeWheel`s as a time and loads the season
+  that time belongs to; in an earlier season, while visiting, it goes back to Winter.
+- **`Past`**: `Past.Travel(scene)` loads a season as a visit from Winter (`Past.Visiting`), and
+  `Remember("seed")` (from a step's `onDone`) saves something done in the past.
+- **`Echo`**: shows and hides objects when a room starts, or when `Apply()` is called, if things
+  were remembered from earlier seasons, flags are set, or only while visiting: the cactus, the
+  burned-down candle, Harvey coming back, the ringing phone.
+- **`Blender`**: put an item in, switch it on, pour it into a cup. Any of its recipes, any order.
 
-Flags reset every time a room loads; unlocked seasons are kept between sessions.
+Flags reset every time a room loads; unlocked seasons and what you did in the past are kept between
+sessions (PlayerPrefs `unlocked_<Season>`, `past_<thing>`).
 
 ## Notes
 
@@ -111,5 +155,5 @@ Flags reset every time a room loads; unlocked seasons are kept between sessions.
   reads their vertices).
 - Three plastic flowers in the living-room vase (part of the apartment kit) have no mesh in the
   repo, so they don't show.
-- Not built from the original: the optional extras (achievements, the secret ending's jars,
-  blender and juices).
+- The woman and the shadow are the player's own mannequin model, with a skirt and hair added.
+- Not built from the original: achievements.

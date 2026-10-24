@@ -26,7 +26,17 @@ public class RoomEnding : MonoBehaviour
     private IEnumerator Run() {
         if (GameManager.instance != null) GameManager.instance.CompleteSeason(season);
         HintText.Show(message);
+        yield return FadeOut(glitchSeconds, fadeSeconds);
 
+        // the cube select needs the mouse
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(nextScene);
+    }
+
+    // The camera tears up and goes dark (also the clock's time travel).
+    public static IEnumerator FadeOut(float glitchSeconds, float fadeSeconds) {
         // the camera tears up...
         var glitches = FindObjectsByType<GlitchEffect>(FindObjectsSortMode.None);
         for (float t = 0f; t < glitchSeconds; t += Time.deltaTime) {
@@ -42,12 +52,6 @@ public class RoomEnding : MonoBehaviour
             fade.color = new Color(0f, 0f, 0f, t / fadeSeconds);
             yield return null;
         }
-
-        // the cube select needs the mouse
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(nextScene);
     }
 
     private static Image BlackScreen() {
