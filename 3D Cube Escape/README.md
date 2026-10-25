@@ -156,4 +156,9 @@ sessions (PlayerPrefs `unlocked_<Season>`, `past_<thing>`).
 - Three plastic flowers in the living-room vase (part of the apartment kit) have no mesh in the
   repo, so they don't show.
 - The woman and the shadow are the player's own mannequin model, with a skirt and hair added.
+- Web build: it uses the project's WebGL template (`Assets/WebGLTemplates/CubeEscape`, Unity's
+  default page plus one fix: a room locks the cursor before the player has clicked, browsers refuse
+  that, and Unity's loader would show an error alert for it). Decompression fallback is on, because
+  itch.io doesn't serve the compressed files with the headers Unity otherwise needs. In a browser,
+  click the game to capture the mouse; Esc releases it, so pause with E.
 - Not built from the original: achievements.
