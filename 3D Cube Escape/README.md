@@ -157,8 +157,36 @@ sessions (PlayerPrefs `unlocked_<Season>`, `past_<thing>`).
   repo, so they don't show.
 - The woman and the shadow are the player's own mannequin model, with a skirt and hair added.
 - Web build: it uses the project's WebGL template (`Assets/WebGLTemplates/CubeEscape`, Unity's
-  default page plus one fix: a room locks the cursor before the player has clicked, browsers refuse
-  that, and Unity's loader would show an error alert for it). Decompression fallback is on, because
-  itch.io doesn't serve the compressed files with the headers Unity otherwise needs. In a browser,
-  click the game to capture the mouse; Esc releases it, so pause with E.
+  default page plus two changes: it ignores the browser refusing pointer lock, because a room locks
+  the cursor before the player has clicked and Unity's loader would show an error alert for it; and it
+  renders at the page's resolution, not the screen's pixel density). Decompression fallback is on,
+  because itch.io doesn't serve the compressed files with the headers Unity otherwise needs. In a
+  browser, click the game to capture the mouse; Esc releases it, so pause with E.
 - Not built from the original: achievements.
+
+## Performance
+
+The apartment kit and the props were built for screenshots, not for a browser. What keeps it fast:
+
+- Only the sun casts shadows. The room's point lights don't (each one re-drew the whole apartment
+  six times a frame), nor do small props.
+- The mirror's reflection probe renders once, as the room loads, not every frame.
+- Dense models (the 490k-triangle clock, the 120k egg cup, the curtains, the blender...) have
+  decimated stand-ins in `Assets/Assets/Meshes/Optimized`, about 8k triangles each, made with
+  Blender's Decimate. They're named after the original mesh and its model's GUID; the scenes use
+  them in place of the originals, colliders included.
+- The walls, floors and furniture that never move are static: batched into fewer draw calls, and
+  occlusion-culled (from inside one room the walls hide the others). If the apartment changes,
+  re-bake occlusion culling for each room scene (Window > Rendering > Occlusion Culling).
+- Quality: Windows builds use Ultra (soft sun shadows to 30 m, 3 per-pixel lights); the web build
+  uses High (no shadows, 1 per-pixel light, the rest per vertex). No screen-space reflections;
+  bloom in fast mode.
+- The web build caps textures at 1024 px and crunch-compresses them, and compresses the music
+  harder. Hotbar icons are 128 px pixel art (4 px per art pixel), uncompressed.
+- `Benchmark`: start a build with `-benchmark SpringLevel,WinterLevel`, or open the web build with
+  `?benchmark=SpringLevel`, and it turns the player round on the spot and logs frame times and draw
+  counts (`[Benchmark] ...`).
+
+Measured: the web build went from 5.3 to 165 fps in Spring on a laptop's integrated Intel GPU, and
+its download from 203 MB to 61 MB. The Windows build holds 240 fps (the display's refresh rate) in
+Spring and Winter on an RTX 4070 laptop GPU.
