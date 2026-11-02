@@ -168,9 +168,17 @@ sessions (PlayerPrefs `unlocked_<Season>`, `past_<thing>`).
 
 The apartment kit and the props were built for screenshots, not for a browser. What keeps it fast:
 
-- Only the sun casts shadows. The room's point lights don't (each one re-drew the whole apartment
-  six times a frame), nor do small props.
-- The mirror's reflection probe renders once, as the room loads, not every frame.
+- The room lights are baked: lightmaps for the walls, floors and furniture, light probes for
+  everything that moves (`Assets/Scenes/ApartmentLighting.lighting`, shared by all four rooms). The
+  sun stays real time (Mixed, Baked Indirect), so each season keeps its own sun and its shadows, and
+  only its bounce light is baked. Baked lights use the "legacy" falloff of real-time lights and the
+  bounce light is turned down (indirect 0.4), so the rooms look as they did with real-time lights.
+  Re-bake a room's lighting (Window > Rendering > Lighting > Generate Lighting) after changing its
+  furniture or lights.
+- Only the sun casts shadows; small props don't.
+- The reflection probes (the mirror's and the room's) render once, as the room loads, not every
+  frame. They're real time, so keep them out of a lighting bake (disable them while it runs), or
+  the bake writes a cubemap for each one (8 MB for the mirror's) that every build ships unused.
 - Dense models (the 490k-triangle clock, the 120k egg cup, the curtains, the blender...) have
   decimated stand-ins in `Assets/Assets/Meshes/Optimized`, about 8k triangles each, made with
   Blender's Decimate. They're named after the original mesh and its model's GUID; the scenes use
@@ -179,14 +187,27 @@ The apartment kit and the props were built for screenshots, not for a browser. W
   occlusion-culled (from inside one room the walls hide the others). If the apartment changes,
   re-bake occlusion culling for each room scene (Window > Rendering > Occlusion Culling).
 - Quality: Windows builds use Ultra (soft sun shadows to 30 m, 3 per-pixel lights); the web build
-  uses High (no shadows, 1 per-pixel light, the rest per vertex). No screen-space reflections;
-  bloom in fast mode.
+  uses High (no shadows, 1 per-pixel light). No screen-space reflections; bloom in fast mode.
 - The web build caps textures at 1024 px and crunch-compresses them, and compresses the music
-  harder. Hotbar icons are 128 px pixel art (4 px per art pixel), uncompressed.
+  harder; the Windows build caps them at 2048 px. Hotbar icons are 128 px pixel art (4 px per art
+  pixel), uncompressed.
+- Web builds use the "Runtime Speed with LTO" code optimization (the default, "Shorter Build Time",
+  is barely optimized; LTO makes a full web build take about 30 minutes) and Medium code stripping.
+  Nothing in the game calls code by name (`Invoke("...")`, `SendMessage`, reflection), which
+  stripping could remove.
+- Nothing ships that the game doesn't use: the icon pack's demo menu windows moved out of
+  `Resources` (to `Demo Prefabs`; the pack's own demo scene no longer opens them), and the splash
+  screen is off (optional for Unity Personal since Unity 6).
 - `Benchmark`: start a build with `-benchmark SpringLevel,WinterLevel`, or open the web build with
   `?benchmark=SpringLevel`, and it turns the player round on the spot and logs frame times and draw
   counts (`[Benchmark] ...`).
 
 Measured: the web build went from 5.3 to 165 fps in Spring on a laptop's integrated Intel GPU, and
-its download from 203 MB to 61 MB. The Windows build holds 240 fps (the display's refresh rate) in
-Spring and Winter on an RTX 4070 laptop GPU.
+its download from 203 MB to 61 MB (v1.1). The Windows build holds 240 fps (the display's refresh
+rate) in Spring and Winter on an RTX 4070 laptop GPU.
+
+Baked lighting (v1.2) cut the draw work in Spring by more than half: on Windows, 895 to 384 batches,
+756 to 179 set-pass calls and 807k to 388k triangles a frame; on the web, 276 to 85 set-pass calls
+and 223k to 132k triangles. In Chrome on the RTX, Spring went from 128 fps with frequent drops
+(95th percentile 15 ms) to a steady 159 fps (8 ms; the monitor's 164 Hz is the cap). It costs 3 MB of
+download (lightmaps, probes, lightmap UVs): 64 MB for the web build.
