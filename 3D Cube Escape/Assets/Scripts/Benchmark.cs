@@ -5,7 +5,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 // Frame-time benchmark: turns the player once round on the spot and logs frame times and draw
-// stats. Nothing happens unless asked: start a build with "-benchmark SpringLevel,WinterLevel"
+// stats, then the worst frames on a quick look round the kitchen and the bedroom. Nothing happens
+// unless asked: start a build with "-benchmark SpringLevel,WinterLevel"
 // (it plays each room, logs "[Benchmark] ...", then quits), open the web build with
 // "?benchmark=SpringLevel" on its URL (results go to the browser console), or call
 // Benchmark.Run() in Play mode.
@@ -64,6 +65,18 @@ public class Benchmark : MonoBehaviour
         }
         batches.Dispose(); setPass.Dispose(); tris.Dispose(); casters.Dispose();
 
+        // then a quick look round the kitchen and the bedroom: stutter on first seeing what the start hides
+        var tour = new List<float>();
+        foreach (var spot in new[] { new Vector2(12.5f, 88.4f), new Vector2(8.5f, 75.5f) }) {
+            player.transform.position = new Vector3(spot.x, player.transform.position.y, spot.y);
+            for (float t = 0f; t < 2f; t += Time.unscaledDeltaTime) {
+                player.transform.rotation = Quaternion.Euler(0f, 180f * t, 0f);
+                yield return null;
+                tour.Add(Time.unscaledDeltaTime * 1000f);
+            }
+        }
+        tour.Sort();
+
         frames.Sort();
         float avg = 0f;
         foreach (float f in frames) avg += f;
@@ -71,7 +84,8 @@ public class Benchmark : MonoBehaviour
         int n = frames.Count;
         LastResult = string.Format("{0}: {1} frames, avg {2:F1} ms ({3:F0} fps), 95th pct {4:F1} ms, worst {5:F1} ms (worst while settling {10:F0} ms); per frame: {6} batches, {7} setpass, {8}k tris, {9} shadow casters",
             SceneManager.GetActiveScene().name, n, avg, 1000f / avg, frames[(int)(n * 0.95f)], frames[n - 1],
-            sumBatches / n, sumSetPass / n, sumTris / n / 1000, sumCasters / n, settleWorst);
+            sumBatches / n, sumSetPass / n, sumTris / n / 1000, sumCasters / n, settleWorst)
+            + string.Format("; kitchen and bedroom: worst {0:F0} ms, 95th pct {1:F1} ms", tour[tour.Count - 1], tour[(int)(tour.Count * 0.95f)]);
         Debug.Log("[Benchmark] " + LastResult);
 
         if (pendingScenes != null) {

@@ -198,9 +198,11 @@ The apartment kit and the props were built for screenshots, not for a browser. W
 - Nothing ships that the game doesn't use: the icon pack's demo menu windows moved out of
   `Resources` (to `Demo Prefabs`; the pack's own demo scene no longer opens them), and the splash
   screen is off (optional for Unity Personal since Unity 6).
+- The apartment kit's drawer scripts logged a line on every frame the cursor was over a drawer;
+  those lines are gone, and log messages in builds no longer record a stack trace.
 - `Benchmark`: start a build with `-benchmark SpringLevel,WinterLevel`, or open the web build with
-  `?benchmark=SpringLevel`, and it turns the player round on the spot and logs frame times and draw
-  counts (`[Benchmark] ...`).
+  `?benchmark=SpringLevel`, and it turns the player round on the spot, then looks round the kitchen
+  and the bedroom, and logs frame times and draw counts (`[Benchmark] ...`).
 
 Measured: the web build went from 5.3 to 165 fps in Spring on a laptop's integrated Intel GPU, and
 its download from 203 MB to 61 MB (v1.1). The Windows build holds 240 fps (the display's refresh
@@ -211,3 +213,7 @@ Baked lighting (v1.2) cut the draw work in Spring by more than half: on Windows,
 and 223k to 132k triangles. In Chrome on the RTX, Spring went from 128 fps with frequent drops
 (95th percentile 15 ms) to a steady 159 fps (8 ms; the monitor's 164 Hz is the cap). It costs 3 MB of
 download (lightmaps, probes, lightmap UVs): 64 MB for the web build.
+
+Each room still takes about 2 s on its first frame in the browser (1 s or less on Windows). It isn't
+shader compilation: drawing every material up front behind a black screen (tried for v1.3) didn't
+shorten it, and nothing stutters later on first seeing another room.
